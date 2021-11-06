@@ -49,17 +49,10 @@ jobs:
           name: jacoco-report
           path: target/site/jacoco/
       - name: Verify and Inspect
-        run: mvn -B verify -DskipTests  
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
-        with:
-          args: >
-                -Dsonar.organization=judebantony
-                -Dsonar.projectKey=cicd-github-action-example
-                -Dsonar.verbose=true   
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=judebantony_cicd-github-action-example
       - name: Email code coverage report
         uses: dawidd6/action-send-mail@v3
         with:
