@@ -132,7 +132,7 @@ jobs:
         with:
           url: 'https://judebantony.jfrog.io/'
           credentials type: 'accesstoken'
-          apikey: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}
+          access token: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}
           args: ping       
           
           
