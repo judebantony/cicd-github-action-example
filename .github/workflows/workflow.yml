@@ -32,8 +32,8 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2     
-      - name: Build and Package
-        run: mvn -B clean package -DskipTests
+      - name: Build
+        run: mvn -B clean build -DskipTests
       - name: Run UnitTest
         run: mvn -B test
       - name: Generate JaCoCo Badge
@@ -125,8 +125,14 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Publish Artifact JFrog
-        uses: jfrog/setup-jfrog-cli@v2
-        env:
-          JF_ARTIFACTORY_1: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}
+      - name: Package
+        run: mvn -B clean package -DskipTests
+      - name: Publish JFrog Artifact
+        uses: advancedcsg-open/action-jfrog-cli@master
+        with:
+          url: 'https://judebantony.jfrog.io/'
+          credentials type: 'apikey'
+          apikey: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}
+          args: u "ping"         
+          
           
