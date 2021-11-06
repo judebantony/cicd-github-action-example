@@ -31,9 +31,9 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2     
-      - name: Maven Package
+      - name: Build and Package
         run: mvn -B clean package -DskipTests
-      - name: Maven UnitTest
+      - name: Run UnitTest
         run: mvn -B test
       - name: Generate JaCoCo Badge
         id: jacoco
@@ -51,7 +51,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=judebantony_cicd-github-action-example -DskipTests              
+        run: mvn -B verify -DskipTests              
       - name: Email code coverage report
         uses: dawidd6/action-send-mail@v3
         with:
