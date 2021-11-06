@@ -67,3 +67,13 @@ jobs:
           ignore_cert: true
           convert_markdown: true
           priority: low
+          
+  sonar:
+    name: Inspect
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
