@@ -68,9 +68,12 @@ jobs:
           ignore_cert: true
           convert_markdown: true
           priority: low
+          
+          
   analyze:
       name: Scan
       runs-on: ubuntu-latest
+      needs: [test]
       permissions:
         actions: read
         contents: read
@@ -97,6 +100,7 @@ jobs:
   sonar:
     name: Inspect
     runs-on: ubuntu-latest
+    needs: [test]
     
     steps:
       - name: Check out the code
@@ -128,7 +132,7 @@ jobs:
   artifactory:
     name: Publish Artifact
     runs-on: ubuntu-latest
-    needs: [test, sonar]
+    needs: [test, sonar, analyze]
     
     steps:
       - name: Check out the code
