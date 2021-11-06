@@ -133,6 +133,6 @@ jobs:
           url: 'https://judebantony.jfrog.io/'
           credentials type: 'accesstoken'
           access token: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}
-          args: ping       
+          args: u "target/*.jar" "libs-release-repo" --recursive=true       
           
           
