@@ -131,8 +131,9 @@ jobs:
         uses: advancedcsg-open/action-jfrog-cli@master
         with:
           url: 'https://judebantony.jfrog.io/'
-          credentials type: 'accesstoken'
-          access token: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}
+          credentials type: 'username'
+          user: ${{ secrets.ARTIFACTORY_USER }}
+          password: ${{ secrets.ARTIFACTORY_PASSWORD }}
           args: u "target/*.jar" "libs-release-repo" --recursive=true       
           
           
