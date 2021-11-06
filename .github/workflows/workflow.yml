@@ -49,4 +49,4 @@ jobs:
           in_reply_to: <judebantony@gmail.com>
           ignore_cert: true
           convert_markdown: true
-          priority: low          
+          priority: low
