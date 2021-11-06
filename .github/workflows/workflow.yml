@@ -40,12 +40,14 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
           subject: Test Coverage of ${{github.repository}} repo
           to: judebantony@gmail.com
           from: Jude Antony
           body: Build job of ${{github.repository}} completed successfully!
           html_body: file://target/site/jacoco/index.html
-          reply_to: judebantony@gmail.com
+          reply_to: judebantonyofficial@gmail.com
           in_reply_to: <judebantony@gmail.com>
           ignore_cert: true
           convert_markdown: true
