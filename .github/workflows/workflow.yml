@@ -8,34 +8,51 @@ on:
 jobs:
 
   test:
-    name: Build And UnitTest
+    name: Release CI Workflow
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
       - name: Maven Package
         run: mvn -B clean package -DskipTests
-      - name: Maven Verify
-        run: mvn -B clean verify -DskipTests
-      - name: Maven Test
+      - name: Maven UnitTest
         run: mvn -B test
       - name: Generate JaCoCo Badge
         id: jacoco
         uses: cicirello/jacoco-badge-generator@v2
-      - name: Log coverage percentage
+      - name: Log code coverage percentage
         run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
-      - name: Upload JaCoCo coverage report
+      - name: Upload code coverage report
         uses: actions/upload-artifact@v2
         with:
           name: jacoco-report
           path: target/site/jacoco/
-      - name: Send report
+      - name: Maven Verify and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=judebantony_cicd-github-action-example -DskipTests              
+      - name: Email code coverage report
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
