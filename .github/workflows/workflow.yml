@@ -38,7 +38,7 @@ jobs:
           author_email: judebantony@gmail.com
           committer_name: judebantony
           committer_email: judebantony@gmail.com
-          default_author: judebantony@users.noreply.github.com
+          default_author: github_actions
           message: 'commit badge'
           add: '*.svg'          
       - name: Upload JaCoCo coverage report
