@@ -133,6 +133,6 @@ jobs:
           url: 'https://judebantony.jfrog.io/'
           credentials type: 'accesstoken'
           apikey: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}
-          args: u "target/*.jar"  --recursive=true --build-name=cigithubaction       
+          args: u "target/(*).jar" "default-mavan-local/{1}/" --recursive=true       
           
           
