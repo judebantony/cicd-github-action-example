@@ -103,6 +103,7 @@ jobs:
     name: Publish Artifact
     runs-on: ubuntu-latest
     needs: [test, sonar]
+    
     steps:
       - name: Check out the code
         uses: actions/checkout@v1
@@ -125,10 +126,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Publish Artifact JFrog
-      - uses: jfrog/setup-jfrog-cli@v2
+        uses: jfrog/setup-jfrog-cli@v2
         env:
           JF_ARTIFACTORY_1: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}
-      - run: |
-          jfrog c add judebantony.jfrog.io
-          jfrog rt ping
           
