@@ -30,6 +30,10 @@ jobs:
         run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
+      - name: setup git config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"          
       - name: Commit and push the badge (if it changed)
         uses: EndBug/add-and-commit@v7
         with:
