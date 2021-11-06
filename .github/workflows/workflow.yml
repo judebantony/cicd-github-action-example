@@ -131,8 +131,8 @@ jobs:
         uses: advancedcsg-open/action-jfrog-cli@master
         with:
           url: 'https://judebantony.jfrog.io/'
-          credentials type: 'apikey'
+          credentials type: 'accesstoken'
           apikey: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}
-          args: u "ping"         
+          args: u "target/*.jar"  --recursive=true --build-name=cigithubaction       
           
           
