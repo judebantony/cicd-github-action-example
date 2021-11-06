@@ -130,10 +130,10 @@ jobs:
       - name: Publish JFrog Artifact
         uses: advancedcsg-open/action-jfrog-cli@master
         with:
-          url: 'https://judebantony.jfrog.io/'
+          url: 'https://judebantony.jfrog.io/artifactory'
           credentials type: 'username'
           user: ${{ secrets.ARTIFACTORY_USER }}
           password: ${{ secrets.ARTIFACTORY_PASSWORD }}
-          args: u "target/*.jar" "libs-release-repo" --recursive=true       
+          args: u "target/*.jar" "/libs-release-repo" --recursive=true       
           
           
