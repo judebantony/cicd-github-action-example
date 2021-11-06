@@ -133,6 +133,6 @@ jobs:
           url: 'https://judebantony.jfrog.io/'
           credentials type: 'accesstoken'
           apikey: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}
-          args: u "target/*.jar" "default-maven-virtual" --recursive=true       
+          args: u "target/*.jar" "libs-release-repo" --recursive=true       
           
           
