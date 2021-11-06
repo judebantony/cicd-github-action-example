@@ -46,7 +46,6 @@ jobs:
           to: judebantony@gmail.com
           from: Jude Antony
           body: Build job of ${{github.repository}} completed successfully!
-          html_body: file://README.html
           attachments: ./target/site/jacoco/index.html
           reply_to: judebantonyofficial@gmail.com
           in_reply_to: <judebantony@gmail.com>
