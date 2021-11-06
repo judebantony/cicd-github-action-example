@@ -49,9 +49,6 @@ jobs:
           name: jacoco-report
           path: target/site/jacoco/
       - name: Verify
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  
         run: mvn -B verify -DskipTests
       - name: Email code coverage report
         uses: dawidd6/action-send-mail@v3
@@ -74,6 +71,7 @@ jobs:
   sonar:
     name: Inspect
     runs-on: ubuntu-latest
+    
     steps:
       - name: Check out the code
         uses: actions/checkout@v1
