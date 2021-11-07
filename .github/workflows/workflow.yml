@@ -204,16 +204,10 @@ jobs:
           registry: 'https://judebantony.jfrog.io'
           username: ${{ secrets.ARTIFACTORY_USER }}
           password: ${{ secrets.ARTIFACTORY_PASSWORD }}        
-      - name: Build Image 
+      - name: Build and Publish Image 
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          push: false       
-      - name: Publish Image to JFrog Artifact
-        uses: advancedcsg-open/action-jfrog-cli@master
-        with:
-          url: 'https://judebantony.jfrog.io/artifactory'
-          credentials type: 'username'
-          user: ${{ secrets.ARTIFACTORY_USER }}
-          password: ${{ secrets.ARTIFACTORY_PASSWORD }}
-          args: dp "judebantony.jfrog.io/artifactory/cigithubaction:latest" "default-docker-local"     
+          context: .
+          push: true
+          tags: judebantony.jfrog.io/artifactory/cigithubaction:latest
