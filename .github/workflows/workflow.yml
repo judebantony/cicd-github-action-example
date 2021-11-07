@@ -210,4 +210,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: judebantony.jfrog.io/artifactory/cigithubaction:latest
+          tags: judebantony.jfrog.io/artifactory/default-docker-local/cigithubaction:latest
