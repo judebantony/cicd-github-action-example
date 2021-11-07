@@ -231,6 +231,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           cluster-name: 'JudeAKSCluster'
           resource-group: 'DefaultResourceGroup-EUS'
+      - name: Create AKS Namespace     
         run: |
             kubectl create namespace cigithubactionqa --dry-run -o json | kubectl apply -f -
       - name: Setting JFrog Context       
