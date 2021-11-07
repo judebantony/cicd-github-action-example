@@ -16,7 +16,7 @@
 *.factorypath
 *.project
 /.idea
-
+aks.txt
 
 # Package Files #
 *.jar
