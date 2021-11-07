@@ -201,7 +201,7 @@ jobs:
       - name: Login to JFrog  
         uses: docker/login-action@v1
         with:
-          registry: 'https://judebantony.jfrog.io/artifactory/default-docker-local'
+          registry: 'https://judebantony.jfrog.io'
           username: ${{ secrets.ARTIFACTORY_USER }}
           password: ${{ secrets.ARTIFACTORY_PASSWORD }}        
       - name: Build Image 
