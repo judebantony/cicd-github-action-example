@@ -216,7 +216,7 @@ jobs:
   qadeploy:
     name: QA Deployment 
     runs-on: ubuntu-latest
-    needs: [test, sonar, analyze, imagebuild]
+    needs: [test, sonar, analyze, artifactory, imagebuild]
 
     steps:
       - name: Login to JFrog  
@@ -234,13 +234,14 @@ jobs:
       - name: Create AKS Namespace     
         run: |
             kubectl create namespace cigithubactionqa --dry-run -o json | kubectl apply -f -
-      - name: Setting JFrog Context       
+      - name: Create Secret     
         uses: azure/k8s-create-secret@v1
         with:
           container-registry-url: 'https://judebantony.jfrog.io'
           container-registry-username: ${{ secrets.ARTIFACTORY_USER }}
           container-registry-password: ${{ secrets.ARTIFACTORY_PASSWORD }}
-          namespace: cigithubactionqa
+          namespace: 'cigithubactionqa'
+          secret-name: 'cigithubactionqa-crd'
           force: true
       - name: Deploy app to AKS 
         uses: azure/k8s-deploy@v1
@@ -250,4 +251,6 @@ jobs:
             manifests/service.yml
           images: |
              judebantony.jfrog.io/default-docker-local/cigithubaction:latest
-          namespace: cigithubactionqa         
+          imagepullsecrets: |
+            cigithubactionqa-crd   
+          namespace: 'cigithubactionqa'         
