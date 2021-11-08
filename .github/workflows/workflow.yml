@@ -294,11 +294,11 @@ jobs:
           server_port: 465
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
-          subject: Test Coverage of ${{github.repository}} repo
+          subject: QA Test Result of ${{github.repository}} repo
           to: judebantony@gmail.com
           from: judebantonyofficial@gmail.com
           body: Build job of ${{github.repository}} completed successfully!
-          html_body: file://target/cucumber-reports/cucumber.html
+          attachments: ./target/cucumber-reports/cucumber.html
           reply_to: judebantonyofficial@gmail.com
           in_reply_to: judebantonyofficial@gmail.com
           ignore_cert: true
