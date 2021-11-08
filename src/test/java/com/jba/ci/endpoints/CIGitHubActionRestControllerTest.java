@@ -20,10 +20,10 @@ import org.springframework.test.web.servlet.MockMvc;
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(CIGitHubActionRestController.class)
 public class CIGitHubActionRestControllerTest {
-	
-	 private static final String API_V1_CI_HEALTH = "/api/v1/ci/health";
+
+	private static final String API_V1_CI_HEALTH = "/api/v1/ci/health";
 	@Autowired
-	    MockMvc mockMvc;
+	MockMvc mockMvc;
 
 	@Test
 	public void testHealth() throws Exception {
