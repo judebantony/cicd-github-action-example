@@ -4,11 +4,11 @@
 package com.jba.ci.bdd.stepdefs;
 
 
-import com.jba.ci.bdd.CucumberSpringContextConfig;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.spring.CucumberContextConfiguration;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -19,7 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  *
  */
 @Slf4j
-public class CucumberStepDef extends CucumberSpringContextConfig {
+@CucumberContextConfiguration
+public class CucumberStepDef  {
+
+	private static final String CI_HEALTH = "/ci/health";
 
 	private static final String BASE_URL = "http://20.81.93.165/api/v1";
 
@@ -27,14 +30,13 @@ public class CucumberStepDef extends CucumberSpringContextConfig {
 
 	@Given("user wants to call health check api")
 	public void want_call_health_check_api() {
-		System.out.print("Jude is here");
 	}
 
 	@When("user call health check api")
 	public void call_health_check_api() {
 		RestAssured.baseURI = BASE_URL;
 		RequestSpecification request = RestAssured.given();
-		response = request.get("/ci/health");
+		response = request.get(CI_HEALTH);
 	}
 
 	@Then("return result")

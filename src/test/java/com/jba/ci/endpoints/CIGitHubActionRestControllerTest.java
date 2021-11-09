@@ -3,6 +3,7 @@
  */
 package com.jba.ci.endpoints;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -22,13 +23,15 @@ import org.springframework.test.web.servlet.MockMvc;
 public class CIGitHubActionRestControllerTest {
 
 	private static final String API_V1_CI_HEALTH = "/api/v1/ci/health";
+	
 	@Autowired
-	MockMvc mockMvc;
+	private MockMvc mockMvc;
 
 	@Test
 	public void testHealth() throws Exception {
 
 		mockMvc.perform(get(API_V1_CI_HEALTH)).andExpect(status().isOk());
+		assertTrue(true);
 	}
 
 }
