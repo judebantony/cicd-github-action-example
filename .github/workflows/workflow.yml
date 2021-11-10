@@ -273,13 +273,14 @@ jobs:
       - name: Run QA Automation
         run: mvn -B verify -DexcludedGroups="Ignore" -Dgroups="Smoke | Sanity"
         env: 
-          DISPLAY: :19
           CUCUMBER_PUBLISH_TOKEN: ${{secrets.CUCUMBER_PUBLISH_TOKEN}}
       - name: Upload QA Automation Report
         uses: deblockt/cucumber-report-annotations-action@v1.7
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
-          path: "./target/cucumber-reports/cucumber-report.json"        
+          path: "target/cucumber-reports/cucumber.json"
+          check-status-on-error: 'neutral'
+          annotation-status-on-error: 'warning'    
       - name: Email QA Automation report
         uses: dawidd6/action-send-mail@v3
         with:
