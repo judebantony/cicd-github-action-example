@@ -122,7 +122,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=judebantony_cicd-github-action-example
-      
+      - name: SonarQube Quality Gate check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        with:
+          scanMetadataReportFile: target/sonar/report-task.txt     
+          
+           
   artifactory:
     name: Publish Artifact
     runs-on: ubuntu-latest
@@ -263,6 +268,14 @@ jobs:
           restore-keys: ${{ runner.os }}-m2     
       - name: Run QA Automation
         run: mvn -B verify -DexcludedGroups="Ignore" -Dgroups="Smoke | Sanity"
+        env: 
+          DISPLAY: :19
+          CUCUMBER_PUBLISH_TOKEN: ${{secrets.CUCUMBER_PUBLISH_TOKEN}}
+      - name: Upload QA Automation Report
+        uses: deblockt/cucumber-report-annotations-action@v1.7
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          path: "./target/cucumber-reports/cucumber-report.json"        
       - name: Email QA Automation report
         uses: dawidd6/action-send-mail@v3
         with:
@@ -299,7 +312,7 @@ jobs:
           server_port: 465
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
-          subject: Stage Deployment ${{github.repository}} completed
+          subject: Stage Deployment ${{github.repository}} starting
           to: judebantony@gmail.com
           from: judebantonyofficial@gmail.com
           body: Build job of ${{github.repository}} completed successfully!
