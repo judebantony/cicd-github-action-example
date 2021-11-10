@@ -29,8 +29,8 @@ jobs:
           restore-keys: ${{ runner.os }}-m2     
       - name: Build
         run: mvn -B clean package -DskipTests
-      - name: Run UnitTest
-        run: mvn -B test -Dgroups="Ignore" -DexcludedGroups="Smoke | Sanity"
+      - name: Run UnitTest and Verify 
+        run: mvn -B verify -Dgroups="Ignore" -DexcludedGroups="Smoke | Sanity"
       - name: Generate JaCoCo Badge
         id: jacoco
         uses: cicirello/jacoco-badge-generator@v2
@@ -43,26 +43,11 @@ jobs:
         with:
           name: jacoco-report
           path: target/site/jacoco/
-      - name: Verify
-        run: mvn -B verify -DskipTests
-      - name: Email code coverage report
-        uses: dawidd6/action-send-mail@v3
+      - name: Adding Junit Report
+        uses: ashley-taylor/junit-report-annotations-action@1.3
+        if: always()
         with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: Test Coverage of ${{github.repository}} repo
-          to: judebantony@gmail.com
-          from: judebantonyofficial@gmail.com
-          body: Build job of ${{github.repository}} completed successfully!
-          html_body: file://target/site/jacoco/index.html
-          reply_to: judebantonyofficial@gmail.com
-          in_reply_to: judebantonyofficial@gmail.com
-          ignore_cert: true
-          convert_markdown: true
-          priority: low
-          
+          access-token: ${{ secrets.GITHUB_TOKEN }}          
           
   analyze:
       name: Scan
