@@ -126,9 +126,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Set up Maven
-        uses: stCarolas/setup-maven@v4.2
-        with:
-          maven-version: 3.8.2
+        run: mvn -N io.takari:maven:wrapper -Dmaven=3.8.2
       - name: Run Snyk to check for vulnerabilities
         continue-on-error: true      
         uses: snyk/actions/maven-3-jdk-11@master
