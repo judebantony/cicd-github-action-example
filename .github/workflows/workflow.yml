@@ -266,23 +266,11 @@ jobs:
           path: "target/cucumber-reports/cucumber.json"
           check-status-on-error: 'neutral'
           annotation-status-on-error: 'warning'    
-      - name: Email QA Automation report
-        uses: dawidd6/action-send-mail@v3
+      - name: Upload Cucumber report
+        uses: actions/upload-artifact@v2
         with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: QA Test Result of ${{github.repository}} repo
-          to: judebantony@gmail.com
-          from: judebantonyofficial@gmail.com
-          body: Build job of ${{github.repository}} completed successfully!
-          attachments: ./target/cucumber-reports/cucumber.html
-          reply_to: judebantonyofficial@gmail.com
-          in_reply_to: judebantonyofficial@gmail.com
-          ignore_cert: true
-          convert_markdown: true
-          priority: low
+          name: cucumber-report
+          path: target/cucumber-reports/
 
   stagedeployapproval:
     name: Waiting for staging Deployment Approval
