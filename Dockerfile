@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:14-jdk-alpine3.10
 LABEL maintainer="Jude Antony <judebantony@gmail.com>"
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring

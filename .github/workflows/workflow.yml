@@ -270,7 +270,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: cucumber-report
-          path: target/cucumber-reports/
+          path: target/cucumber-reports/cucumber.html
 
   stagedeployapproval:
     name: Waiting for staging Deployment Approval
@@ -286,10 +286,10 @@ jobs:
           server_port: 465
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
-          subject: Stage Deployment ${{github.repository}} starting
+          subject: Stage Deployment ${{github.repository}} waiting for your approval.
           to: judebantony@gmail.com
           from: judebantonyofficial@gmail.com
-          body: Build job of ${{github.repository}} completed successfully!
+          body: Please review the test result and approve it.
           reply_to: judebantonyofficial@gmail.com
           in_reply_to: judebantonyofficial@gmail.com
           ignore_cert: true
