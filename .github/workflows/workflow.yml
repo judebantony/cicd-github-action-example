@@ -379,7 +379,10 @@ jobs:
         env:
           APP_HOST: http://20.81.93.165
           APP_ENV: Development
-          APP_ID: ea0079f1-648e-4bdb-aa2d-233696082b4e   
+          APP_ID: ea0079f1-648e-4bdb-aa2d-233696082b4e
+          configurationFiles: |
+            /hawk/stackhawk.yml
+          network: host          
 
   stagingdeployapproval:
     name: Waiting for Staging Deployment Approval
