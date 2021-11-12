@@ -23,6 +23,5 @@ spec:
       - name: cigithubaction
         image: judebantony.jfrog.io/default-docker-local/cigithubaction:latest
         imagePullPolicy: IfNotPresent
-        imagepullsecrets: cigithubactionstaging-crd 
         ports:
         - containerPort: 18080
