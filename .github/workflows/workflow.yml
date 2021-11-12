@@ -407,15 +407,25 @@ jobs:
           resource-group: 'DefaultResourceGroup-EUS'
       - name: Create AKS Namespace     
         run: |
-            kubectl create namespace cigithubactionqa --dry-run -o json | kubectl apply -f -
+            kubectl create namespace cigithubactionstaging --dry-run -o json | kubectl apply -f -
       - name: Create Secret     
         uses: azure/k8s-create-secret@v1
         with:
           container-registry-url: 'https://judebantony.jfrog.io'
           container-registry-username: ${{ secrets.ARTIFACTORY_USER }}
           container-registry-password: ${{ secrets.ARTIFACTORY_PASSWORD }}
-          namespace: 'cigithubactionqa'
-          secret-name: 'cigithubactionqa-crd'
-    
+          namespace: 'cigithubactionstaging'
+          secret-name: 'cigithubactionstaging-crd'
+      - name: Run Helm Deploy
+        run: |
+         helm upgrade \
+              --install \
+              --create-namespace \
+              --atomic \
+              --wait \
+              --namespace cigithubactionstaging \
+              cigithubaction \
+              ./helmchats \
+              
     
     
