@@ -354,11 +354,37 @@ jobs:
         with:
           name: cucumber-report
           path: target/cucumber-reports/cucumber.html
+          
+  stackhawk:
+    name: DAST Scan using StackHawk
+    runs-on: ubuntu-20.04
+    needs: [qadeploy]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Run HawkScan
+        uses: stackhawk/hawkscan-action@v1.3.2
+        continue-on-error: true
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          codeScanningAlerts: true
+          githubToken: ${{ secrets.GITHUB_TOKEN }}   
+          environmentVariables: |
+            APP_HOST
+            APP_ENV
+            APP_ID
+        env:
+          APP_HOST: http://20.81.93.165
+          APP_ENV: Development
+          APP_ID: ea0079f1-648e-4bdb-aa2d-233696082b4e   
 
   stagingdeployapproval:
     name: Waiting for Staging Deployment Approval
     runs-on: ubuntu-latest
-    needs: [qatest]
+    needs: [qatest, stackhawk]
     environment: staging
     
     steps:

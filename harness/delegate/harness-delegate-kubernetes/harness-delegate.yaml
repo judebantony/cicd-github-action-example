@@ -1,0 +1,181 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: harness-delegate
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: harness-delegate-cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: harness-delegate
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: judeaksdelegate-proxy
+  namespace: harness-delegate
+type: Opaque
+data:
+  # Enter base64 encoded username and password, if needed
+  PROXY_USER: ""
+  PROXY_PASSWORD: ""
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    harness.io/app: harness-delegate
+    harness.io/account: agspiw
+    harness.io/name: judeaksdelegate
+  # Name must contain the six letter account identifier: agspiw
+  name: judeaksdelegate-agspiw
+  namespace: harness-delegate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      harness.io/app: harness-delegate
+      harness.io/account: agspiw
+      harness.io/name: judeaksdelegate
+  serviceName: ""
+  template:
+    metadata:
+      labels:
+        harness.io/app: harness-delegate
+        harness.io/account: agspiw
+        harness.io/name: judeaksdelegate
+    spec:
+      containers:
+      - image: harness/delegate:latest
+        imagePullPolicy: Always
+        name: harness-delegate-instance
+        ports:
+          - containerPort: 8080
+        resources:
+          limits:
+            cpu: "1"
+            memory: "8Gi"
+        readinessProbe:
+          exec:
+            command:
+              - test
+              - -s
+              - delegate.log
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        livenessProbe:
+          exec:
+            command:
+              - bash
+              - -c
+              - '[[ -e /opt/harness-delegate/msg/data/watcher-data && $(($(date +%s000) - $(grep heartbeat /opt/harness-delegate/msg/data/watcher-data | cut -d ":" -f 2 | cut -d "," -f 1))) -lt 300000 ]]'
+          initialDelaySeconds: 240
+          periodSeconds: 10
+          failureThreshold: 2
+        env:
+        - name: JAVA_OPTS
+          value: "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -XX:MaxRAMFraction=2 -Xms64M"
+        - name: ACCOUNT_ID
+          value: aGS5Pi_WSPa9IsdlTlJc7g
+        - name: ACCOUNT_SECRET
+          value: 364e63b48bd1de67d7617c6c4e35d20f
+        - name: MANAGER_HOST_AND_PORT
+          value: https://app.harness.io/gratis
+        - name: WATCHER_STORAGE_URL
+          value: https://app.harness.io/public/free/freemium/watchers
+        - name: WATCHER_CHECK_LOCATION
+          value: current.version
+        - name: REMOTE_WATCHER_URL_CDN
+          value: https://app.harness.io/public/shared/watchers/builds
+        - name: DELEGATE_STORAGE_URL
+          value: https://app.harness.io
+        - name: DELEGATE_CHECK_LOCATION
+          value: delegatefree.txt
+        - name: DEPLOY_MODE
+          value: KUBERNETES
+        - name: DELEGATE_NAME
+          value: judeaksdelegate
+        - name: DELEGATE_PROFILE
+          value: "wVuMGQ3fS56X0BRCf_bwQw"
+        - name: DELEGATE_TYPE
+          value: "KUBERNETES"
+        - name: PROXY_HOST
+          value: ""
+        - name: PROXY_PORT
+          value: ""
+        - name: PROXY_SCHEME
+          value: ""
+        - name: NO_PROXY
+          value: ""
+        - name: PROXY_MANAGER
+          value: "true"
+        - name: PROXY_USER
+          valueFrom:
+            secretKeyRef:
+              name: judeaksdelegate-proxy
+              key: PROXY_USER
+        - name: PROXY_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: judeaksdelegate-proxy
+              key: PROXY_PASSWORD
+        - name: POLL_FOR_TASKS
+          value: "false"
+        - name: HELM_DESIRED_VERSION
+          value: ""
+        - name: USE_CDN
+          value: "true"
+        - name: CDN_URL
+          value: https://app.harness.io
+        - name: JRE_VERSION
+          value: 1.8.0_242
+        - name: HELM3_PATH
+          value: ""
+        - name: HELM_PATH
+          value: ""
+        - name: KUSTOMIZE_PATH
+          value: ""
+        - name: KUBECTL_PATH
+          value: ""
+        - name: ENABlE_CE
+          value: "false"
+        - name: GRPC_SERVICE_ENABLED
+          value: "true"
+        - name: GRPC_SERVICE_CONNECTOR_PORT
+          value: "8080"
+        - name: VERSION_CHECK_DISABLED
+          value: "false"
+        - name: DELEGATE_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+      restartPolicy: Always
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: delegate-service
+  namespace: harness-delegate
+spec:
+  type: ClusterIP
+  selector:
+    harness.io/app: harness-delegate
+    harness.io/account: agspiw
+    harness.io/name: judeaksdelegate
+  ports:
+    - port: 8080
