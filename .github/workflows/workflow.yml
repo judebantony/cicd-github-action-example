@@ -425,7 +425,7 @@ jobs:
               --wait \
               --namespace cigithubactionstaging \
               cigithubaction \
-              ./helmchats \
+              ./helm \
 
   stagetest:
     name: Staging Validation and Report
