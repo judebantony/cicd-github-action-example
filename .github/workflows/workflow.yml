@@ -30,7 +30,7 @@ jobs:
       - name: Build
         run: mvn -B clean package -DskipTests
       - name: Run UnitTest and Verify 
-        run: mvn -B verify -DexcludedGroups="Smoke | Sanity"
+        run: mvn -B verify -DexcludedGroups="Smoke | Staging"
       - name: Generate JaCoCo Badge
         id: jacoco
         uses: cicirello/jacoco-badge-generator@v2
@@ -338,11 +338,11 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2     
-      - name: Run QA Automation
-        run: mvn -B verify -DexcludedGroups="Ignore" -Dgroups="Smoke | Sanity"
+      - name: Run Test Automation
+        run: mvn -B verify -DexcludedGroups="Staging" -Dgroups="Smoke"
         env: 
           CUCUMBER_PUBLISH_TOKEN: ${{secrets.CUCUMBER_PUBLISH_TOKEN}}
-      - name: Upload QA Automation Report
+      - name: Upload Test Automation Report
         uses: deblockt/cucumber-report-annotations-action@v1.7
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
@@ -355,8 +355,8 @@ jobs:
           name: cucumber-report
           path: target/cucumber-reports/cucumber.html
 
-  stagedeployapproval:
-    name: Waiting for staging Deployment Approval
+  stagingdeployapproval:
+    name: Waiting for Staging Deployment Approval
     runs-on: ubuntu-latest
     needs: [qatest]
     environment: staging
@@ -379,10 +379,10 @@ jobs:
           convert_markdown: true
           priority: low
           
-  stagedeploy:         
+  stagingdeploy:         
     name: Staging Deployment Using Helm
     runs-on: ubuntu-latest
-    needs: [stagedeployapproval]
+    needs: [stagingdeployapproval]
 
     steps:
       - name: Check out the code
@@ -426,6 +426,43 @@ jobs:
               --namespace cigithubactionstaging \
               cigithubaction \
               ./helmchats \
+
+  stagetest:
+    name: Staging Validation and Report
+    runs-on: ubuntu-latest
+    needs: [stagingdeploy]
+    
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Run Test Automation
+        run: mvn -B verify -DexcludedGroups="Smoke" -Dgroups="Staging"
+        env: 
+          CUCUMBER_PUBLISH_TOKEN: ${{secrets.CUCUMBER_PUBLISH_TOKEN}}
+      - name: Upload Test Automation Report
+        uses: deblockt/cucumber-report-annotations-action@v1.7
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          path: "target/cucumber-reports/cucumber.json"
+          check-status-on-error: 'neutral'
+          annotation-status-on-error: 'warning'    
+      - name: Upload Cucumber report
+        uses: actions/upload-artifact@v2
+        with:
+          name: cucumber-staging-report
+          path: target/cucumber-reports/cucumber.html
               
     
     
