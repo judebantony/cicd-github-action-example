@@ -116,7 +116,29 @@ jobs:
         uses: github/codeql-action/autobuild@v1
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
-          
+        
+        
+  codacyScan:
+      name: SAST Scan using Codacy
+      runs-on: ubuntu-latest
+      needs: [test]
+      
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@main
+  
+        - name: Run Codacy Analysis CLI
+          uses: codacy/codacy-analysis-cli-action@master
+          with:
+            output: codacy.sarif
+            format: sarif
+            gh-code-scanning-compat: true
+            max-allowed-issues: 2147483647
+        
+        - name: Upload SARIF results file
+          uses: github/codeql-action/upload-sarif@main
+          with:
+            sarif_file: codacy.sarif          
 
   snykScan:
       name: SCA Scan using Snyk
@@ -237,7 +259,7 @@ jobs:
   artifactory:
     name: Publish Artifact
     runs-on: ubuntu-latest
-    needs: [test, sonar, analyze, dependabot, snykScan, snykImageScan, snyKubeScan, blackduck]
+    needs: [test, sonar, analyze, dependabot, snykScan, snykImageScan, snyKubeScan, blackduck, codacyScan]
     
     steps:
       - name: Check out the code
@@ -268,7 +290,7 @@ jobs:
   imagebuild:
     name: Build Docker Image and Publish 
     runs-on: ubuntu-latest
-    needs: [test, sonar, analyze, dependabot, snykScan, snykImageScan, snyKubeScan, blackduck]
+    needs: [test, sonar, analyze, dependabot, snykScan, snykImageScan, snyKubeScan, blackduck, codacyScan]
 
     steps:
       - name: Check out the code
