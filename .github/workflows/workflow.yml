@@ -146,13 +146,19 @@ jobs:
       runs-on: ubuntu-latest
       needs: [test]  
       
-      if: ${{ github.actor == 'dependabot[bot]' }}
       steps:
-        - uses: actions/checkout@v2
+        - name: Check out the code
+          uses: actions/checkout@v2
           with:
             fetch-depth: 0
             github-token: ${{ secrets.GITHUB_TOKEN }}          
-          
+        - name: Dependabot metadata
+          id: metadata
+          uses: dependabot/fetch-metadata@v1.1.1
+          with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}   
+            
+                 
   snykImageScan:
       name: Imane Scan using Snyk
       runs-on: ubuntu-latest
