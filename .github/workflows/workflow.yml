@@ -152,7 +152,33 @@ jobs:
           with:
             fetch-depth: 0
             token: ${{ secrets.GITHUB_TOKEN }}          
-            
+
+  blackduck:
+      name: SCA Scan using BlackDuck
+      runs-on: ubuntu-latest
+      needs: [test]  
+
+      steps:
+        - name: Check out the code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Set up JDK
+          uses: actions/setup-java@v1
+          with:
+            java-version: 1.8
+        - name: Cache Maven packages
+          uses: actions/cache@v1
+          with:
+            path: ~/.m2
+            key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+            restore-keys: ${{ runner.os }}-m2     
+        - name: Build with Maven
+          run: |
+            mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+            mvn test -B
+        - name: Upload to CoPilot
+          run: bash <(curl -s https://copilot.blackducksoftware.com/ci/githubactions/scripts/upload)            
                  
   snykImageScan:
       name: Imane Scan using Snyk
@@ -215,7 +241,7 @@ jobs:
   artifactory:
     name: Publish Artifact
     runs-on: ubuntu-latest
-    needs: [test, sonar, analyze, dependabot, snykScan, snykImageScan, snyKubeScan]
+    needs: [test, sonar, analyze, dependabot, snykScan, snykImageScan, snyKubeScan, blackduck]
     
     steps:
       - name: Check out the code
@@ -246,7 +272,7 @@ jobs:
   imagebuild:
     name: Build Docker Image and Publish 
     runs-on: ubuntu-latest
-    needs: [test, sonar, analyze, dependabot, snykScan, snykImageScan, snyKubeScan]
+    needs: [test, sonar, analyze, dependabot, snykScan, snykImageScan, snyKubeScan, blackduck]
 
     steps:
       - name: Check out the code
