@@ -154,7 +154,7 @@ jobs:
             github-token: ${{ secrets.GITHUB_TOKEN }}          
         - name: Dependabot metadata
           id: metadata
-          uses: dependabot/fetch-metadata@v1.1.1
+          uses: dependabot/updater-action@v1.1.1
           with:
             github-token: ${{ secrets.GITHUB_TOKEN }}   
             
