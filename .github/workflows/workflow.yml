@@ -178,7 +178,7 @@ jobs:
             mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
             mvn test -B
         - name: Upload to CoPilot
-          run: bash <(curl -s https://copilot.blackducksoftware.com/ci/githubactions/scripts/upload)            
+          run: bash <(curl -s https://copilot-test.blackducksoftware.com/ci/githubactions/scripts/upload)
                  
   snykImageScan:
       name: Imane Scan using Snyk
