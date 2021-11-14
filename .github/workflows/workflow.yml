@@ -310,7 +310,6 @@ jobs:
   jfrogXrayImageScan:
       name: Imane Scan using JfrogXry
       runs-on: ubuntu-latest
-      needs: [snyIaSScan, trufflehogScan]  
           
       steps:
       - name: Check out the code
@@ -338,8 +337,10 @@ jobs:
           username: ${{ secrets.ARTIFACTORY_USER }}
           password: ${{ secrets.ARTIFACTORY_PASSWORD }}        
       - uses: jfrog/setup-jfrog-cli@v1
-      - run: |
-          jfrog xr audit-mvn
+        env:
+          JF_ARTIFACTORY_1: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}
+        run: |
+              jfrog rt ping
            
   artifactory:
     name: Publish Artifact
