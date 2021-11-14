@@ -2,5 +2,8 @@ app:
   applicationId: ea0079f1-648e-4bdb-aa2d-233696082b4e
   env: Development
   host : http://20.81.93.165/
+  openApiConf: 
+      filePath: "openapi.json"
+    
 hawk:
  failureThreshold: high
