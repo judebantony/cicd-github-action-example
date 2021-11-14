@@ -237,7 +237,10 @@ jobs:
       needs: [dependabot, snykScan, blackduck, fossaScan]
       
       steps:
-        - uses: actions/checkout@v2
+        - name: Check out the code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
         - name: Run Snyk to check configuration files for security issues
           continue-on-error: true
           uses: snyk/actions/iac@master
@@ -251,12 +254,26 @@ jobs:
           uses: github/codeql-action/upload-sarif@v1
           with:
             sarif_file: snyk.sarif
-
+            
+  trufflehogScan:
+      name: Secret Scan Using Trufflehog
+      runs-on: ubuntu-latest
+      needs: [dependabot, snykScan, blackduck, fossaScan]
+      
+      steps:
+        - name: Check out the code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: trufflehog-actions-scan
+          uses: edplato/trufflehog-actions-scan@master
+          with:
+            scanArguments: "--regex --entropy=False --max_depth=5" 
                  
   snykImageScan:
       name: Imane Scan using Snyk
       runs-on: ubuntu-latest
-      needs: [snyIasScan]  
+      needs: [snyIasScan, trufflehogScan]  
           
       steps:
       - name: Check out the code
