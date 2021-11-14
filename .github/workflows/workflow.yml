@@ -124,9 +124,9 @@ jobs:
       needs: [test]
       
       steps:
-        - name: Checkout code
-          uses: actions/checkout@main
-  
+        - uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
         - name: Run Codacy Analysis CLI
           uses: codacy/codacy-analysis-cli-action@master
           with:
@@ -197,6 +197,33 @@ jobs:
             mvn test -B
         - name: Upload to CoPilot
           run: bash <(curl -s https://copilot.blackducksoftware.com/ci/githubactions/scripts/upload)
+          
+        - name: Upload SARIF file
+          uses: github/codeql-action/upload-sarif@v1
+          with:
+              sarif_file: workflowengine-results.sarif.json         
+          
+  fossa-scan:
+      name: SCA Scan using FOSSA
+      runs-on: ubuntu-latest
+      needs: [test]  
+      
+      steps:
+        - name: Check out the code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+  
+        - name: Run FOSSA Scan
+          uses: fossas/fossa-action@v1
+          with:
+            api-key: ${{secrets.FOSSA_APIKEY}}
+  
+        - name: Run FOSSA Test
+          uses: fossas/fossa-action@v1
+          with:
+            api-key: ${{secrets.FOSSA_APIKEY}}
+            run-tests: true          
                  
   snykImageScan:
       name: Imane Scan using Snyk
@@ -426,6 +453,7 @@ jobs:
         continue-on-error: true
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
+          configurationFiles: stackhawk.yml
           codeScanningAlerts: true
           githubToken: ${{ secrets.GITHUB_TOKEN }}   
           environmentVariables: |
