@@ -337,8 +337,6 @@ jobs:
           username: ${{ secrets.ARTIFACTORY_USER }}
           password: ${{ secrets.ARTIFACTORY_PASSWORD }}        
       - uses: jfrog/setup-jfrog-cli@v1
-        env:
-          JF_ARTIFACTORY_1: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}
       - run: |
               jfrog rt ping
            
