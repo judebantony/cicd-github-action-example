@@ -326,19 +326,11 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Package
-        run: mvn -B clean package -DskipTests
-      - name: Build a Docker image
-        run: docker build -t your/image-to-test .
-      - name: Login to JFrog  
-        uses: docker/login-action@v1
-        with:
-          registry: 'https://judebantony.jfrog.io'
-          username: ${{ secrets.ARTIFACTORY_USER }}
-          password: ${{ secrets.ARTIFACTORY_PASSWORD }}        
       - uses: jfrog/setup-jfrog-cli@v1
+        env:
+          JF_ARTIFACTORY_1: ${{ secrets.JF_ARTIFACTORY_SECRET_1 }}
       - run: |
-              jfrog rt ping
+              jfrog rt ping --url=https://judebantony.jfrog.io --user=${{ secrets.ARTIFACTORY_USER }} --password=${{ secrets.ARTIFACTORY_PASSWORD }}
            
   artifactory:
     name: Publish Artifact
