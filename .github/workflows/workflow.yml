@@ -50,7 +50,7 @@ jobs:
           access-token: ${{ secrets.GITHUB_TOKEN }}          
 
   sonar:
-    name: Inspect - Sonar Code Quality Scan
+    name: Inspect - SAST Using Sonar
     runs-on: ubuntu-latest
     needs: [test]
     
@@ -89,7 +89,7 @@ jobs:
         with:
           scanMetadataReportFile: target/sonar/report-task.txt     
           
-  analyze:
+  codeqlScan:
       name: SAST Scan using CodeQL
       runs-on: ubuntu-latest
       needs: [test]
@@ -118,6 +118,24 @@ jobs:
         uses: github/codeql-action/analyze@v1
         
         
+  appScan:
+    name: SAST Scan using AppScan CodeSweep
+    runs-on: ubuntu-latest
+    needs: [test]
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+           fetch-depth: 0
+      - name: Run AppScan CodeSweep
+        uses: HCL-TECH-SOFTWARE/appscan-codesweep-action@v1
+        with:
+            asoc_key: ${{secrets.ASOC_KEY}}
+            asoc_secret: ${{secrets.ASOC_SECRET}}
+        env: 
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+               
   codacyScan:
       name: SAST Scan using Codacy
       runs-on: ubuntu-latest
@@ -143,7 +161,7 @@ jobs:
   snykScan:
       name: SCA Scan using Snyk
       runs-on: ubuntu-latest
-      needs: [test]  
+      needs: [sonar, codeqlScan, codacyScan, appScan]
           
       steps:
       - uses: actions/checkout@v2
@@ -166,7 +184,7 @@ jobs:
   dependabot:
       name: SCA Scan using Dependabot
       runs-on: ubuntu-latest
-      needs: [test]  
+      needs: [sonar, codeqlScan, codacyScan, appScan]  
       
       steps:
         - name: Check out the code
@@ -178,7 +196,7 @@ jobs:
   blackduck:
       name: SCA Scan using BlackDuck
       runs-on: ubuntu-latest
-      needs: [test]  
+      needs: [sonar, codeqlScan, codacyScan, appScan] 
 
       steps:
         - name: Check out the code
@@ -201,24 +219,44 @@ jobs:
   fossaScan:
       name: SCA Scan using FOSSA
       runs-on: ubuntu-latest
-      needs: [test]  
+      needs: [sonar, codeqlScan, codacyScan, appScan]  
       
       steps:
         - name: Check out the code
           uses: actions/checkout@v2
           with:
             fetch-depth: 0
-  
         - name: Run FOSSA Scan
           uses: fossas/fossa-action@v1
           with:
             api-key: ${{secrets.FOSSA_APIKEY}}
   
+  snyIasScan:
+      name: SAST - Scan IaS Configs using Snyk
+      runs-on: ubuntu-latest
+      needs: [dependabot, snykScan, blackduck, fossaScan]
+      
+      steps:
+        - uses: actions/checkout@v2
+        - name: Run Snyk to check configuration files for security issues
+          continue-on-error: true
+          uses: snyk/actions/iac@master
+          env:
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          with:
+            file: |
+              manifests/deployment.yml
+              manifests/service.yml
+        - name: Upload result to GitHub Code Scanning
+          uses: github/codeql-action/upload-sarif@v1
+          with:
+            sarif_file: snyk.sarif
+
                  
   snykImageScan:
       name: Imane Scan using Snyk
       runs-on: ubuntu-latest
-      needs: [test]  
+      needs: [snyIasScan]  
           
       steps:
       - name: Check out the code
@@ -252,31 +290,11 @@ jobs:
         with:
           sarif_file: snyk.sarif      
 
-  snyKubeScan:
-      name: Scan K8S Configs using Snyk
-      runs-on: ubuntu-latest
-      needs: [test]  
-      
-      steps:
-        - uses: actions/checkout@v2
-        - name: Run Snyk to check configuration files for security issues
-          continue-on-error: true
-          uses: snyk/actions/iac@master
-          env:
-            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-          with:
-            file: |
-              manifests/deployment.yml
-              manifests/service.yml
-        - name: Upload result to GitHub Code Scanning
-          uses: github/codeql-action/upload-sarif@v1
-          with:
-            sarif_file: snyk.sarif
            
   artifactory:
     name: Publish Artifact
     runs-on: ubuntu-latest
-    needs: [test, sonar, analyze, dependabot, snykScan, snykImageScan, snyKubeScan, blackduck, codacyScan, fossaScan]
+    needs: [snykImageScan]
     
     steps:
       - name: Check out the code
@@ -307,7 +325,7 @@ jobs:
   imagebuild:
     name: Build Docker Image and Publish 
     runs-on: ubuntu-latest
-    needs: [test, sonar, analyze, dependabot, snykScan, snykImageScan, snyKubeScan, blackduck, codacyScan, fossaScan]
+    needs: [snykImageScan]
 
     steps:
       - name: Check out the code
@@ -428,10 +446,10 @@ jobs:
           name: cucumber-report
           path: target/cucumber-reports/cucumber.html
           
-  stackhawk:
+  stackhawkScan:
     name: DAST Scan using StackHawk
     runs-on: ubuntu-20.04
-    needs: [qadeploy]
+    needs: [qatest]
 
     steps:
       - name: Checkout code
@@ -461,7 +479,7 @@ jobs:
   stagingdeployapproval:
     name: Waiting for Staging Deployment Approval
     runs-on: ubuntu-latest
-    needs: [qatest, stackhawk]
+    needs: [stackhawkScan]
     environment: staging
     
     steps:
