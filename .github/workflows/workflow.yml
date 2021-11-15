@@ -329,7 +329,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - uses: jfrog/setup-jfrog-cli@v1
       - run: |
-              jfrog c add --url=https://judebantony.jfrog.io/artifactory --user=${{ secrets.ARTIFACTORY_USER }} --password=${{ secrets.ARTIFACTORY_PASSWORD }}
+              jfrog rt ping --url=https://judebantony.jfrog.io/artifactory --user=${{ secrets.ARTIFACTORY_USER }} --password=${{ secrets.ARTIFACTORY_PASSWORD }}
            
   artifactory:
     name: Publish Artifact
