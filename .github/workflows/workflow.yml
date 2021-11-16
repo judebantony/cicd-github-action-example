@@ -588,7 +588,7 @@ jobs:
               cigithubaction \
               ./helm \
 
-  stagetest:
+  stagingtest:
     name: Staging Validation and Report
     runs-on: ubuntu-latest
     needs: [stagingdeploy]
