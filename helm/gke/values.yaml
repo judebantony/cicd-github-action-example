@@ -3,4 +3,4 @@ image:
   pullpolicy: IfNotPresent
 
 imagePullSecrets:
-  - name : cigithubactionuatgke-crd  
+  - name : cigithubactionuat-crd  
