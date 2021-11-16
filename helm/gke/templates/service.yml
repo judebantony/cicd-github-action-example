@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cigithubaction
+spec:
+  type: LoadBalancer
+  selector:
+    app: cigithubaction
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 18080
+    nodePort: 31484
+    name: http
