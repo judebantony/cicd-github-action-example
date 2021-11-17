@@ -12,7 +12,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.spring.CucumberContextConfiguration;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -56,7 +55,26 @@ public class SeleniumStepDef {
 
 		DesiredCapabilities caps = new DesiredCapabilities();
 		if (LAMDA_TEST.equalsIgnoreCase(tool)) {
+			caps.setCapability("platform", "Windows 10");
+			caps.setCapability("browserName", "Chrome");
+			caps.setCapability("version", "92.0"); 
+			caps.setCapability("resolution", "1024x768");
+			caps.setCapability("build", "First Test");
+			caps.setCapability("name", "Sample Test");
+			caps.setCapability("network", true); 
+			caps.setCapability("visual", true); 
+			caps.setCapability("video", true); 
+			caps.setCapability("console", true); 
 
+			try {
+				WebDriver driver = new RemoteWebDriver(
+						new URL(HUB_CLOUD_LAMADATEST_COM_WD_HUB),
+						caps);
+				driver.get(SWAGGER_URL);
+				System.out.println("Jude Testing lamdatest = " + driver.getTitle());
+				driver.quit();
+			} catch (Exception e) {
+			}
 		} else {
 			caps.setCapability("os", "Windows");
 			caps.setCapability("os_version", "10");
@@ -73,26 +91,6 @@ public class SeleniumStepDef {
 				System.out.println("Jude Testing browserstack = " + driver.getTitle());
 				driver.quit();
 			} catch (Exception x) {
-				caps.setCapability("platform", "Windows 10");
-				caps.setCapability("browserName", "Chrome");
-				caps.setCapability("version", "92.0"); 
-				caps.setCapability("resolution", "1024x768");
-				caps.setCapability("build", "First Test");
-				caps.setCapability("name", "Sample Test");
-				caps.setCapability("network", true); 
-				caps.setCapability("visual", true); 
-				caps.setCapability("video", true); 
-				caps.setCapability("console", true); 
-
-				try {
-					WebDriver driver = new RemoteWebDriver(
-							new URL(HUB_CLOUD_LAMADATEST_COM_WD_HUB),
-							caps);
-					driver.get(SWAGGER_URL);
-					System.out.println("Jude Testing lamdatest = " + driver.getTitle());
-					driver.quit();
-				} catch (Exception e) {
-				}
 			}
 		}
 	}
