@@ -40,7 +40,7 @@ public class SeleniumStepDef {
 	public static final String URL = "https://" + AUTOMATE_USERNAME + COLLUMN + AUTOMATE_ACCESS_KEY
 			+ HUB_CLOUD_BROWSERSTACK_COM_WD_HUB;
 	
-	public static final String LAMADATEST_URL = "https://" + "judebantony" + COLLUMN + "7qLE6NcISsjNhszXPJiZGWjvuNGJjcAlKAF9zsdiHEJTwb6HCr"
+	public static final String LAMADATEST_URL = "https://" + LAMADATEST_AUTOMATE_USERNAME + COLLUMN + LAMADATEST_AUTOMATE_ACCESS_KEY
 			+ HUB_CLOUD_LAMADATEST_COM_WD_HUB;
 
 
