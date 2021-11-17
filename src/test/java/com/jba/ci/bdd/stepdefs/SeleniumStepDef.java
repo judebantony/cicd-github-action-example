@@ -68,7 +68,7 @@ public class SeleniumStepDef {
 
 			try {
 				WebDriver driver = new RemoteWebDriver(
-						new URL(HUB_CLOUD_LAMADATEST_COM_WD_HUB),
+						new URL(LAMADATEST_URL),
 						caps);
 				driver.get(SWAGGER_URL);
 				System.out.println("Jude Testing lamdatest = " + driver.getTitle());
