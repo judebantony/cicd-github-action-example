@@ -436,6 +436,7 @@ jobs:
   dockerHubImageBuild:
       name: Push Docker image to Docker Hub
       runs-on: ubuntu-latest
+      needs: [snykImageScan, jfrogXrayImageScan]
       
       steps:
         - name: Check out the repo
