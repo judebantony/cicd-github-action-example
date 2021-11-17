@@ -20,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @Slf4j
-@CucumberContextConfiguration
 public class SeleniumStepDef {
 
 	private static final String LAMDA_TEST = "LamdaTest";
@@ -99,6 +98,6 @@ public class SeleniumStepDef {
 	}
 
 	@Then("return ui")
-	public void return_result() {
+	public void return_ui() {
 	}
 }
