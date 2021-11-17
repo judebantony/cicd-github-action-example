@@ -608,10 +608,55 @@ jobs:
           name: cucumber-report
           path: target/cucumber-reports/cucumber.html
           
+  seliniumTest:
+    name: 'BrowserStack QA Test Validation'
+    runs-on: ubuntu-latest 
+    needs: [qadeploy]
+    
+    steps:
+
+      - name: 'BrowserStack or LamdaTest Env Setup'  
+        uses: browserstack/github-actions/setup-env@master
+        with:
+          username:  ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+
+      - name: 'BrowserStack Local Tunnel Setup' 
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: start
+          local-identifier: random
+
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Run BrowserStack Test Automation
+        run: mvn -B verify -DexcludedGroups="Staging" -Dgroups="Smoke"
+        env: 
+          CUCUMBER_PUBLISH_TOKEN: ${{secrets.CUCUMBER_PUBLISH_TOKEN}}
+
+      - name: 'BrowserStackLocal Stop'  
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: stop
+
+          
+          
   stackhawkScan:
     name: DAST Scan using StackHawk
     runs-on: ubuntu-20.04
-    needs: [qatest]
+    needs: [qatest, seliniumTest]
 
     steps:
       - name: Checkout code
