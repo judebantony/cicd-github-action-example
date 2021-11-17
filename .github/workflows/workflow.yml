@@ -677,7 +677,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2     
       - name: Run LamdaTest Automation
-        run: mvn -B verify -DLT_ACCESS_KEY= ${{ secrets.LT_ACCESS_KEY }} -DLT_EMAIL=${{ secrets.LT_EMAIL }} -DexcludedGroups="Staging | Smoke | BrowserStack" -Dgroups="LamdaTest"
+        run: mvn -B verify -DLT_ACCESS_KEY=${{ secrets.LT_ACCESS_KEY }} -DLT_EMAIL=${{ secrets.LT_EMAIL }} -DexcludedGroups="Staging | Smoke | BrowserStack" -Dgroups="LamdaTest"
         env: 
           CUCUMBER_PUBLISH_TOKEN: ${{secrets.CUCUMBER_PUBLISH_TOKEN}}
       - name: Export Tunnel Logs for debugging
