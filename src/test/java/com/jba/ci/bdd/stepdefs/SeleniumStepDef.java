@@ -74,6 +74,7 @@ public class SeleniumStepDef {
 				System.out.println("Jude Testing lamdatest = " + driver.getTitle());
 				driver.quit();
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		} else {
 			caps.setCapability("os", "Windows");
@@ -91,6 +92,7 @@ public class SeleniumStepDef {
 				System.out.println("Jude Testing browserstack = " + driver.getTitle());
 				driver.quit();
 			} catch (Exception x) {
+				x.printStackTrace();
 			}
 		}
 	}
