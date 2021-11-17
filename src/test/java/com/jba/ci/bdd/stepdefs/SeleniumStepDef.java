@@ -67,6 +67,7 @@ public class SeleniumStepDef {
 			caps.setCapability("console", true); 
 
 			try {
+				System.out.println("Jude Testing lamdatest = " + LAMADATEST_URL);
 				WebDriver driver = new RemoteWebDriver(
 						new URL(LAMADATEST_URL),
 						caps);
