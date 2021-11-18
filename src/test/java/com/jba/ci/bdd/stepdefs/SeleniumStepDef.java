@@ -21,6 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SeleniumStepDef {
 
+	private static final String HTTPS = "https://";
+
 	private static final String LAMDA_TEST = "LamdaTest";
 
 	private static final String HUB_CLOUD_BROWSERSTACK_COM_WD_HUB = "@hub-cloud.browserstack.com/wd/hub";
@@ -34,13 +36,13 @@ public class SeleniumStepDef {
 	public static final String BUILD_NAME = System.getenv("BROWSERSTACK_BUILD_NAME");
 	public static final String PROJECT_NAME = System.getenv("BROWSERSTACK_PROJECT_NAME");
 
-	public static final String LAMADATEST_AUTOMATE_USERNAME = "judebantony";
-	public static final String LAMADATEST_AUTOMATE_ACCESS_KEY = "7qLE6NcISsjNhszXPJiZGWjvuNGJjcAlKAF9zsdiHEJTwb6HCr";
+	public static final String LAMADATEST_AUTOMATE_USERNAME = System.getenv("LT_EMAIL");
+	public static final String LAMADATEST_AUTOMATE_ACCESS_KEY = System.getenv("LT_ACCESS_KEY");
 
-	public static final String URL = "https://" + AUTOMATE_USERNAME + COLLUMN + AUTOMATE_ACCESS_KEY
+	public static final String URL = HTTPS + AUTOMATE_USERNAME + COLLUMN + AUTOMATE_ACCESS_KEY
 			+ HUB_CLOUD_BROWSERSTACK_COM_WD_HUB;
 	
-	public static final String LAMADATEST_URL = "https://" + LAMADATEST_AUTOMATE_USERNAME + COLLUMN + LAMADATEST_AUTOMATE_ACCESS_KEY
+	public static final String LAMADATEST_URL = HTTPS + LAMADATEST_AUTOMATE_USERNAME + COLLUMN + LAMADATEST_AUTOMATE_ACCESS_KEY
 			+ HUB_CLOUD_LAMADATEST_COM_WD_HUB;
 
 
@@ -67,7 +69,6 @@ public class SeleniumStepDef {
 			caps.setCapability("console", true); 
 
 			try {
-				System.out.println("Jude Testing lamdatest = " + LAMADATEST_URL);
 				WebDriver driver = new RemoteWebDriver(
 						new URL(LAMADATEST_URL),
 						caps);
