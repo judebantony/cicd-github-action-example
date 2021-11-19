@@ -23,8 +23,9 @@ terraform {
 }
 
 provider "aws" {
-  region = "ap-south-1a"
+  region = "ap-south-1"
 }
+
 data "aws_availability_zones" "all" {}
 
 variable "server_port" {
@@ -34,7 +35,7 @@ variable "server_port" {
 
 
 resource "aws_security_group" "elb" {
-  name = "terraform-example-elb"
+  name = "githubaction-terraform-example-elb"
   
   # Allow all outbound
   egress {
