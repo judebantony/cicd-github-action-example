@@ -913,7 +913,7 @@ jobs:
         uses: "finnp/create-file-action@master"
         env:
           FILE_NAME: "plan.html" 
-          FILE_DATA: "${{steps.return_plan_outpot.outputs.result//[$'\t\r\n ']}}"     
+          FILE_DATA: "${{steps.return_plan_outpot.outputs.result}}"     
         
       - name: Upload Terraform Planb result
         uses: actions/upload-artifact@v2
