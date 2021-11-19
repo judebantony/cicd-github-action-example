@@ -909,7 +909,9 @@ jobs:
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
             return output;
       - name: Create plan result
-        run: "${{steps.set-result.outputs.result}}" > plan.html
+        shell: bash
+        run: |
+          "${{steps.set-result.outputs.result}}" > plan.html
         
       - name: Upload Terraform Planb result
         uses: actions/upload-artifact@v2
