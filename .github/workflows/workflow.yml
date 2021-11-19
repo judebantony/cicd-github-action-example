@@ -873,8 +873,6 @@ jobs:
         id: fmt
         run: |
             cd terraform/
-            pwd
-            ls -lst
             terraform fmt -check
       - name: Terraform Init
         id: init
@@ -909,7 +907,6 @@ jobs:
             </details>
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
             github.issues.createComment({
-              issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: output
@@ -917,6 +914,8 @@ jobs:
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
+      - name: Terraform Apply
+        run: terraform apply -auto-approve        
           
   uatdeploy:
     name: UAT Deployment using Harness
