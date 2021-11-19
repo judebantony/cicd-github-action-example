@@ -911,7 +911,7 @@ jobs:
       - name: Create plan result
         shell: bash
         run: |
-          "${{steps.set-result.outputs.result}}" > plan.html
+          "${{steps.return_plan_outpot.outputs.result}}" > plan.html
         
       - name: Upload Terraform Planb result
         uses: actions/upload-artifact@v2
