@@ -93,7 +93,7 @@ resource "aws_security_group" "githubactioninstance" {
 }
 
 resource "aws_launch_configuration" "githubactionlaunch" {
-  image_id        = "ami-0c55b159cbfafe1f0"
+  image_id        = "ami-0567e0d2b4b2169ae"
   instance_type   = "t2.micro"
   security_groups = [aws_security_group.githubactioninstance.id]
   user_data       = <<-EOF
