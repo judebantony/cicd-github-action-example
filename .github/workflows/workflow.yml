@@ -873,6 +873,8 @@ jobs:
         id: fmt
         run: |
             cd terraform/
+            pwd
+            ls -lst
             terraform fmt -check
       - name: Terraform Init
         id: init
