@@ -909,9 +909,10 @@ jobs:
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
             return output;
       - name: Create plan result
-        shell: bash
-        run: |
-          echo "${{steps.return_plan_outpot.outputs.result}}" > plan.html
+        uses: "finnp/create-file-action@master"
+        env:
+          FILE_NAME: "plan.html" 
+          FILE_DATA: "${{steps.return_plan_outpot.outputs.result}}"     
         
       - name: Upload Terraform Planb result
         uses: actions/upload-artifact@v2
@@ -922,8 +923,6 @@ jobs:
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
-      - name: Terraform Apply
-        run: terraform apply -auto-approve        
           
   uatdeploy:
     name: UAT Deployment using Harness
