@@ -913,7 +913,7 @@ jobs:
         uses: "finnp/create-file-action@master"
         env:
           FILE_NAME: "plan.html" 
-          FILE_DATA: "${{steps.return_plan_outpot.outputs.result}}"     
+          FILE_DATA: "${{steps.return_plan_outpot.outputs.result//[$'\t\r\n ']}}"     
         
       - name: Upload Terraform Planb result
         uses: actions/upload-artifact@v2
@@ -926,7 +926,9 @@ jobs:
         run: exit 1
         
       - name: Terraform Apply
-        run: terraform apply -auto-approve  
+        run: |
+            cd terraform/
+            terraform apply -auto-approve  
                 
   uatdeploy:
     name: UAT Deployment using Harness
@@ -937,4 +939,3 @@ jobs:
       - name: Run Harness UAT Deployment
         run: |
           curl -X POST -H 'content-type: application/json' --url https://app.harness.io/gateway/api/webhooks/Tlugr1ZdISx44rvm4flAiXHMb3uKG3ikyiHSbOks?accountId=aGS5Pi_WSPa9IsdlTlJc7g -d '{"application":"1FYrnQdZROqjpAQdCBIMbw"}'
-                   
