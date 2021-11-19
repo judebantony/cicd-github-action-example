@@ -70,7 +70,7 @@ resource "aws_autoscaling_group" "githubactionautoscaling" {
   min_size = 2
   max_size = 10
 
-  load_balancers    = [aws_elb.example.name]
+  load_balancers    = [aws_elb.githubactionelb.name]
   health_check_type = "ELB"
 
   tag {
@@ -82,7 +82,7 @@ resource "aws_autoscaling_group" "githubactionautoscaling" {
 
 
 resource "aws_security_group" "githubactioninstance" {
-  name = "terraform-example-instance"
+  name = "githubaction-terraform-example-instance"
   ingress {
     from_port   = var.server_port
     to_port     = var.server_port
