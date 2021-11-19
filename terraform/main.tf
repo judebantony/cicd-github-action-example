@@ -64,7 +64,7 @@ resource "aws_elb" "githubactionelb" {
 
 
 resource "aws_autoscaling_group" "githubactionautoscaling" {
-  launch_configuration = aws_launch_configuration.example.id
+  launch_configuration = aws_launch_configuration.githubactionlaunch.id
   availability_zones   = data.aws_availability_zones.all.names
 
   min_size = 2
@@ -94,7 +94,7 @@ resource "aws_security_group" "githubactioninstance" {
 resource "aws_launch_configuration" "githubactionlaunch" {
   image_id        = "ami-0c55b159cbfafe1f0"
   instance_type   = "t2.micro"
-  security_groups = [aws_security_group.instance.id]
+  security_groups = [aws_security_group.githubactioninstance.id]
   user_data       = <<-EOF
               #!/bin/bash
               echo "Hello, World" > index.html
@@ -107,6 +107,6 @@ resource "aws_launch_configuration" "githubactionlaunch" {
 
 
 output "clb_dns_name" {
-  value       = aws_elb.example.dns_name
+  value       = aws_elb.githubactionelb.dns_name
   description = "The domain name of the load balancer"
 }
