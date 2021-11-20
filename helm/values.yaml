@@ -1,6 +1,0 @@
-image:
-  repository: judebantony.jfrog.io/default-docker-local/cigithubaction:latest
-  pullpolicy: IfNotPresent
-
-imagePullSecrets:
-  - name : cigithubactionstaging-crd  

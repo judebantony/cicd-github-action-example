@@ -254,6 +254,9 @@ jobs:
             file: |
               manifests/deployment.yml
               manifests/service.yml
+              terraform/main.tf
+              helm/gke/templates/*.yml
+              heml/gke/*.yml
         - name: Upload result to GitHub Code Scanning
           uses: github/codeql-action/upload-sarif@v1
           with:
@@ -929,6 +932,23 @@ jobs:
         run: |
             cd terraform/
             terraform apply -auto-approve  
+   
+  k6_cloud_test:
+    name: k6 cloud test run
+    runs-on: ubuntu-latest
+    needs: [terraform]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+  
+      - name: Run k6 cloud test
+        uses: k6io/action@v0.1
+        with:
+          filename: k6/test.js
+          cloud: true
+          token: ${{ secrets.K6_CLOUD_API_TOKEN }}   
                 
   uatdeploy:
     name: UAT Deployment using Harness
