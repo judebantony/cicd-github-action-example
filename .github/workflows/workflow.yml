@@ -254,10 +254,6 @@ jobs:
             file: |
               manifests/deployment.yml
               manifests/service.yml
-              terraform/main.tf
-              helm/gke/templates/deployment.yml
-              helm/gke/templates/service.yml
-              helm/gke/templates/service-account.yml
         - name: Upload result to GitHub Code Scanning
           uses: github/codeql-action/upload-sarif@v1
           with:
