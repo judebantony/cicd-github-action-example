@@ -944,8 +944,9 @@ jobs:
   
       - name: Cloud k6 test
         env:
-          K6_CLOUD_TOKEN: ${{ secrets.k6_cloud_token }}
-        run: k6 cloud ./k6/test.js       
+          K6_CLOUD_TOKEN: ${{ secrets.K6_CLOUD_API_TOKEN }}
+        run: k6 cloud ./k6/test.js  
+             
   uatdeploy:
     name: UAT Deployment using Harness
     runs-on: ubuntu-latest
