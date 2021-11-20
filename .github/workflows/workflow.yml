@@ -940,11 +940,10 @@ jobs:
         uses: actions/checkout@v1
         with:
           fetch-depth: 0
-      - run : pwd    
       - name: Run k6 cloud test
         uses: k6io/action@v0.1
         with:
-          filename: /k6/test.ts
+          filename: test.ts
           cloud: true
           token: ${{ secrets.K6_CLOUD_API_TOKEN }}
              
