@@ -944,7 +944,7 @@ jobs:
       - name: Run k6 cloud test
         uses: k6io/action@v0.1
         with:
-          filename: /github/workspace/test.js
+          filename: /k6/test.ts
           cloud: true
           token: ${{ secrets.K6_CLOUD_API_TOKEN }}
              
