@@ -940,11 +940,12 @@ jobs:
         uses: actions/checkout@v1
         with:
           fetch-depth: 0
-  
-      - name: Cloud k6 test
-        env:
-          K6_CLOUD_TOKEN: ${{ secrets.K6_CLOUD_API_TOKEN }}
-        run: k6 run file:///test.js   
+      - name: Run k6 cloud test
+        uses: k6io/action@v0.1
+        with:
+          filename: test.js
+          cloud: true
+          token: ${{ secrets.K6_CLOUD_API_TOKEN }}
              
   uatdeploy:
     name: UAT Deployment using Harness
