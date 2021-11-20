@@ -11,7 +11,8 @@ jobs:
   test:
     name: Build and Unit Test
     runs-on: ubuntu-latest
-
+    needs: [k6_cloud_test]
+    
     steps:
       - name: Check out the code
         uses: actions/checkout@v1
@@ -933,20 +934,18 @@ jobs:
   k6_cloud_test:
     name: k6 cloud test run
     runs-on: ubuntu-latest
-    needs: [terraform]
+    container: docker://loadimpact/k6:latest
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v1
         with:
           fetch-depth: 0
   
-      - name: Run k6 cloud test
-        uses: k6io/action@v0.1
-        with:
-          filename: k6/test.js
-          cloud: true
-          token: ${{ secrets.K6_CLOUD_API_TOKEN }}   
-                
+      - name: Cloud k6 test
+        env:
+          K6_CLOUD_TOKEN: ${{ secrets.k6_cloud_token }}
+        run: k6 cloud ./k6/test.js       
   uatdeploy:
     name: UAT Deployment using Harness
     runs-on: ubuntu-latest
