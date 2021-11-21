@@ -43,6 +43,7 @@ public class CucumberStepDef {
 
 	@Then("return result")
 	public void return_result() {
+		log.info("Response {}", response.getStatusCode());
 		assertEquals(200, response.getStatusCode());
 	}
 }

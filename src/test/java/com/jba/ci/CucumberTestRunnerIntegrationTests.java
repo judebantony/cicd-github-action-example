@@ -12,6 +12,7 @@ import io.cucumber.junit.platform.engine.Cucumber;
  * @author judebarnabasantony
  *
  */
+@SuppressWarnings("deprecation")
 @Cucumber
 @SpringBootTest
 public class CucumberTestRunnerIntegrationTests{
