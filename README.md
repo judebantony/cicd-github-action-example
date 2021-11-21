@@ -49,7 +49,7 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
       - Jfrog Artifactiory    
 14. Container Scan - Docker Image
       - Snyk 
-    	  - JFrog Xray
+      - JFrog Xray
 15. Container Repository
      - JFrog Artifactory
      - Github Package
