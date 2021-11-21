@@ -236,7 +236,7 @@ jobs:
             api-key: ${{secrets.FOSSA_APIKEY}}
   
   snyIaSScan:
-      name: SAST - Scan IaS Configs using Snyk
+      name: SAST - Scan IaC Configs using Snyk
       runs-on: ubuntu-latest
       needs: [dependabot, snykScan, blackduck, fossaScan]
       

@@ -12,6 +12,43 @@
 
 CICD Using GitHub and Harness Example
 
+This release is Github Action full release workflow with integrated with all SaaS offing, such as
+1. Integrate JIRA with GitHub
+2. Build using Mavan and Github Action
+3. SonarQube - Code Quality
+4. SAST tool include -
+      - CodeQL
+      - HCL AppScan CodeSweep
+      - Codacy. 
+5. SCA Tool include - 
+     - Snyk
+     - Dependabot
+     - BlackDuck
+     - FOSSA
+6. IaC Configs using Snyk
+7. Secret Scan Using Trufflehog
+8. Publish Artifact Jar
+    - Jfrog Artifactory 
+    - Github Package
+9.  Container Scan 
+    - Snyk 
+    - JFrog Xray. 
+10. Build Docker Image and Publish
+    - JFrog Artifactory
+    - Github Package
+    - DockerHub. 
+11. Deployed using GitHub native action 
+    - Azure - AKS
+    - GCP - GKE 
+    - AWS - EC2
+12. Deployed using Harness and trigged from Github Action. 
+13. Implement the testing framework, 
+    - Unit Testing - Junit
+    - Functional Testing - Cucumber and Selenium.   
+14. Integrate the Selenium Grid
+    - BrowserStack
+    - LamdaTest. 
+15. Performance test using k6. 
 
 
 ## License
