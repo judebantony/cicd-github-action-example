@@ -22,54 +22,54 @@ This is sample project to demonstrate the E2E Github Action release workflow wit
 3. SCM
 	- GitHub		
 4. Build
-	 - Mavan
+	- Mavan
 5. CI	 
-	 - Github Action
-3. Code Quality
-	 - SonarQube 
-4. SAST 
+	- Github Action
+6. Code Quality
+	- SonarQube 
+7. SAST 
      - CodeQL
      - HCL AppScan CodeSweep
      - Codacy. 
-5. SCA 
+8. SCA 
      - Snyk
      - Dependabot
      - BlackDuck
      - FOSSA
-6. DAST
+9. DAST
      - StackHawk    
-7. IaC Configs Scan
+10. IaC Configs Scan
      - Snyk
-8. Secret Scan
+11. Secret Scan
 	 - Trufflehog
-9.  Maven Repository
+12.  Maven Repository
      - Jfrog Artifactory 
      - Github Package
-10. Helm Repository
-	 - Jfrog Artifactiory    
-11. Container Scan - Docker Image
-    	 - Snyk 
+13. Helm Repository
+     - Jfrog Artifactiory    
+14. Container Scan - Docker Image
+     - Snyk 
     	 - JFrog Xray. 
-12. Container Repository
+15. Container Repository
      - JFrog Artifactory
      - Github Package
      - DockerHub
-13. Deploying to Azure - AKS
+16. Deploying to Azure - AKS
 	  - GitHub Action & K8S native 
-14. Deploying to Azure - AKS
+17. Deploying to Azure - AKS
 	  - GitHub Action & Helm Chart 
-15. Deploying to GCP - GKE 
+18. Deploying to GCP - GKE 
 	  - GitHub Action & Harness
-16. Provisioning AWS - EC2
+19. Provisioning AWS - EC2
 	  - Terraform 	
-17. Unit Testing
+20. Unit Testing
       - Junit
-18. Functional Testing
+21. Functional Testing
 	  - Cucumber
 	  - Selenium
 	  - BrowserStack
 	  - LamdaTest. 
-19. Performance test
+22. Performance test
 	  - k6 
 
 
