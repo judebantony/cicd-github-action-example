@@ -10,9 +10,9 @@
 [![Main Branch](https://github.com/judebantony/cicd-github-action-example/actions/workflows/workflow.yml/badge.svg)](https://github.com/judebantony/cicd-github-action-example/actions/workflows/workflow.yml)
 
 
-##E2E CICD - SecDevOps
+## E2E CICD - SecDevOps
 
-This is sample project to demonstrate the E2E Github Action release workflow with all Security Controls and use Cloud SaaS tools offering.
+This is a sample project to demonstrate the E2E Github Action release workflow with all Security Controls and integrated with different Cloud SaaS tools offering as listed below.
 
 1. Requirements
 	- JIRA
@@ -30,11 +30,11 @@ This is sample project to demonstrate the E2E Github Action release workflow wit
 7. SAST 
      - CodeQL
      - HCL AppScan CodeSweep
-     - Codacy. 
+     - Codacy
 8. SCA 
      - Snyk
      - Dependabot
-     - BlackDuck
+     - BlackDuck CoPilot
      - FOSSA
 9. DAST
      - StackHawk    
@@ -42,14 +42,14 @@ This is sample project to demonstrate the E2E Github Action release workflow wit
      - Snyk
 11. Secret Scan
 	 - Trufflehog
-12.  Maven Repository
+12. Maven Repository
      - Jfrog Artifactory 
      - Github Package
 13. Helm Repository
-     - Jfrog Artifactiory    
+      - Jfrog Artifactiory    
 14. Container Scan - Docker Image
-     - Snyk 
-    	 - JFrog Xray. 
+      - Snyk 
+    	  - JFrog Xray
 15. Container Repository
      - JFrog Artifactory
      - Github Package
@@ -68,9 +68,9 @@ This is sample project to demonstrate the E2E Github Action release workflow wit
 	  - Cucumber
 	  - Selenium
 	  - BrowserStack
-	  - LamdaTest. 
+	  - LamdaTest 
 22. Performance test
-	  - k6 
+	  - K6 
 
 
 ## License
