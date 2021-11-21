@@ -10,46 +10,67 @@
 [![Main Branch](https://github.com/judebantony/cicd-github-action-example/actions/workflows/workflow.yml/badge.svg)](https://github.com/judebantony/cicd-github-action-example/actions/workflows/workflow.yml)
 
 
-CICD Using GitHub and Harness Example
+##E2E CICD - SecDevOps
 
-This release is Github Action full release workflow with integrated with all SaaS offing, such as
-1. Integrate JIRA with GitHub
-2. Build using Mavan and Github Action
-3. SonarQube - Code Quality
-4. SAST tool include -
-      - CodeQL
-      - HCL AppScan CodeSweep
-      - Codacy. 
-5. SCA Tool include - 
+This is sample project to demonstrate the E2E Github Action release workflow with all Security Controls and use Cloud SaaS tools offering.
+
+1. Requirements
+	- JIRA
+2. Code
+	- Spring Boot
+	- Java
+3. SCM
+	- GitHub		
+4. Build
+	 - Mavan
+5. CI	 
+	 - Github Action
+3. Code Quality
+	 - SonarQube 
+4. SAST 
+     - CodeQL
+     - HCL AppScan CodeSweep
+     - Codacy. 
+5. SCA 
      - Snyk
      - Dependabot
      - BlackDuck
      - FOSSA
-6. IaC Configs using Snyk
-7. Secret Scan Using Trufflehog
-8. Publish Artifact Jar
-    - Jfrog Artifactory 
-    - Github Package
-9.  Container Scan 
-    - Snyk 
-    - JFrog Xray. 
-10. Build Docker Image and Publish
-    - JFrog Artifactory
-    - Github Package
-    - DockerHub. 
-11. Deployed using GitHub native action 
-    - Azure - AKS
-    - GCP - GKE 
-    - AWS - EC2
-12. Deployed using Harness and trigged from Github Action. 
-13. Implement the testing framework, 
-    - Unit Testing - Junit
-    - Functional Testing - Cucumber and Selenium.   
-14. Integrate the Selenium Grid
-    - BrowserStack
-    - LamdaTest. 
-15. Performance test using k6. 
+6. DAST
+     - StackHawk    
+7. IaC Configs Scan
+     - Snyk
+8. Secret Scan
+	 - Trufflehog
+9.  Maven Repository
+     - Jfrog Artifactory 
+     - Github Package
+10. Helm Repository
+	 - Jfrog Artifactiory    
+11. Container Scan - Docker Image
+    	 - Snyk 
+    	 - JFrog Xray. 
+12. Container Repository
+     - JFrog Artifactory
+     - Github Package
+     - DockerHub
+13. Deploying to Azure - AKS
+	  - GitHub Action & K8S native 
+14. Deploying to Azure - AKS
+	  - GitHub Action & Helm Chart 
+15. Deploying to GCP - GKE 
+	  - GitHub Action & Harness
+16. Provisioning AWS - EC2
+	  - Terraform 	
+17. Unit Testing
+      - Junit
+18. Functional Testing
+	  - Cucumber
+	  - Selenium
+	  - BrowserStack
+	  - LamdaTest. 
+19. Performance test
+	  - k6 
 
 
 ## License
--[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fjudebantony%2Fcicd-github-action-example.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fjudebantony%2Fcicd-github-action-example?ref=badge_large)
