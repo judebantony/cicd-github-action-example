@@ -10,6 +10,9 @@
 [![Main Branch](https://github.com/judebantony/cicd-github-action-example/actions/workflows/workflow.yml/badge.svg)](https://github.com/judebantony/cicd-github-action-example/actions/workflows/workflow.yml)
 
 
+### Easily upload coverage reports to Codecov from GitHub Actions
+
+
 ## E2E CICD - SecDevOps
 
 This is a sample project to demonstrate the E2E Github Action release workflow with all Security Controls and integrated with different Cloud SaaS tools offering as listed below.
@@ -39,7 +42,7 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
      - HCL AppScan CodeSweep - [More Information](https://www.hcltechsw.com/appscan/codesweep)	
      - Codacy - [More Information](https://www.codacy.com/products/sonarqube-alternatives?utm_term=sonarqube&utm_campaign=SEA+-+Competitors&utm_source=adwords&utm_medium=ppc&hsa_acc=9882323101&hsa_cam=11598890837&hsa_grp=112569261106&hsa_ad=493336668133&hsa_src=g&hsa_tgt=kwd-57815990976&hsa_kw=sonarqube&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAiA4veMBhAMEiwAU4XRr_qVWrji3IRgivxyqqPc3QrEMVwBQmQoACBfPuCL5H0gE0nmn3n2LhoCcgkQAvD_BwE)
 8. SCA (Software Composition Analysis)
-     - Snyk - [More Information](https://snyk.io)
+     - Snyk - [More Information](https://snyk.io)<br />
              [Dashboard Example](https://app.snyk.io/org/judebantony)
      - Dependabot - [More Information](https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/)
      - BlackDuck CoPilot - [More Information](https://www.synopsys.com/blogs/software-security/introducing-black-duck-copilot/) <br />
@@ -47,7 +50,7 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
      - FOSSA [More Information](https://fossa.com)<br />
      		[Dashboard Example](https://app.fossa.com/projects/git%2Bgithub.com%2Fjudebantony%2Fcicd-github-action-example/refs/branch/main/0116ae3eef023ccfb56995ab2c4b10aaf5ffe1e1)
 9. DAST (Dynamic Application Security Testing)
-     - StackHawk - [More Information](https://www.stackhawk.com)
+     - StackHawk - [More Information](https://www.stackhawk.com)<br />
      		[Dashboard Example](https://app.stackhawk.com/applications)
 10. IaC Configs Scan
      - Snyk
