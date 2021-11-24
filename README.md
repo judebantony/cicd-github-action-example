@@ -9,6 +9,7 @@
 
 [![Main Branch](https://github.com/judebantony/cicd-github-action-example/actions/workflows/workflow.yml/badge.svg)](https://github.com/judebantony/cicd-github-action-example/actions/workflows/workflow.yml)
 
+[![codecov](https://codecov.io/gh/judebantony/cicd-github-action-example/branch/main/graph/badge.svg?token=E3O3NABP1H)](https://codecov.io/gh/judebantony/cicd-github-action-example)
 
 ### Easily upload coverage reports to Codecov from GitHub Actions
 
@@ -36,7 +37,10 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
 6. Code Quality <br />
 	  - SonarQube <br />
 		  SonarQube is an open-source platform developed by SonarSource for continuous inspection of code quality to perform automatic reviews with static analysis of code to detect bugs, code smells, and security vulnerabilities on 20+ programming languages. <br />
-	  SonarQube :: [Dashboard Example](https://sonarcloud.io/organizations/judebantony/projects)	
+	  SonarQube :: [Dashboard Example](https://sonarcloud.io/organizations/judebantony/projects)	<br />
+	  - Codecov - [More Information](https://docs.codecov.com/docs) <br/>
+	    [Dashboard Example](https://codecov.io/gh/judebantony/cicd-github-action-example/commit/4b9f0f601ab2feee0e409ede57283d5b99b9182d/build)	<br />
+	  	
 7. SAST (Static Analysis Security Testing)
      - CodeQL - CodeQL is the code analysis engine developed by GitHub to automate security checks. [More information](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-with-codeql)
      - HCL AppScan CodeSweep - [More Information](https://www.hcltechsw.com/appscan/codesweep)	

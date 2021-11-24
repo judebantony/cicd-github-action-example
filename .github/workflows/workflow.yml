@@ -94,7 +94,7 @@ jobs:
           scanMetadataReportFile: target/sonar/report-task.txt     
 
   codecov:
-    name: Inspect - Using Sonar
+    name: Inspect - Using Codecov
     runs-on: ubuntu-latest
     needs: [test]
     
@@ -159,7 +159,7 @@ jobs:
   appScan:
     name: SAST Scan using AppScan CodeSweep
     runs-on: ubuntu-latest
-    needs: [sonar]
+    needs: [sonar, codecov]
     
     steps:
       - name: Checkout repository
@@ -177,7 +177,7 @@ jobs:
   codacyScan:
       name: SAST Scan using Codacy
       runs-on: ubuntu-latest
-      needs: [sonar]
+      needs: [sonar, codecov]
       
       steps:
         - uses: actions/checkout@v2
