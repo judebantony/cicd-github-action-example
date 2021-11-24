@@ -73,10 +73,10 @@ public class SeleniumStepDef {
 						new URL(LAMADATEST_URL),
 						caps);
 				driver.get(SWAGGER_URL);
-				System.out.println("Jude Testing lamdatest = " + driver.getTitle());
+				log.info("Testing lamdatest = {}" , driver.getTitle());
 				driver.quit();
 			} catch (Exception e) {
-				e.printStackTrace();
+				log.error("{}",e);
 			}
 		} else {
 			caps.setCapability("os", "Windows");
@@ -91,10 +91,10 @@ public class SeleniumStepDef {
 			try {
 				WebDriver driver = new RemoteWebDriver(new URL(URL), caps);
 				driver.get(SWAGGER_URL);
-				System.out.println("Jude Testing browserstack = " + driver.getTitle());
+				log.info("Testing browserstack = {}" , driver.getTitle());
 				driver.quit();
 			} catch (Exception x) {
-				x.printStackTrace();
+				log.error("{}",x);
 			}
 		}
 	}

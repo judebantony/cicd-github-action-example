@@ -14,19 +14,25 @@
 
 This is a sample project to demonstrate the E2E Github Action release workflow with all Security Controls and integrated with different Cloud SaaS tools offering as listed below.
 
-1. Requirements
-	- JIRA
-2. Code
-	- Spring Boot
-	- Java
-3. SCM
-	- GitHub		
-4. Build
-	- Mavan
-5. CI	 
-	- Github Action
-6. Code Quality
-	- SonarQube 
+1. Requirements <br />
+	   - JIRA <br />
+	 Used atlassian Jira cloud offering to capture the requirements.<br />
+	 JIRA Project :: [https://judebantony.atlassian.net](https://judebantony.atlassian.net)	
+	  
+2. Code <br />
+	  - Spring Boot
+	  - Java
+	  
+3. SCM <br />
+	  - GitHub		
+4. Build <br />
+	  - Mavan
+5. CI	<br /> 
+	  - Github Action
+6. Code Quality <br />
+	  - SonarQube <br />
+	  SonarQube is an open-source platform developed by SonarSource for continuous inspection of code quality to perform automatic reviews with static analysis of code to detect bugs, code smells, and security vulnerabilities on 20+ programming languages. <br />
+	  SonarQube :: [https://sonarcloud.io/organizations/judebantony/projects](https://sonarcloud.io/organizations/judebantony/projects)	
 7. SAST 
      - CodeQL
      - HCL AppScan CodeSweep
@@ -69,8 +75,10 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
 	  - Selenium
 	  - BrowserStack
 	  - LamdaTest 
-22. Performance test
+22. Performance Testing
 	  - K6 
+23. Create Release Tag
+	 
 
 
 ## License
