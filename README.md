@@ -432,6 +432,297 @@ updates:
 
 ```
 
+### 12) Trufflehog - Secret Scan
+
+```yaml 
+
+  trufflehogScan:
+      name: Secret Scan Using Trufflehog
+      runs-on: ubuntu-latest
+      needs: [dependabot, snykScan, blackduck, fossaScan]
+      
+      steps:
+        - name: Check out the code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: trufflehog-actions-scan
+          uses: edplato/trufflehog-actions-scan@master
+          with:
+            scanArguments: "--regex --entropy=False --max_depth=5" 
+
+
+```
+
+### 13) Snyk - Container Image Scan
+
+```yaml 
+
+snykImageScan:
+      name: Image Scan using Snyk
+      runs-on: ubuntu-latest
+      needs: [jfrogArtifactPush, gitHubPakageArtifactPush]  
+          
+      steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Package
+        run: mvn -B clean package -DskipTests
+      - name: Build a Docker image
+        run: docker build -t your/image-to-test .
+      - name: Run Snyk to check Docker image for vulnerabilities
+        continue-on-error: true
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: your/image-to-test
+          args: --sarif-file-output=snyk.sarif --file=Dockerfile
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: snyk.sarif     
+
+
+```
+
+### 14) Jfrog Artifactory - Publish Artifact(jar)
+
+```yaml 
+
+ jfrogArtifactPush:
+    name: Publish Artifact to Jfrog Artifactory
+    runs-on: ubuntu-latest
+    needs: [snykIaSScan, trufflehogScan] 
+    
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Package
+        run: mvn -B clean package -DskipTests
+      - name: Publish JFrog Artifact
+        uses: advancedcsg-open/action-jfrog-cli@master
+        with:
+          url: 'https://judebantony.jfrog.io/artifactory'
+          credentials type: 'username'
+          user: ${{ secrets.ARTIFACTORY_USER }}
+          password: ${{ secrets.ARTIFACTORY_PASSWORD }}
+          args: u "target/*.jar" "/libs-snapshot-repo-libs-release-local" --recursive=true  
+
+
+```
+
+### 15) GitHub Package - Publish Artifact(jar)
+
+```yaml 
+
+ gitHubPakageArtifactPush:
+    name: Publish Artifact to GitHub Package
+    runs-on: ubuntu-latest 
+    needs: [snyIaSScan, trufflehogScan] 
+    permissions: 
+      contents: read
+      packages: write 
+      
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Publish package
+        run: mvn --batch-mode deploy -DskipTests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+```
+
+### 16) JFrog Artifactory - Build Docker Image and Publish
+
+```yaml 
+
+jfrogImageBuild:
+    name: Build Docker Image and Publish to JFrog Artifactory
+    runs-on: ubuntu-latest
+    needs: [snykImageScan, jfrogXrayImageScan]
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Package
+        run: mvn -B clean package -DskipTests
+      - name: Set up QEMU️
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to JFrog  
+        uses: docker/login-action@v1
+        with:
+          registry: 'https://judebantony.jfrog.io'
+          username: ${{ secrets.ARTIFACTORY_USER }}
+          password: ${{ secrets.ARTIFACTORY_PASSWORD }}        
+      - name: Build and Publish Image 
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: judebantony.jfrog.io/default-docker-local/cigithubaction:latest
+
+
+```
+
+### 17) GitHub Package - Build Docker Image and Publish
+
+```yaml 
+
+gitHubPakageImageBuild:
+    name: Push Docker image to GitHub Package
+    runs-on: ubuntu-latest
+    needs: [snykImageScan, jfrogXrayImageScan]
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+        - name: Check out the repo
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Set up JDK 8
+          uses: actions/setup-java@v1
+          with:
+            java-version: 1.8
+        - name: Cache Maven packages
+          uses: actions/cache@v1
+          with:
+            path: ~/.m2
+            key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+            restore-keys: ${{ runner.os }}-m2
+        - name: Package
+          run: mvn -B clean package -DskipTests
+        - name: Set up QEMU️
+          uses: docker/setup-qemu-action@v1
+        - name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v1
+
+        - name: Log in to the Container registry
+          uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+          with:
+            registry: https://ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+  
+        - name: Extract metadata (tags, labels) for Docker
+          id: meta
+          uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+          with:
+            images: ghcr.io/judebantony/cigithubaction:latest
+  
+        - name: ghcr.io
+          uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+          with:
+            context: .
+            push: true
+            tags: ghcr.io/judebantony/cigithubaction:latest
+
+
+```
+### 18) Docker Hub - Build Docker Image and Publish
+
+```yaml 
+
+ dockerHubImageBuild:
+      name: Push Docker image to Docker Hub
+      runs-on: ubuntu-latest
+      needs: [snykImageScan, jfrogXrayImageScan]
+      
+      steps:
+        - name: Check out the repo
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Set up JDK 8
+          uses: actions/setup-java@v1
+          with:
+            java-version: 1.8
+        - name: Cache Maven packages
+          uses: actions/cache@v1
+          with:
+            path: ~/.m2
+            key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+            restore-keys: ${{ runner.os }}-m2
+        - name: Package
+          run: mvn -B clean package -DskipTests
+        - name: Log in to Docker Hub
+          uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+          with:
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
+        
+        - name: Extract metadata (tags, labels) for Docker
+          id: meta
+          uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+          with:
+            images: docker.io/judebantony/cigithubaction
+        
+        - name: Build and push Docker image
+          uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+          with:
+            context: .
+            push: true
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.outputs.labels }}
+
+
+```
+
 ## Author
 
 Jude Antony ([LinkedIn](https://www.linkedin.com/in/jude-antony-2b208219/))
