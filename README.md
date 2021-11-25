@@ -304,6 +304,134 @@ Some the sample code for integrating different SaaS tool to CICD using GitHub Ac
             sarif_file: codacy.sarif          
 ```
 
+### 7) Snyk - SCA 
+
+```yaml
+  snykScan:
+      name: SCA Scan using Snyk
+      runs-on: ubuntu-latest
+      needs: [codeqlScan, codacyScan, appScan]
+          
+      steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up Maven
+        run: mvn -N io.takari:maven:wrapper -Dmaven=3.8.2
+      - name: Run Snyk to check for vulnerabilities
+        continue-on-error: true      
+        uses: snyk/actions/maven-3-jdk-11@master
+        env:
+           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --sarif-file-output=snyk.sarif
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: snyk.sarif
+
+```
+
+### 8) Dependabot - SCA 
+
+```yaml dependabot.yml
+
+version: 2
+updates:
+  - package-ecosystem: "maven"
+    directory: "/" 
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+```
+
+### 9) BlackDuck CoPilot - SCA 
+
+```yaml 
+
+  blackduck:
+      name: SCA Scan using BlackDuck
+      runs-on: ubuntu-latest
+      needs: [codeqlScan, codacyScan, appScan] 
+
+      steps:
+        - name: Check out the code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Set up JDK
+          uses: actions/setup-java@v1
+          with:
+            java-version: 1.8
+        - name: Set up Maven
+          run: mvn -N io.takari:maven:wrapper -Dmaven=3.8.2
+        - name: Build with Maven
+          run: |
+            mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+            mvn test -B
+        - name: Upload to CoPilot
+          run: bash <(curl -s https://copilot.blackducksoftware.com/ci/githubactions/scripts/upload)
+
+
+```
+
+### 10) FOSSA - SCA 
+
+```yaml 
+
+  fossaScan:
+      name: SCA Scan using FOSSA
+      runs-on: ubuntu-latest
+      needs: [codeqlScan, codacyScan, appScan]  
+      
+      steps:
+        - name: Check out the code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Run FOSSA Scan
+          uses: fossas/fossa-action@v1
+          with:
+            api-key: ${{secrets.FOSSA_APIKEY}}
+
+
+```
+
+### 11) Snyk - Infra as Code Configs Scan
+
+```yaml 
+
+  snykIaSScan:
+      name: SAST - Scan IaC Configs using Snyk
+      runs-on: ubuntu-latest
+      needs: [dependabot, snykScan, blackduck, fossaScan]
+      
+      steps:
+        - name: Check out the code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Run Snyk to check configuration files for security issues
+          continue-on-error: true
+          uses: snyk/actions/iac@master
+          env:
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          with:
+            file: |
+              manifests/deployment.yml
+              manifests/service.yml
+        - name: Upload result to GitHub Code Scanning
+          uses: github/codeql-action/upload-sarif@v1
+          with:
+            sarif_file: snyk.sarif
+
+
+```
+
 ## Author
 
 Jude Antony ([LinkedIn](https://www.linkedin.com/in/jude-antony-2b208219/))
