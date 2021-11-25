@@ -11,38 +11,34 @@
 
 [![codecov](https://codecov.io/gh/judebantony/cicd-github-action-example/branch/main/graph/badge.svg?token=E3O3NABP1H)](https://codecov.io/gh/judebantony/cicd-github-action-example)
 
-### Easily upload coverage reports to Codecov from GitHub Actions
 
-
-## E2E CICD - SecDevOps
+## CICD - SecDevOps using GitHub Action 
 
 This is a sample project to demonstrate the E2E Github Action release workflow with all Security Controls and integrated with different Cloud SaaS tools offering as listed below.
 
-1. Requirements <br />
-	   - JIRA <br />
-			 Used atlassian Jira cloud offering to capture the requirements.<br />
-	 JIRA Project :: [https://judebantony.atlassian.net](https://judebantony.atlassian.net)	
+1. Requirements 
+    - JIRA <br />
+		Used atlassian Jira cloud offering to capture the requirements.<br />
+	    JIRA Project :: [https://judebantony.atlassian.net](https://judebantony.atlassian.net)	
+2. Code
+    - Spring Boot <br />
+    - Java <br />
+      Build a sample application using below frameworks.<br /> 
 	  
-2. Code <br />
-	  - Spring Boot
-	  - Java
-	  
-3. SCM <br />
-	  - GitHub		
-4. Build <br />
-	  - Mavan
-5. CI	<br /> 
-	  - Github Action <br />
-	  	Used 
-6. Code Quality <br />
-	  - SonarQube <br />
-		  SonarQube is an open-source platform developed by SonarSource for continuous inspection of code quality to perform automatic reviews with static analysis of code to detect bugs, code smells, and security vulnerabilities on 20+ programming languages. <br />
-	  SonarQube :: [Dashboard Example](https://sonarcloud.io/organizations/judebantony/projects)	<br />
-	  - Codecov - [More Information](https://docs.codecov.com/docs) <br/>
+3. SCM
+     - GitHub		
+4. Build
+     - Mavan - [More Information](https://maven.apache.org) <br/>
+5. CI
+     - Github Action - [More Information](https://github.com/features/actions) <br/>
+6. Code Quality
+    - SonarQube [More Information](https://en.wikipedia.org/wiki/SonarQube)<br />
+	     [Dashboard Example](https://sonarcloud.io/organizations/judebantony/projects)	<br />
+    - Codecov - [More Information](https://docs.codecov.com/docs) <br/>
 	    [Dashboard Example](https://codecov.io/gh/judebantony/cicd-github-action-example/commit/4b9f0f601ab2feee0e409ede57283d5b99b9182d/build)	<br />
 	  	
 7. SAST (Static Analysis Security Testing)
-     - CodeQL - CodeQL is the code analysis engine developed by GitHub to automate security checks. [More information](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-with-codeql)
+     - CodeQL - [More information](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-with-codeql)
      - HCL AppScan CodeSweep - [More Information](https://www.hcltechsw.com/appscan/codesweep)	
      - Codacy - [More Information](https://www.codacy.com/products/sonarqube-alternatives?utm_term=sonarqube&utm_campaign=SEA+-+Competitors&utm_source=adwords&utm_medium=ppc&hsa_acc=9882323101&hsa_cam=11598890837&hsa_grp=112569261106&hsa_ad=493336668133&hsa_src=g&hsa_tgt=kwd-57815990976&hsa_kw=sonarqube&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAiA4veMBhAMEiwAU4XRr_qVWrji3IRgivxyqqPc3QrEMVwBQmQoACBfPuCL5H0gE0nmn3n2LhoCcgkQAvD_BwE)
 8. SCA (Software Composition Analysis)
@@ -57,40 +53,137 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
      - StackHawk - [More Information](https://www.stackhawk.com)<br />
      		[Dashboard Example](https://app.stackhawk.com/applications)
 10. IaC Configs Scan
-     - Snyk
+     - Snyk - [More Information](https://snyk.io)<br />
 11. Secret Scan
-	 - Trufflehog
+     - Trufflehog - [More Information](https://github.com/trufflesecurity/truffleHog)<br />
 12. Maven Repository
-     - Jfrog Artifactory 
-     - Github Package
+     - Jfrog Artifactory - [More Information](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)<br />
+     - Github Package - [More Information](https://github.com/trufflesecurity/truffleHog)<br />
 13. Helm Repository
-      - Jfrog Artifactiory    
+      - Jfrog Artifactiory - [More Information](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)<br /> 
 14. Container Scan - Docker Image
-      - Snyk 
-      - JFrog Xray
+      - Snyk - [More Information](https://snyk.io)<br />
+      - JFrog Xray - [More Information](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)<br />
 15. Container Repository
-     - JFrog Artifactory
-     - Github Package
-     - DockerHub
+     - JFrog Artifactory - [More Information](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)<br />
+     - Github Package - [More Information](https://github.com/features/packages)<br />
+     - DockerHub - [More Information](https://hub.docker.com/r/judebantony/cigithubaction)<br />
 16. Deploying to Azure - AKS
-	  - GitHub Action & K8S native 
+     - GitHub Action & K8S native 
 17. Deploying to Azure - AKS
-	  - GitHub Action & Helm Chart 
+     - GitHub Action & Helm Chart - [More Information](https://helm.sh/docs/topics/charts/)<br />
 18. Deploying to GCP - GKE 
-	  - GitHub Action & Harness
+     - GitHub Action & Harness - [More Information](https://harness.io)<br />
 19. Provisioning AWS - EC2
-	  - Terraform 	
+     - Terraform - [More Information](https://www.terraform.io)<br />
 20. Unit Testing
-      - Junit
+     - Junit - [More Information](https://junit.org/junit5/)<br />
 21. Functional Testing
-	  - Cucumber
-	  - Selenium
-	  - BrowserStack
-	  - LamdaTest 
+     - Cucumber - [More Information](https://cucumber.io)<br />
+     - Selenium - [More Information](https://www.selenium.dev)<br />
+     - BrowserStack - [More Information](https://www.browserstack.com)<br />
+     - LamdaTest - [More Information](https://www.lambdatest.com)<br />
 22. Performance Testing
-	  - K6 
+     - K6 - [More Information](https://k6.io)<br />
 23. Create Release Tag
 	 
+## Integration with GitHub Action
+Some the sample code for integrating different SaaS tool to CICD using GitHub Action 
+### 1) Maven - Build and Unit Test
 
+```yaml
 
-## License
+  test:
+    name: Build and Unit Test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Build
+        run: mvn -B clean package -DskipTests
+      - name: Run UnitTest and Verify 
+        run: mvn -B verify -DexcludedGroups="Smoke | Staging | BrowserStack | LamdaTest"
+      - name: Generate JaCoCo Badge
+        id: jacoco
+        uses: cicirello/jacoco-badge-generator@v2
+      - name: Log code coverage percentage
+        run: |
+          echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
+          echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
+      - name: Upload code coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/
+      - name: Adding Junit Report
+        uses: ashley-taylor/junit-report-annotations-action@master
+        if: always()
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}          
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        with:
+           files: target/surefire-reports/*.xml
+
+```
+### 2) Sonar Cloud - Code Quality
+
+```yaml
+  sonar:
+    name: Inspect - Using Sonar
+    runs-on: ubuntu-latest
+    needs: [test]
+    
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify -DexcludedGroups="Smoke | Staging | LamdaTest | BrowserStack" org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.issuesReport.html.enable=true -Dsonar.projectKey=judebantony_cicd-github-action-example
+      - name: SonarQube Quality Gate check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   
+        timeout-minutes: 5     
+        with:
+          scanMetadataReportFile: target/sonar/report-task.txt     
+
+```
+
+## Author
+
+Jude Antony ([Jude LinkedIn](https://www.linkedin.com/in/jude-antony-2b208219/))
