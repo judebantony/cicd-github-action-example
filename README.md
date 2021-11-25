@@ -184,6 +184,126 @@ Some the sample code for integrating different SaaS tool to CICD using GitHub Ac
 
 ```
 
+### 3) Codecov - Code Coverage
+
+```yaml
+  codecov:
+    name: Inspect - Using Codecov
+    runs-on: ubuntu-latest
+    needs: [test]
+    
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify -DexcludedGroups="Smoke | Staging | LamdaTest | BrowserStack" cobertura:cobertura
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} 
+          flags: unittests 
+          name: codecov-umbrella 
+          fail_ci_if_error: true 
+          verbose: true     
+
+```
+
+### 4) CodeQL - SAST
+
+```yaml
+  codeqlScan:
+      name: SAST Scan using CodeQL
+      runs-on: ubuntu-latest
+      needs: [sonar, codecov]
+      
+      permissions:
+        actions: read
+        contents: read
+        security-events: write
+      strategy:
+        fail-fast: false
+        matrix:
+          language: [ 'java' ]
+          
+      steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+           fetch-depth: 0
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: ${{ matrix.language }}
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v1
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
+
+```
+
+### 5) AppScan CodeSweep - SAST 
+
+```yaml
+  appScan:
+    name: SAST Scan using AppScan CodeSweep
+    runs-on: ubuntu-latest
+    needs: [sonar, codecov]
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+           fetch-depth: 0
+      - name: Run AppScan CodeSweep
+        uses: HCL-TECH-SOFTWARE/appscan-codesweep-action@v1
+        with:
+            asoc_key: ${{secrets.ASOC_KEY}}
+            asoc_secret: ${{secrets.ASOC_SECRET}}
+        env: 
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+```
+
+### 6) Codacy - SAST 
+
+```yaml
+  codacyScan:
+      name: SAST Scan using Codacy
+      runs-on: ubuntu-latest
+      needs: [sonar, codecov]
+      
+      steps:
+        - uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Run Codacy Analysis CLI
+          uses: codacy/codacy-analysis-cli-action@master
+          with:
+            output: codacy.sarif
+            format: sarif
+            gh-code-scanning-compat: true
+            max-allowed-issues: 2147483647
+        
+        - name: Upload SARIF results file
+          uses: github/codeql-action/upload-sarif@main
+          with:
+            sarif_file: codacy.sarif          
+```
+
 ## Author
 
-Jude Antony ([Jude LinkedIn](https://www.linkedin.com/in/jude-antony-2b208219/))
+Jude Antony ([LinkedIn](https://www.linkedin.com/in/jude-antony-2b208219/))
