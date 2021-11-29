@@ -267,7 +267,7 @@ jobs:
         - name: Build with Maven
           run: |
             mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-            mvn test -B
+            mvn test -B -DexcludedGroups="Smoke | Staging | BrowserStack | LamdaTest"
         - name: Upload to CoPilot
           run: bash <(curl -s https://copilot.blackducksoftware.com/ci/githubactions/scripts/upload)
           
