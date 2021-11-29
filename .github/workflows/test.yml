@@ -194,22 +194,4 @@ jobs:
           with:
             sarif_file: codacy.sarif          
 
-  rest-api-static-security-testing:
-      name: SAST Scan using 42Crunch for REST API
-      runs-on: ubuntu-latest
-      needs: [sonar, codecov]
-      
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
-          with:
-            fetch-depth: 0
-  
-        - name: 42Crunch REST API Static Security Testing
-          uses: 42Crunch/api-security-audit-action@96228d9c48873fe001354047d47fb62be42abeb1
-          with:
-            api-token: ${{ secrets.CRUNCH_API_TOKEN }}
-            min-score: 75
-            upload-to-code-scanning: true
-            github-token: ${{ github.token }}
 

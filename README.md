@@ -7,7 +7,7 @@
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fjudebantony%2Fcicd-github-action-example.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fjudebantony%2Fcicd-github-action-example?ref=badge_shield)
 
-[![Main Branch](https://github.com/judebantony/cicd-github-action-example/actions/workflows/workflow.yml/badge.svg)](https://github.com/judebantony/cicd-github-action-example/actions/workflows/workflow.yml)
+[![Main Branch](https://github.com/judebantony/cicd-github-action-example/actions/workflows/test.yml/badge.svg)](https://github.com/judebantony/cicd-github-action-example/actions/workflows/test.yml)
 
 [![codecov](https://codecov.io/gh/judebantony/cicd-github-action-example/branch/main/graph/badge.svg?token=E3O3NABP1H)](https://codecov.io/gh/judebantony/cicd-github-action-example)
 
@@ -41,6 +41,7 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
      - CodeQL - [More information](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-with-codeql)
      - HCL AppScan CodeSweep - [More Information](https://www.hcltechsw.com/appscan/codesweep)	
      - Codacy - [More Information](https://www.codacy.com/products/sonarqube-alternatives?utm_term=sonarqube&utm_campaign=SEA+-+Competitors&utm_source=adwords&utm_medium=ppc&hsa_acc=9882323101&hsa_cam=11598890837&hsa_grp=112569261106&hsa_ad=493336668133&hsa_src=g&hsa_tgt=kwd-57815990976&hsa_kw=sonarqube&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAiA4veMBhAMEiwAU4XRr_qVWrji3IRgivxyqqPc3QrEMVwBQmQoACBfPuCL5H0gE0nmn3n2LhoCcgkQAvD_BwE)
+     - 42crunch - [More Information](https://platform.42crunch.com)
 8. SCA (Software Composition Analysis)
      - Snyk - [More Information](https://snyk.io)<br />
              [Dashboard Example](https://app.snyk.io/org/judebantony)
