@@ -726,7 +726,7 @@ gitHubPakageImageBuild:
 
 ### 19) CD - Deploy to Azure AKS
 
-Deploy the Container image to Azure AKS, manifest files are available manifests folder.
+Deploy the Container image to Azure AKS, manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
 
 ```yaml 
 
@@ -915,6 +915,7 @@ Deploy the Container image to Azure AKS, manifest files are available manifests 
 ```
 
 ### 23) DAST Scan - Using StackHawk.
+StackHawk config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/stackhawl.yml).
 
 ```yaml 
 
@@ -950,7 +951,7 @@ Deploy the Container image to Azure AKS, manifest files are available manifests 
 
 ```
 
-### 24) Approval Gates and Email.
+### 24) Setting up Approval Gates and Email.
 
 ```yaml 
 
@@ -981,7 +982,7 @@ Deploy the Container image to Azure AKS, manifest files are available manifests 
 ```
 
 ### 25) CD - Deploy to Azure AKS using Helm.
-Deploy the Container image to Azure AKS using Helm, manifest files are available helm folder.
+Deploy the Container image to Azure AKS using Helm, manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/helm).
 
 ```yaml 
 
@@ -1052,6 +1053,7 @@ Deploy the Container image to Google GKE using Harness.
 ```
 
 ### 27) Load Testing - K6.
+Load Test file is present here [k6-test.js](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
 
 ```yaml 
 
@@ -1102,6 +1104,7 @@ Deploy the Container image to Google GKE using Harness.
 ```
 
 ### 29) IaC - using Terraform - Create AWS EC2.
+Set up the AWS EC2 instances using Terrform , manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
 
 ```yaml 
 
