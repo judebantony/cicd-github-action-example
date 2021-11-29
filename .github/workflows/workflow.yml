@@ -967,7 +967,7 @@ jobs:
           FILE_NAME: "plan.html" 
           FILE_DATA: "${{steps.return_plan_outpot.outputs.result}}"     
         
-      - name: Upload Terraform Planb result
+      - name: Upload Terraform Plan result
         uses: actions/upload-artifact@v2
         with:
           name: terrform-plan-result

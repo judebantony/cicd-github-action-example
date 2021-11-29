@@ -724,6 +724,463 @@ gitHubPakageImageBuild:
 
 ```
 
+### 19) CD - Deploy to Azure AKS
+
+Deploy the Container image to Azure AKS, manifest files are available manifests folder.
+
+```yaml 
+
+  qadeploy:
+    name: QA Deployment to AKS 
+    runs-on: ubuntu-latest
+    needs: [jfrogImageBuild, dockerHubImageBuild, gitHubPakageImageBuild]
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Login to JFrog  
+        uses: docker/login-action@v1
+        with:
+          registry: 'https://judebantony.jfrog.io'
+          username: ${{ secrets.ARTIFACTORY_USER }}
+          password: ${{ secrets.ARTIFACTORY_PASSWORD }}        
+      - name: Setting AKS Context 
+        uses: azure/aks-set-context@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          cluster-name: 'JudeAKSCluster'
+          resource-group: 'DefaultResourceGroup-EUS'
+      - name: Create AKS Namespace     
+        run: |
+            kubectl create namespace cigithubactionqa --dry-run -o json | kubectl apply -f -
+      - name: Create Secret     
+        uses: azure/k8s-create-secret@v1
+        with:
+          container-registry-url: 'https://judebantony.jfrog.io'
+          container-registry-username: ${{ secrets.ARTIFACTORY_USER }}
+          container-registry-password: ${{ secrets.ARTIFACTORY_PASSWORD }}
+          namespace: 'cigithubactionqa'
+          secret-name: 'cigithubactionqa-crd'
+      - name: Deploy app to AKS 
+        uses: azure/k8s-deploy@v1
+        with:
+          manifests: |
+            manifests/deployment.yml
+            manifests/service.yml
+          images: |
+             judebantony.jfrog.io/default-docker-local/cigithubaction:latest
+          imagepullsecrets: |
+            cigithubactionqa-crd   
+          namespace: 'cigithubactionqa'         
+
+
+```
+
+### 20) Functional Test - Using Cucumber.
+
+```yaml 
+
+  qatest:
+    name: QA Validation and Report
+    runs-on: ubuntu-latest
+    needs: [qadeploy]
+    
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Run Test Automation
+        run: mvn -B verify -DexcludedGroups="Staging | LamdaTest | BrowserStack" -Dgroups="Smoke"
+        env: 
+          CUCUMBER_PUBLISH_TOKEN: ${{secrets.CUCUMBER_PUBLISH_TOKEN}}
+      - name: Upload Test Automation Report
+        uses: deblockt/cucumber-report-annotations-action@v1.7
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          path: "target/cucumber-reports/cucumber.json"
+          check-status-on-error: 'neutral'
+          annotation-status-on-error: 'warning'    
+      - name: Upload Cucumber report
+        uses: actions/upload-artifact@v2
+        with:
+          name: cucumber-report
+          path: target/cucumber-reports/cucumber.html
+
+```
+### 21) Functional UI Test - Using BrowserStack.
+
+```yaml 
+
+  browserStackTest:
+    name: 'BrowserStack QA Test Validation'
+    runs-on: ubuntu-latest 
+    needs: [qadeploy]
+    
+    steps:
+
+      - name: 'BrowserStack Env Setup'  
+        uses: browserstack/github-actions/setup-env@master
+        with:
+          username:  ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+
+      - name: 'BrowserStack Local Tunnel Setup' 
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: start
+          local-identifier: random
+
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Run BrowserStack Test Automation
+        run: mvn -B verify -DexcludedGroups="Staging | Smoke | LamdaTest" -Dgroups="BrowserStack"
+        env: 
+          CUCUMBER_PUBLISH_TOKEN: ${{secrets.CUCUMBER_PUBLISH_TOKEN}}
+
+      - name: 'BrowserStackLocal Stop'  
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: stop
+
+```
+
+### 22) Functional UI Test - Using LamdaTest.
+
+```yaml 
+
+  lamdaTest:
+    name: 'LamdaTest QA Test Validation'
+    runs-on: ubuntu-latest 
+    needs: [qadeploy]
+    
+    steps:
+      - name: Start Tunnel
+        id: tunnel
+        uses: LambdaTest/LambdaTest-tunnel-action@v1
+        with:
+          user: ${{ secrets.LT_EMAIL }}
+          accessKey: ${{ secrets.LT_ACCESS_KEY }}
+          tunnelName: "testTunnel"
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Run LamdaTest Automation
+        run: mvn -B verify -DexcludedGroups="Staging | Smoke | BrowserStack" -Dgroups="LamdaTest"
+        env: 
+          CUCUMBER_PUBLISH_TOKEN: ${{secrets.CUCUMBER_PUBLISH_TOKEN}}
+          LT_EMAIL: ${{ secrets.LT_EMAIL }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+      - name: Export Tunnel Logs for debugging
+        uses: actions/upload-artifact@v2
+        with:
+           name: tunnel_logs
+           path: ${{ steps.tunnel.outputs.logFileName }}          
+
+```
+
+### 23) DAST Scan - Using StackHawk.
+
+```yaml 
+
+  stackhawkScan:
+    name: DAST Scan using StackHawk
+    runs-on: ubuntu-20.04
+    needs: [qatest, browserStackTest, lamdaTest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Download OpenAPI Spec
+        run: |
+          curl http://20.81.93.165/api-docs > openapi.json
+      - name: Run HawkScan
+        uses: stackhawk/hawkscan-action@v1.3.2
+        continue-on-error: true
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          configurationFiles: stackhawk.yml
+          codeScanningAlerts: true
+          githubToken: ${{ secrets.GITHUB_TOKEN }}   
+          environmentVariables: |
+            APP_HOST
+            APP_ENV
+            APP_ID
+        env:
+          APP_HOST: http://20.81.93.165
+          APP_ENV: Development
+          APP_ID: ea0079f1-648e-4bdb-aa2d-233696082b4e
+
+```
+
+### 24) Approval Gates and Email.
+
+```yaml 
+
+ stagingdeployapproval:
+    name: Waiting for Staging Deployment Approval
+    runs-on: ubuntu-latest
+    needs: [stackhawkScan]
+    environment: staging
+    
+    steps:
+      - name: Email Status
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Stage Deployment ${{github.repository}} waiting for your approval.
+          to: judebantony@gmail.com
+          from: judebantonyofficial@gmail.com
+          body: Please review the test result and approve it.
+          reply_to: judebantonyofficial@gmail.com
+          in_reply_to: judebantonyofficial@gmail.com
+          ignore_cert: true
+          convert_markdown: true
+          priority: low
+
+```
+
+### 25) CD - Deploy to Azure AKS using Helm.
+Deploy the Container image to Azure AKS using Helm, manifest files are available helm folder.
+
+```yaml 
+
+ stagingdeploy:         
+    name: Staging Deployment Using Helm To AKS
+    runs-on: ubuntu-latest
+    needs: [stagingdeployapproval]
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Install Helm
+        uses: Azure/setup-helm@v1
+        with:
+          version: v3.7.1    
+      - name: Login to JFrog  
+        uses: docker/login-action@v1
+        with:
+          registry: 'https://judebantony.jfrog.io'
+          username: ${{ secrets.ARTIFACTORY_USER }}
+          password: ${{ secrets.ARTIFACTORY_PASSWORD }}        
+      - name: Setting AKS Context 
+        uses: azure/aks-set-context@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          cluster-name: 'JudeAKSCluster'
+          resource-group: 'DefaultResourceGroup-EUS'
+      - name: Create AKS Namespace     
+        run: |
+            kubectl create namespace cigithubactionstaging --dry-run -o json | kubectl apply -f -
+      - name: Create Secret     
+        uses: azure/k8s-create-secret@v1
+        with:
+          container-registry-url: 'https://judebantony.jfrog.io'
+          container-registry-username: ${{ secrets.ARTIFACTORY_USER }}
+          container-registry-password: ${{ secrets.ARTIFACTORY_PASSWORD }}
+          namespace: 'cigithubactionstaging'
+          secret-name: 'cigithubactionstaging-crd'
+      - name: Run Helm Deploy
+        run: |
+         helm upgrade \
+              --install \
+              --create-namespace \
+              --atomic \
+              --wait \
+              --namespace cigithubactionstaging \
+              cigithubaction \
+              ./helm/aks \
+
+```
+
+### 26) CD - Deploy to Google GKE using Harness.
+Deploy the Container image to Google GKE using Harness.
+
+```yaml 
+
+  uatdeploy:
+    name: UAT Deployment using Harness
+    runs-on: ubuntu-latest
+    needs: [uateployapproval]
+
+    steps:
+      - name: Run Harness UAT Deployment
+        run: |
+          curl -X POST -H 'content-type: application/json' --url https://app.harness.io/gateway/api/webhooks/Tlugr1ZdISx44rvm4flAiXHMb3uKG3ikyiHSbOks?accountId=aGS5Pi_WSPa9IsdlTlJc7g -d '{"application":"1FYrnQdZROqjpAQdCBIMbw"}'
+```
+
+### 27) Load Testing - K6.
+
+```yaml 
+
+  k6_cloud_test:
+    name: Perf Testing - k6 cloud test run
+    runs-on: ubuntu-latest
+    needs: [terraform]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Run k6 cloud test
+        uses: k6io/action@v0.1
+        with:
+          filename: k6-test.ts
+          cloud: true
+          token: ${{ secrets.K6_CLOUD_API_TOKEN }}
+
+```
+
+### 28) Release Tag Creation.
+
+```yaml 
+
+  releaseTag:
+      name: Release Tag Creation 
+      runs-on: ubuntu-latest
+      needs: [k6_cloud_test]
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Bump version and push tag
+          id: tag_version
+          uses: anothrNick/github-tag-action@1.26.0
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            WITH_V: true
+        - name: Create a GitHub release
+          uses: ncipollo/release-action@v1
+          with:
+            tag: ${{ steps.tag_version.outputs.new_tag }}
+            name: Release ${{ steps.tag_version.outputs.new_tag }}
+            body: ${{ steps.tag_version.outputs.changelog }}  
+
+```
+
+### 29) IaC - using Terraform - Create AWS EC2.
+
+```yaml 
+
+  terraform:
+    name: "Terraform - Create AWS EC2"
+    runs-on: ubuntu-latest
+    needs: [uatdeploy]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      - name: Terraform Format
+        id: fmt
+        run: |
+            cd terraform/
+            terraform fmt -check
+      - name: Terraform Init
+        id: init
+        run: |
+            cd terraform/
+            terraform init
+      - name: Terraform Validate
+        id: validate
+        run: |
+            cd terraform/
+            terraform validate -no-color
+      - name: Terraform Plan
+        id: plan
+        run: |
+            cd terraform/
+            terraform plan -no-color
+        continue-on-error: true
+      - uses: actions/github-script@0.9.0
+        id: return_plan_outpot
+        env:
+          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const output = `#### Terraform Format and Style \`${{ steps.fmt.outcome }}\`
+            #### Terraform Initialization ️\`${{ steps.init.outcome }}\`
+            #### Terraform Validation \`${{ steps.validate.outcome }}\`
+            #### Terraform Plan \`${{ steps.plan.outcome }}\`
+            <details><summary>Show Plan</summary>
+            \`\`\`\n
+            ${process.env.PLAN}
+            \`\`\`
+            </details>
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+            return output;
+      - name: Create plan result
+        uses: "finnp/create-file-action@master"
+        env:
+          FILE_NAME: "plan.html" 
+          FILE_DATA: "${{steps.return_plan_outpot.outputs.result}}"     
+        
+      - name: Upload Terraform Plan result
+        uses: actions/upload-artifact@v2
+        with:
+          name: terrform-plan-result
+          path: plan.html
+             
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+        
+      - name: Terraform Apply
+        run: |
+            cd terraform/
+            terraform apply -auto-approve  
+
+```
+
+
 ## Author
 
 Jude Antony ([LinkedIn](https://www.linkedin.com/in/jude-antony-2b208219/))
