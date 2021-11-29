@@ -194,10 +194,29 @@ jobs:
           with:
             sarif_file: codacy.sarif          
 
+  rest-api-static-security-testing:
+      name: SAST Scan using 42Crunch for REST API
+      runs-on: ubuntu-latest
+      needs: [sonar, codecov]
+      
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+  
+        - name: 42Crunch REST API Static Security Testing
+          uses: 42Crunch/api-security-audit-action@96228d9c48873fe001354047d47fb62be42abeb1
+          with:
+            api-token: ${{ secrets.CRUNCH_API_TOKEN }}
+            min-score: 75
+            upload-to-code-scanning: true
+            github-token: ${{ github.token }}
+
   snykScan:
       name: SCA Scan using Snyk
       runs-on: ubuntu-latest
-      needs: [codeqlScan, codacyScan, appScan]
+      needs: [codeqlScan, codacyScan, appScan, rest-api-static-security-testing]
           
       steps:
       - uses: actions/checkout@v2
@@ -220,7 +239,7 @@ jobs:
   dependabot:
       name: SCA Scan using Dependabot
       runs-on: ubuntu-latest
-      needs: [codeqlScan, codacyScan, appScan]  
+      needs: [codeqlScan, codacyScan, appScan, rest-api-static-security-testing]  
       
       steps:
         - name: Check out the code
@@ -232,7 +251,7 @@ jobs:
   blackduck:
       name: SCA Scan using BlackDuck
       runs-on: ubuntu-latest
-      needs: [codeqlScan, codacyScan, appScan] 
+      needs: [codeqlScan, codacyScan, appScan, rest-api-static-security-testing] 
 
       steps:
         - name: Check out the code
@@ -255,7 +274,7 @@ jobs:
   fossaScan:
       name: SCA Scan using FOSSA
       runs-on: ubuntu-latest
-      needs: [codeqlScan, codacyScan, appScan]  
+      needs: [codeqlScan, codacyScan, appScan, rest-api-static-security-testing]  
       
       steps:
         - name: Check out the code
@@ -755,6 +774,7 @@ jobs:
           APP_HOST: http://20.81.93.165
           APP_ENV: Development
           APP_ID: ea0079f1-648e-4bdb-aa2d-233696082b4e
+
  
   stagingdeployapproval:
     name: Waiting for Staging Deployment Approval
