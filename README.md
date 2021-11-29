@@ -50,6 +50,7 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
      		[Dashboard Example](https://copilot.blackducksoftware.com/github/repos/judebantony/cicd-github-action-example/results)
      - FOSSA [More Information](https://fossa.com)<br />
      		[Dashboard Example](https://app.fossa.com/projects/git%2Bgithub.com%2Fjudebantony%2Fcicd-github-action-example/refs/branch/main/0116ae3eef023ccfb56995ab2c4b10aaf5ffe1e1)
+     - Shift Left [More Information](https://www.shiftleft.io/apps/shiftleft-java-demo/vulnerabilities?scan=1&branch=demo-branch-1638196402&severity=critical)		
 9. DAST (Dynamic Application Security Testing)
      - StackHawk - [More Information](https://www.stackhawk.com)<br />
      		[Dashboard Example](https://app.stackhawk.com/applications)
@@ -403,7 +404,33 @@ updates:
 
 ```
 
-### 11) Snyk - Infra as Code Configs Scan
+### 11) ShiftLeft - SCA & SAST
+
+```yaml 
+
+   shitLeftScan:
+      name: SAST and SCA Scan using ShiftLeft
+      runs-on: ubuntu-latest
+      needs: [codeqlScan, codacyScan, appScan, rest-api-static-security-testing]
+      steps:
+      - uses: actions/checkout@v2
+      - name: Perform Scan
+        uses: ShiftLeftSecurity/scan-action@39af9e54bc599c8077e710291d790175c9231f64
+        env:
+          WORKSPACE: ""
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SCAN_AUTO_BUILD: true
+        with:
+          output: reports
+      - name: Upload report
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: reports
+
+
+```
+
+### 12) Snyk - Infra as Code Configs Scan
 
 ```yaml 
 
@@ -434,7 +461,7 @@ updates:
 
 ```
 
-### 12) Trufflehog - Secret Scan
+### 13) Trufflehog - Secret Scan
 
 ```yaml 
 
@@ -456,7 +483,7 @@ updates:
 
 ```
 
-### 13) Snyk - Container Image Scan
+### 14) Snyk - Container Image Scan
 
 ```yaml 
 
@@ -500,7 +527,7 @@ snykImageScan:
 
 ```
 
-### 14) Jfrog Artifactory - Publish Artifact(jar)
+### 15) Jfrog Artifactory - Publish Artifact(jar)
 
 ```yaml 
 
@@ -538,7 +565,7 @@ snykImageScan:
 
 ```
 
-### 15) GitHub Package - Publish Artifact(jar)
+### 16) GitHub Package - Publish Artifact(jar)
 
 ```yaml 
 
@@ -573,7 +600,7 @@ snykImageScan:
 
 ```
 
-### 16) JFrog Artifactory - Build Docker Image and Publish
+### 17) JFrog Artifactory - Build Docker Image and Publish
 
 ```yaml 
 
@@ -620,7 +647,7 @@ jfrogImageBuild:
 
 ```
 
-### 17) GitHub Package - Build Docker Image and Publish
+### 18) GitHub Package - Build Docker Image and Publish
 
 ```yaml 
 
@@ -676,7 +703,7 @@ gitHubPakageImageBuild:
 
 
 ```
-### 18) Docker Hub - Build Docker Image and Publish
+### 19) Docker Hub - Build Docker Image and Publish
 
 ```yaml 
 
@@ -725,7 +752,7 @@ gitHubPakageImageBuild:
 
 ```
 
-### 19) CD - Deploy to Azure AKS
+### 20) CD - Deploy to Azure AKS
 
 Deploy the Container image to Azure AKS, manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
 
@@ -779,7 +806,7 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
 
 ```
 
-### 20) Functional Test - Using Cucumber.
+### 21) Functional Test - Using Cucumber.
 
 ```yaml 
 
@@ -821,7 +848,7 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
           path: target/cucumber-reports/cucumber.html
 
 ```
-### 21) Functional UI Test - Using BrowserStack.
+### 22) Functional UI Test - Using BrowserStack.
 
 ```yaml 
 
@@ -870,7 +897,7 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
 
 ```
 
-### 22) Functional UI Test - Using LamdaTest.
+### 23) Functional UI Test - Using LamdaTest.
 
 ```yaml 
 
@@ -915,7 +942,7 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
 
 ```
 
-### 23) DAST Scan - Using StackHawk.
+### 24) DAST Scan - Using StackHawk.
 StackHawk config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/stackhawl.yml).
 
 ```yaml 
@@ -952,7 +979,7 @@ StackHawk config file is present [here](https://github.com/judebantony/cicd-gith
 
 ```
 
-### 24) Setting up Approval Gates and Email.
+### 25) Setting up Approval Gates and Email.
 
 ```yaml 
 
@@ -982,7 +1009,7 @@ StackHawk config file is present [here](https://github.com/judebantony/cicd-gith
 
 ```
 
-### 25) CD - Deploy to Azure AKS using Helm.
+### 26) CD - Deploy to Azure AKS using Helm.
 Deploy the Container image to Azure AKS using Helm, manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/helm).
 
 ```yaml 
@@ -1037,7 +1064,7 @@ Deploy the Container image to Azure AKS using Helm, manifest files are available
 
 ```
 
-### 26) CD - Deploy to Google GKE using Harness.
+### 27) CD - Deploy to Google GKE using Harness.
 Deploy the Container image to Google GKE using Harness.
 
 ```yaml 
@@ -1053,7 +1080,7 @@ Deploy the Container image to Google GKE using Harness.
           curl -X POST -H 'content-type: application/json' --url https://app.harness.io/gateway/api/webhooks/Tlugr1ZdISx44rvm4flAiXHMb3uKG3ikyiHSbOks?accountId=aGS5Pi_WSPa9IsdlTlJc7g -d '{"application":"1FYrnQdZROqjpAQdCBIMbw"}'
 ```
 
-### 27) Load Testing - K6.
+### 28) Load Testing - K6.
 Load Test file is present here [k6-test.js](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
 
 ```yaml 
@@ -1076,7 +1103,7 @@ Load Test file is present here [k6-test.js](https://github.com/judebantony/cicd-
 
 ```
 
-### 28) Release Tag Creation.
+### 29) Release Tag Creation.
 
 ```yaml 
 
@@ -1104,7 +1131,7 @@ Load Test file is present here [k6-test.js](https://github.com/judebantony/cicd-
 
 ```
 
-### 29) IaC - using Terraform - Create AWS EC2.
+### 30) IaC - using Terraform - Create AWS EC2.
 Set up the AWS EC2 instances using Terrform , manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
 
 ```yaml 
