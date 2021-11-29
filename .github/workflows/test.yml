@@ -6,8 +6,6 @@ on:
 
 jobs:
 
-jobs:
-
   test:
     name: Build and Unit Test
     runs-on: ubuntu-latest
