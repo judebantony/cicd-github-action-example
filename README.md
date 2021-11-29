@@ -91,6 +91,7 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
 ## Integration with GitHub Action
 Some the sample code for integrating different SaaS tool to CICD using GitHub Action 
 ### 1) Maven - Build and Unit Test
+Please check [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml).
 
 ```yaml
 
