@@ -18,6 +18,6 @@ export const options = {
 };
 
 export default function () {
-  const res = http.get('http://githubaction-terraform-example-2141246354.ap-south-1.elb.amazonaws.com');
+  const res = http.get('http://20.81.100.36/api/v1/ci/health');
   sleep(1);
 }

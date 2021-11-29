@@ -6,6 +6,8 @@ on:
 
 jobs:
 
+jobs:
+
   test:
     name: Build and Unit Test
     runs-on: ubuntu-latest
@@ -51,10 +53,153 @@ jobs:
         with:
            files: target/surefire-reports/*.xml
            
+  sonar:
+    name: Inspect - Using Sonar
+    runs-on: ubuntu-latest
+    needs: [test]
+    
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify -DexcludedGroups="Smoke | Staging | LamdaTest | BrowserStack" org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.issuesReport.html.enable=true -Dsonar.projectKey=judebantony_cicd-github-action-example
+      - name: SonarQube Quality Gate check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   
+        timeout-minutes: 5     
+        with:
+          scanMetadataReportFile: target/sonar/report-task.txt     
+
+  codecov:
+    name: Inspect - Using Codecov
+    runs-on: ubuntu-latest
+    needs: [test]
+    
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify -DexcludedGroups="Smoke | Staging | LamdaTest | BrowserStack" cobertura:cobertura
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} 
+          flags: unittests 
+          name: codecov-umbrella 
+          fail_ci_if_error: true 
+          verbose: true     
+          
+  codeqlScan:
+      name: SAST Scan using CodeQL
+      runs-on: ubuntu-latest
+      needs: [sonar, codecov]
+      
+      permissions:
+        actions: read
+        contents: read
+        security-events: write
+      strategy:
+        fail-fast: false
+        matrix:
+          language: [ 'java' ]
+          
+      steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+           fetch-depth: 0
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: ${{ matrix.language }}
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v1
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
+        
+        
+  appScan:
+    name: SAST Scan using AppScan CodeSweep
+    runs-on: ubuntu-latest
+    needs: [sonar, codecov]
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+           fetch-depth: 0
+      - name: Run AppScan CodeSweep
+        uses: HCL-TECH-SOFTWARE/appscan-codesweep-action@v1
+        with:
+            asoc_key: ${{secrets.ASOC_KEY}}
+            asoc_secret: ${{secrets.ASOC_SECRET}}
+        env: 
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+               
+  codacyScan:
+      name: SAST Scan using Codacy
+      runs-on: ubuntu-latest
+      needs: [sonar, codecov]
+      
+      steps:
+        - uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Run Codacy Analysis CLI
+          uses: codacy/codacy-analysis-cli-action@master
+          with:
+            output: codacy.sarif
+            format: sarif
+            gh-code-scanning-compat: true
+            max-allowed-issues: 2147483647
+        
+        - name: Upload SARIF results file
+          uses: github/codeql-action/upload-sarif@main
+          with:
+            sarif_file: codacy.sarif          
+
   shitLeftScan:
       name: SAST and SCA Scan using ShiftLeft
       runs-on: ubuntu-latest
-      needs: [test]
+      needs: [codeqlScan, codacyScan, appScan]
       steps:
       - uses: actions/checkout@v2
       - name: Perform Scan
@@ -69,4 +214,715 @@ jobs:
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: reports
+
+  snykScan:
+      name: SCA Scan using Snyk
+      runs-on: ubuntu-latest
+      needs: [codeqlScan, codacyScan, appScan]
+          
+      steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up Maven
+        run: mvn -N io.takari:maven:wrapper -Dmaven=3.8.2
+      - name: Run Snyk to check for vulnerabilities
+        continue-on-error: true      
+        uses: snyk/actions/maven-3-jdk-11@master
+        env:
+           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --sarif-file-output=snyk.sarif
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: snyk.sarif
+
+  dependabot:
+      name: SCA Scan using Dependabot
+      runs-on: ubuntu-latest
+      needs: [codeqlScan, codacyScan, appScan]  
+      
+      steps:
+        - name: Check out the code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+            token: ${{ secrets.GITHUB_TOKEN }}          
+
+  blackduck:
+      name: SCA Scan using BlackDuck
+      runs-on: ubuntu-latest
+      needs: [codeqlScan, codacyScan, appScan] 
+
+      steps:
+        - name: Check out the code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Set up JDK
+          uses: actions/setup-java@v1
+          with:
+            java-version: 1.8
+        - name: Set up Maven
+          run: mvn -N io.takari:maven:wrapper -Dmaven=3.8.2
+        - name: Build with Maven
+          run: |
+            mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+            mvn test -B
+        - name: Upload to CoPilot
+          run: bash <(curl -s https://copilot.blackducksoftware.com/ci/githubactions/scripts/upload)
+          
+  fossaScan:
+      name: SCA Scan using FOSSA
+      runs-on: ubuntu-latest
+      needs: [codeqlScan, codacyScan, appScan]  
+      
+      steps:
+        - name: Check out the code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Run FOSSA Scan
+          uses: fossas/fossa-action@v1
+          with:
+            api-key: ${{secrets.FOSSA_APIKEY}}
+  
+  snykIaSScan:
+      name: SAST - Scan IaC Configs using Snyk
+      runs-on: ubuntu-latest
+      needs: [dependabot, snykScan, blackduck, fossaScan, shitLeftScan]
+      
+      steps:
+        - name: Check out the code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Run Snyk to check configuration files for security issues
+          continue-on-error: true
+          uses: snyk/actions/iac@master
+          env:
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          with:
+            file: |
+              manifests/deployment.yml
+              manifests/service.yml
+        - name: Upload result to GitHub Code Scanning
+          uses: github/codeql-action/upload-sarif@v1
+          with:
+            sarif_file: snyk.sarif
+            
+  trufflehogScan:
+      name: Secret Scan Using Trufflehog
+      runs-on: ubuntu-latest
+      needs: [dependabot, snykScan, blackduck, fossaScan, shitLeftScan]
+      
+      steps:
+        - name: Check out the code
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: trufflehog-actions-scan
+          uses: edplato/trufflehog-actions-scan@master
+          with:
+            scanArguments: "--regex --entropy=False --max_depth=5" 
+            
+  jfrogArtifactPush:
+    name: Publish Artifact to Jfrog Artifactory
+    runs-on: ubuntu-latest
+    needs: [snykIaSScan, trufflehogScan] 
+    
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Package
+        run: mvn -B clean package -DskipTests
+      - name: Publish JFrog Artifact
+        uses: advancedcsg-open/action-jfrog-cli@master
+        with:
+          url: 'https://judebantony.jfrog.io/artifactory'
+          credentials type: 'username'
+          user: ${{ secrets.ARTIFACTORY_USER }}
+          password: ${{ secrets.ARTIFACTORY_PASSWORD }}
+          args: u "target/*.jar" "/libs-snapshot-repo-libs-release-local" --recursive=true       
+  
+  gitHubPakageArtifactPush:
+    name: Publish Artifact to GitHub Package
+    runs-on: ubuntu-latest 
+    needs: [snyIaSScan, trufflehogScan] 
+    permissions: 
+      contents: read
+      packages: write 
+      
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Publish package
+        run: mvn --batch-mode deploy -DskipTests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            
+                 
+  snykImageScan:
+      name: Image Scan using Snyk
+      runs-on: ubuntu-latest
+      needs: [jfrogArtifactPush, gitHubPakageArtifactPush]  
+          
+      steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Package
+        run: mvn -B clean package -DskipTests
+      - name: Build a Docker image
+        run: docker build -t your/image-to-test .
+      - name: Run Snyk to check Docker image for vulnerabilities
+        continue-on-error: true
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: your/image-to-test
+          args: --sarif-file-output=snyk.sarif --file=Dockerfile
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: snyk.sarif      
+
+  jfrogXrayImageScan:
+      name: Image Scan using JfrogXry
+      runs-on: ubuntu-latest
+      needs: [jfrogArtifactPush, gitHubPakageArtifactPush] 
+          
+      steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - uses: jfrog/setup-jfrog-cli@v1
+      - run: |
+              jfrog rt ping --url=https://judebantony.jfrog.io/artifactory --user=${{ secrets.ARTIFACTORY_USER }} --password=${{ secrets.ARTIFACTORY_PASSWORD }}
            
+          
+  jfrogImageBuild:
+    name: Build Docker Image and Publish to JFrog Artifactory
+    runs-on: ubuntu-latest
+    needs: [snykImageScan, jfrogXrayImageScan]
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Package
+        run: mvn -B clean package -DskipTests
+      - name: Set up QEMU️
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to JFrog  
+        uses: docker/login-action@v1
+        with:
+          registry: 'https://judebantony.jfrog.io'
+          username: ${{ secrets.ARTIFACTORY_USER }}
+          password: ${{ secrets.ARTIFACTORY_PASSWORD }}        
+      - name: Build and Publish Image 
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: judebantony.jfrog.io/default-docker-local/cigithubaction:latest
+
+
+  dockerHubImageBuild:
+      name: Push Docker image to Docker Hub
+      runs-on: ubuntu-latest
+      needs: [snykImageScan, jfrogXrayImageScan]
+      
+      steps:
+        - name: Check out the repo
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Set up JDK 8
+          uses: actions/setup-java@v1
+          with:
+            java-version: 1.8
+        - name: Cache Maven packages
+          uses: actions/cache@v1
+          with:
+            path: ~/.m2
+            key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+            restore-keys: ${{ runner.os }}-m2
+        - name: Package
+          run: mvn -B clean package -DskipTests
+        - name: Log in to Docker Hub
+          uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+          with:
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
+        
+        - name: Extract metadata (tags, labels) for Docker
+          id: meta
+          uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+          with:
+            images: docker.io/judebantony/cigithubaction
+        
+        - name: Build and push Docker image
+          uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+          with:
+            context: .
+            push: true
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.outputs.labels }}
+            
+  gitHubPakageImageBuild:
+    name: Push Docker image to GitHub Package
+    runs-on: ubuntu-latest
+    needs: [snykImageScan, jfrogXrayImageScan]
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+        - name: Check out the repo
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Set up JDK 8
+          uses: actions/setup-java@v1
+          with:
+            java-version: 1.8
+        - name: Cache Maven packages
+          uses: actions/cache@v1
+          with:
+            path: ~/.m2
+            key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+            restore-keys: ${{ runner.os }}-m2
+        - name: Package
+          run: mvn -B clean package -DskipTests
+        - name: Set up QEMU️
+          uses: docker/setup-qemu-action@v1
+        - name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v1
+
+        - name: Log in to the Container registry
+          uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+          with:
+            registry: https://ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+  
+        - name: Extract metadata (tags, labels) for Docker
+          id: meta
+          uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+          with:
+            images: ghcr.io/judebantony/cigithubaction:latest
+  
+        - name: ghcr.io
+          uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+          with:
+            context: .
+            push: true
+            tags: ghcr.io/judebantony/cigithubaction:latest
+          
+  qadeploy:
+    name: QA Deployment to AKS 
+    runs-on: ubuntu-latest
+    needs: [jfrogImageBuild, dockerHubImageBuild, gitHubPakageImageBuild]
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Login to JFrog  
+        uses: docker/login-action@v1
+        with:
+          registry: 'https://judebantony.jfrog.io'
+          username: ${{ secrets.ARTIFACTORY_USER }}
+          password: ${{ secrets.ARTIFACTORY_PASSWORD }}        
+      - name: Setting AKS Context 
+        uses: azure/aks-set-context@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          cluster-name: 'JudeAKSCluster'
+          resource-group: 'DefaultResourceGroup-EUS'
+      - name: Create AKS Namespace     
+        run: |
+            kubectl create namespace cigithubactionqa --dry-run -o json | kubectl apply -f -
+      - name: Create Secret     
+        uses: azure/k8s-create-secret@v1
+        with:
+          container-registry-url: 'https://judebantony.jfrog.io'
+          container-registry-username: ${{ secrets.ARTIFACTORY_USER }}
+          container-registry-password: ${{ secrets.ARTIFACTORY_PASSWORD }}
+          namespace: 'cigithubactionqa'
+          secret-name: 'cigithubactionqa-crd'
+      - name: Deploy app to AKS 
+        uses: azure/k8s-deploy@v1
+        with:
+          manifests: |
+            manifests/deployment.yml
+            manifests/service.yml
+          images: |
+             judebantony.jfrog.io/default-docker-local/cigithubaction:latest
+          imagepullsecrets: |
+            cigithubactionqa-crd   
+          namespace: 'cigithubactionqa'         
+
+
+  qatest:
+    name: QA Validation and Report
+    runs-on: ubuntu-latest
+    needs: [qadeploy]
+    
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Run Test Automation
+        run: mvn -B verify -DexcludedGroups="Staging | LamdaTest | BrowserStack" -Dgroups="Smoke"
+        env: 
+          CUCUMBER_PUBLISH_TOKEN: ${{secrets.CUCUMBER_PUBLISH_TOKEN}}
+      - name: Upload Test Automation Report
+        uses: deblockt/cucumber-report-annotations-action@v1.7
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          path: "target/cucumber-reports/cucumber.json"
+          check-status-on-error: 'neutral'
+          annotation-status-on-error: 'warning'    
+      - name: Upload Cucumber report
+        uses: actions/upload-artifact@v2
+        with:
+          name: cucumber-report
+          path: target/cucumber-reports/cucumber.html
+          
+  browserStackTest:
+    name: 'BrowserStack QA Test Validation'
+    runs-on: ubuntu-latest 
+    needs: [qadeploy]
+    
+    steps:
+
+      - name: 'BrowserStack Env Setup'  
+        uses: browserstack/github-actions/setup-env@master
+        with:
+          username:  ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+
+      - name: 'BrowserStack Local Tunnel Setup' 
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: start
+          local-identifier: random
+
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Run BrowserStack Test Automation
+        run: mvn -B verify -DexcludedGroups="Staging | Smoke | LamdaTest" -Dgroups="BrowserStack"
+        env: 
+          CUCUMBER_PUBLISH_TOKEN: ${{secrets.CUCUMBER_PUBLISH_TOKEN}}
+
+      - name: 'BrowserStackLocal Stop'  
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: stop
+
+  lamdaTest:
+    name: 'LamdaTest QA Test Validation'
+    runs-on: ubuntu-latest 
+    needs: [qadeploy]
+    
+    steps:
+      - name: Start Tunnel
+        id: tunnel
+        uses: LambdaTest/LambdaTest-tunnel-action@v1
+        with:
+          user: ${{ secrets.LT_EMAIL }}
+          accessKey: ${{ secrets.LT_ACCESS_KEY }}
+          tunnelName: "testTunnel"
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Run LamdaTest Automation
+        run: mvn -B verify -DexcludedGroups="Staging | Smoke | BrowserStack" -Dgroups="LamdaTest"
+        env: 
+          CUCUMBER_PUBLISH_TOKEN: ${{secrets.CUCUMBER_PUBLISH_TOKEN}}
+          LT_EMAIL: ${{ secrets.LT_EMAIL }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+      - name: Export Tunnel Logs for debugging
+        uses: actions/upload-artifact@v2
+        with:
+           name: tunnel_logs
+           path: ${{ steps.tunnel.outputs.logFileName }}          
+          
+  stackhawkScan:
+    name: DAST Scan using StackHawk
+    runs-on: ubuntu-20.04
+    needs: [qatest, browserStackTest, lamdaTest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Download OpenAPI Spec
+        run: |
+          curl http://20.81.93.165/api-docs > openapi.json
+      - name: Run HawkScan
+        uses: stackhawk/hawkscan-action@v1.3.2
+        continue-on-error: true
+        with:
+          apiKey: ${{ secrets.HAWK_API_KEY }}
+          configurationFiles: stackhawk.yml
+          codeScanningAlerts: true
+          githubToken: ${{ secrets.GITHUB_TOKEN }}   
+          environmentVariables: |
+            APP_HOST
+            APP_ENV
+            APP_ID
+        env:
+          APP_HOST: http://20.81.93.165
+          APP_ENV: Development
+          APP_ID: ea0079f1-648e-4bdb-aa2d-233696082b4e
+
+ 
+  stagingdeployapproval:
+    name: Waiting for Staging Deployment Approval
+    runs-on: ubuntu-latest
+    needs: [stackhawkScan]
+    environment: staging
+    
+    steps:
+      - name: Email Status
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Stage Deployment ${{github.repository}} waiting for your approval.
+          to: judebantony@gmail.com
+          from: judebantonyofficial@gmail.com
+          body: Please review the test result and approve it.
+          reply_to: judebantonyofficial@gmail.com
+          in_reply_to: judebantonyofficial@gmail.com
+          ignore_cert: true
+          convert_markdown: true
+          priority: low
+          
+  stagingdeploy:         
+    name: Staging Deployment Using Helm To AKS
+    runs-on: ubuntu-latest
+    needs: [stagingdeployapproval]
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Install Helm
+        uses: Azure/setup-helm@v1
+        with:
+          version: v3.7.1    
+      - name: Login to JFrog  
+        uses: docker/login-action@v1
+        with:
+          registry: 'https://judebantony.jfrog.io'
+          username: ${{ secrets.ARTIFACTORY_USER }}
+          password: ${{ secrets.ARTIFACTORY_PASSWORD }}        
+      - name: Setting AKS Context 
+        uses: azure/aks-set-context@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          cluster-name: 'JudeAKSCluster'
+          resource-group: 'DefaultResourceGroup-EUS'
+      - name: Create AKS Namespace     
+        run: |
+            kubectl create namespace cigithubactionstaging --dry-run -o json | kubectl apply -f -
+      - name: Create Secret     
+        uses: azure/k8s-create-secret@v1
+        with:
+          container-registry-url: 'https://judebantony.jfrog.io'
+          container-registry-username: ${{ secrets.ARTIFACTORY_USER }}
+          container-registry-password: ${{ secrets.ARTIFACTORY_PASSWORD }}
+          namespace: 'cigithubactionstaging'
+          secret-name: 'cigithubactionstaging-crd'
+      - name: Run Helm Deploy
+        run: |
+         helm upgrade \
+              --install \
+              --create-namespace \
+              --atomic \
+              --wait \
+              --namespace cigithubactionstaging \
+              cigithubaction \
+              ./helm/aks \
+
+  stagingtest:
+    name: Staging Validation and Report
+    runs-on: ubuntu-latest
+    needs: [stagingdeploy]
+    
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Run Test Automation
+        run: mvn -B verify -DexcludedGroups="Smoke | LamdaTest | BrowserStack" -Dgroups="Staging"
+        env: 
+          CUCUMBER_PUBLISH_TOKEN: ${{secrets.CUCUMBER_PUBLISH_TOKEN}}
+      - name: Upload Test Automation Report
+        uses: deblockt/cucumber-report-annotations-action@v1.7
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          path: "target/cucumber-reports/cucumber.json"
+          check-status-on-error: 'neutral'
+          annotation-status-on-error: 'warning'    
+      - name: Upload Cucumber report
+        uses: actions/upload-artifact@v2
+        with:
+          name: cucumber-staging-report
+          path: target/cucumber-reports/cucumber.html
+
+
+  k6_cloud_test:
+    name: Perf Testing - k6 cloud test run
+    runs-on: ubuntu-latest
+    needs: [stagingtest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Run k6 cloud test
+        uses: k6io/action@v0.1
+        with:
+          filename: k6-test.ts
+          cloud: true
+          token: ${{ secrets.K6_CLOUD_API_TOKEN }}
+          
+  releaseTag:
+      name: Release Tag Creation 
+      runs-on: ubuntu-latest
+      needs: [k6_cloud_test]
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Bump version and push tag
+          id: tag_version
+          uses: anothrNick/github-tag-action@1.26.0
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            WITH_V: true
+        - name: Create a GitHub release
+          uses: ncipollo/release-action@v1
+          with:
+            tag: ${{ steps.tag_version.outputs.new_tag }}
+            name: Release ${{ steps.tag_version.outputs.new_tag }}
+            body: ${{ steps.tag_version.outputs.changelog }}  
+
