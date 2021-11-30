@@ -56,9 +56,10 @@ jobs:
             testFormat: "cucumber"
             testPaths: "target/cucumber-reports/cucumber.json"
             projectKey: "JUDE"  
-            testExecKey: "JUDE-46"        
+            testExecKey: "JUDE-46"
+            testPlanKey: "JUDE-45"        
       - name: Upload to XRAY 
         shell: bash
         run: |
-           curl -H "Content-Type: application/json" -X POST -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" -F info=@testexec_cloud_template.json --data target/cucumber-reports/cucumber.json "https://xray.cloud.xpand-it.com/api/v1/import/execution/cucumber/multipart"
+           curl -H "Content-Type: application/json" -X POST -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" -F info=@testexec_cloud_template.json --data target/cucumber-reports/cucumber.json "https://xray.cloud.xpand-it.com/api/v1/import/execution/cucumber"
            cat target/cucumber-reports/cucumber.json
