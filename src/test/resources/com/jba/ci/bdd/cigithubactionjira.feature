@@ -1,5 +1,6 @@
 @Jira
 Feature: Test Health Check Rest API
+  @TEST_JUDE-43	
   Scenario: Health Check Api call is successful 
 
     Given user wants to call health check api
