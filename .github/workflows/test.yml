@@ -24,7 +24,19 @@ jobs:
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2     
+          restore-keys: ${{ runner.os }}-m2    
+      - name: Get Xray Cloud API token
+        env:
+          CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}  
+          CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
+        id: xray-token
+        run: |
+          echo ::set-output name=XRAY_TOKEN::$(curl -H "Content-Type: application/json" -X POST --data "{ \"client_id\": \"$CLIENT_ID\",\"client_secret\": \"$CLIENT_SECRET\" }" https://xray.cloud.xpand-it.com/api/v1/authenticate| tr -d '"')
+      - name: Get Features from XRAY 
+        shell: bash
+        run: |
+           curl -H "Content-Type: application/json" --output ./features.zip -X GET -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}"  "https://xray.cloud.xpand-it.com/api/v1/export/cucumber?keys=JUDE-43"
+           unzip -o features/features.zip -d ./src/test/resources/com/jba/ci/bdd/           
       - name: Build
         run: mvn -B clean package -DskipTests
       - name: Run UnitTest and Verify 
@@ -36,20 +48,6 @@ jobs:
         run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
-      - name: Upload code coverage report
-        uses: actions/upload-artifact@v2
-        with:
-          name: jacoco-report
-          path: target/site/jacoco/
-      - name: Adding Junit Report
-        uses: ashley-taylor/junit-report-annotations-action@master
-        if: always()
-        with:
-          access-token: ${{ secrets.GITHUB_TOKEN }}          
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action/composite@v1
-        with:
-           files: target/surefire-reports/*.xml
       - name: "Import results to Xray"
         uses: mikepenz/xray-action@v0.9.4
         with:
