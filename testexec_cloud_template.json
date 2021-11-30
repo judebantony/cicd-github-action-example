@@ -9,7 +9,7 @@
         }
     }, 
     "xrayFields": {
-        	"testPlanKey": "JUDE-46",
+        	"testPlanKey": "JUDE-45",
         	"environments": ["UAT"]
     }
 }

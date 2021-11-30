@@ -83,6 +83,7 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
      - Junit - [More Information](https://junit.org/junit5/)<br />
 21. Functional Testing
      - Cucumber - [More Information](https://cucumber.io)<br />
+     - Xray with Jira for Test Execution [More Information](https://docs.getxray.app/display/XRAY/About+Xray)<br />
      - Selenium - [More Information](https://www.selenium.dev)<br />
      - BrowserStack - [More Information](https://www.browserstack.com)<br />
      - LamdaTest - [More Information](https://www.lambdatest.com)<br />
@@ -1104,7 +1105,62 @@ Load Test file is present here [k6-test.js](https://github.com/judebantony/cicd-
 
 ```
 
-### 29) Release Tag Creation.
+### 29) Functional Test Xray and Jira.
+
+```yaml 
+
+  jiraXrayTest:
+    name: Functional Test using Xray and Jira 
+    runs-on: ubuntu-latest
+    needs: [uatdeploy]
+        
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2    
+      - name: Get Xray Cloud API token
+        env:
+          CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}  
+          CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
+        id: xray-token
+        run: |
+          echo ::set-output name=XRAY_TOKEN::$(curl -H "Content-Type: application/json" -X POST --data "{ \"client_id\": \"$CLIENT_ID\",\"client_secret\": \"$CLIENT_SECRET\" }" https://xray.cloud.xpand-it.com/api/v1/authenticate| tr -d '"')
+      - name: Get Features from XRAY 
+        shell: bash
+        run: |
+           curl -H "Content-Type: application/json" --output ./features.zip -X GET -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}"  "https://xray.cloud.xpand-it.com/api/v1/export/cucumber?keys=JUDE-43"
+           unzip -o features.zip -d ./src/test/resources/com/jba/ci/bdd/   
+      - name: Build
+        run: mvn -B clean package -DskipTests
+      - name: Run UnitTest and Verify 
+        run: mvn -B verify -DexcludedGroups="Smoke | Staging | BrowserStack | LamdaTest"
+      - name: Generate JaCoCo Badge
+        id: jacoco
+        uses: cicirello/jacoco-badge-generator@v2
+      - name: Log code coverage percentage
+        run: |
+          echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
+          echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
+      - name: Upload to XRAY 
+        shell: bash
+        run: |
+           curl  -X POST -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" -F info=@testexec_cloud_template.json -F results=@"target/cucumber-reports/cucumber.json" "https://xray.cloud.xpand-it.com/api/v1/import/execution/cucumber/multipart"          
+
+```
+
+
+### 30) Release Tag Creation.
 
 ```yaml 
 
@@ -1132,7 +1188,7 @@ Load Test file is present here [k6-test.js](https://github.com/judebantony/cicd-
 
 ```
 
-### 30) IaC - using Terraform - Create AWS EC2.
+### 31) IaC - using Terraform - Create AWS EC2.
 Set up the AWS EC2 instances using Terrform , manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
 
 ```yaml 
