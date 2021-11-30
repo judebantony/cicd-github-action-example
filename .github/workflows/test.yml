@@ -36,7 +36,8 @@ jobs:
         shell: bash
         run: |
            curl -H "Content-Type: application/json" --output ./features.zip -X GET -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}"  "https://xray.cloud.xpand-it.com/api/v1/export/cucumber?keys=JUDE-43"
-           unzip -o features/features.zip -d ./src/test/resources/com/jba/ci/bdd/           
+           ls -lst
+           unzip -o features.zip -d ./src/test/resources/com/jba/ci/bdd/           
       - name: Build
         run: mvn -B clean package -DskipTests
       - name: Run UnitTest and Verify 
