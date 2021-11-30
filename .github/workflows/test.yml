@@ -37,7 +37,6 @@ jobs:
         run: |
            curl -H "Content-Type: application/json" --output ./features.zip -X GET -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}"  "https://xray.cloud.xpand-it.com/api/v1/export/cucumber?keys=JUDE-43"
            unzip -o features.zip -d ./src/test/resources/com/jba/ci/bdd/   
-           ls -lst ./src/test/resources/com/jba/ci/bdd/          
       - name: Build
         run: mvn -B clean package -DskipTests
       - name: Run UnitTest and Verify 
@@ -49,12 +48,7 @@ jobs:
         run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
-      - name: "Import results to Xray"
-        uses: mikepenz/xray-action@v0.9.4
-        with:
-          username: ${{ secrets.XRAY_CLIENT_ID }}
-          password: ${{ secrets.XRAY_CLIENT_SECRET }}
-          testFormat: "Cucumber"
-          testPaths: "target/cucumber-reports/cucumber.json"
-          testExecKey: "JUDE-43"
-          projectKey: "JUDE"           
+      - name: Get Features from XRAY 
+        shell: bash
+        run: |
+           curl -H "Content-Type: application/json" -X POST -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" --data target/cucumber-reports/cucumber.json "https://xray.cloud.xpand-it.com/api/v1/import/execution/cucumber"
