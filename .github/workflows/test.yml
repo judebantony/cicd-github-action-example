@@ -51,7 +51,7 @@ jobs:
         with:
            files: target/surefire-reports/*.xml
       - name: "Import results to Xray"
-        uses: mikepenz/xray-action@@v0.9.4
+        uses: mikepenz/xray-action@v0.9.4
         with:
           username: ${{ secrets.XRAY_CLIENT_ID }}
           password: ${{ secrets.XRAY_CLIENT_SECRET }}
