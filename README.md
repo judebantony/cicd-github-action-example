@@ -19,7 +19,8 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
 1. Requirements 
     - JIRA <br />
 		Used atlassian Jira cloud offering to capture the requirements.<br />
-	    JIRA Project :: [https://judebantony.atlassian.net](https://judebantony.atlassian.net)	
+	    JIRA Project :: [https://judebantony.atlassian.net](https://judebantony.atlassian.net)<br />
+	    Jira Github Integration [More Information](https://support.atlassian.com/jira-cloud-administration/docs/integrate-with-github/)<br />
 2. Code
     - Spring Boot <br />
     - Java <br />
