@@ -62,5 +62,4 @@ jobs:
         shell: bash
         run: |
            run: |
-           cat testexec_cloud_template.json  | sed s/PROJECT_KEY/JUDE/g | sed s/TEST_ENVIRONMENT_NAME/UAT/g | sed s/TESTPLAN_KEY/JUDE-45/g > test_exec.json
-           curl  -X POST -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" -F info=@test_exec.json -F results=@"target/cucumber-reports/cucumber.json" "https://xray.cloud.xpand-it.com/api/v1/import/execution/cucumber/multipart"
+           curl  -X POST -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" -F info=@testexec_cloud_template.json -F results=@"target/cucumber-reports/cucumber.json" "https://xray.cloud.xpand-it.com/api/v1/import/execution/cucumber/multipart"
