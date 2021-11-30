@@ -3,13 +3,13 @@
         "project": {
             "key": "JUDE"
         },
-        "summary": "Test Execution for cucumber execution",
+        "summary": "Test Execution for Test Plan JUDE-45",
         "issuetype": {
             "name": "Test Execution"
         }
     }, 
     "xrayFields": {
-        	"testPlanKey": "JUDE-45",
+        	"testPlanKey": "JUDE-46",
         	"environments": ["UAT"]
     }
 }

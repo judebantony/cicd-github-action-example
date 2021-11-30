@@ -931,7 +931,7 @@ jobs:
   terraform:
     name: "Terraform - Create AWS EC2"
     runs-on: ubuntu-latest
-    needs: [uatdeploy]
+    needs: [jiraXrayTest]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -1090,3 +1090,51 @@ jobs:
       - name: Run Harness UAT Deployment
         run: |
           curl -X POST -H 'content-type: application/json' --url https://app.harness.io/gateway/api/webhooks/Tlugr1ZdISx44rvm4flAiXHMb3uKG3ikyiHSbOks?accountId=aGS5Pi_WSPa9IsdlTlJc7g -d '{"application":"1FYrnQdZROqjpAQdCBIMbw"}'
+  
+  jiraXrayTest:
+    name: Functional Test using Xray and Jira 
+    runs-on: ubuntu-latest
+    needs: [uatdeploy]
+        
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2    
+      - name: Get Xray Cloud API token
+        env:
+          CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}  
+          CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
+        id: xray-token
+        run: |
+          echo ::set-output name=XRAY_TOKEN::$(curl -H "Content-Type: application/json" -X POST --data "{ \"client_id\": \"$CLIENT_ID\",\"client_secret\": \"$CLIENT_SECRET\" }" https://xray.cloud.xpand-it.com/api/v1/authenticate| tr -d '"')
+      - name: Get Features from XRAY 
+        shell: bash
+        run: |
+           curl -H "Content-Type: application/json" --output ./features.zip -X GET -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}"  "https://xray.cloud.xpand-it.com/api/v1/export/cucumber?keys=JUDE-43"
+           unzip -o features.zip -d ./src/test/resources/com/jba/ci/bdd/   
+      - name: Build
+        run: mvn -B clean package -DskipTests
+      - name: Run UnitTest and Verify 
+        run: mvn -B verify -DexcludedGroups="Smoke | Staging | BrowserStack | LamdaTest"
+      - name: Generate JaCoCo Badge
+        id: jacoco
+        uses: cicirello/jacoco-badge-generator@v2
+      - name: Log code coverage percentage
+        run: |
+          echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
+          echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
+      - name: Upload to XRAY 
+        shell: bash
+        run: |
+           curl  -X POST -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" -F info=@testexec_cloud_template.json -F results=@"target/cucumber-reports/cucumber.json" "https://xray.cloud.xpand-it.com/api/v1/import/execution/cucumber/multipart"          

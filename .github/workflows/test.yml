@@ -48,18 +48,7 @@ jobs:
         run: |
           echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
           echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
-      - name: Submit results to Xray
-        uses: mikepenz/xray-action@v0.9.4
-        with:
-            username: ${{ secrets.XRAY_CLIENT_ID }}
-            password: ${{ secrets.XRAY_CLIENT_SECRET }}
-            testFormat: "cucumber"
-            testPaths: "target/cucumber-reports/cucumber.json"
-            projectKey: "JUDE"  
-            testExecKey: "JUDE-46"
-            testPlanKey: "JUDE-45"        
       - name: Upload to XRAY 
         shell: bash
         run: |
-           run: |
            curl  -X POST -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" -F info=@testexec_cloud_template.json -F results=@"target/cucumber-reports/cucumber.json" "https://xray.cloud.xpand-it.com/api/v1/import/execution/cucumber/multipart"
