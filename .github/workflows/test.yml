@@ -61,5 +61,5 @@ jobs:
       - name: Upload to XRAY 
         shell: bash
         run: |
-           curl -H "Content-Type: application/json" -X POST -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" -F info=@testexec_cloud_template.json --data target/cucumber-reports/cucumber.json "https://xray.cloud.xpand-it.com/api/v1/import/execution/cucumber"
+           curl  -X POST -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" --data target/cucumber-reports/cucumber.json "https://xray.cloud.xpand-it.com/api/v1/import/execution/cucumber/multipart"
            cat target/cucumber-reports/cucumber.json
