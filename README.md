@@ -1083,7 +1083,7 @@ Deploy the Container image to Google GKE using Harness.
 ```
 
 ### 28) Load Testing - K6.
-Load Test file is present here [k6-test.js](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
+Load Test file is present here [here](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
 
 ```yaml 
 
@@ -1105,7 +1105,8 @@ Load Test file is present here [k6-test.js](https://github.com/judebantony/cicd-
 
 ```
 
-### 29) Functional Test Xray and Jira.
+### 29) Functional Test using Xray and Jira.
+Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) in Jira for each story and excute as part of CI/CD. Upload the result back to Jira. XRay Test Execution config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/testexec_cloud_template.json).
 
 ```yaml 
 
