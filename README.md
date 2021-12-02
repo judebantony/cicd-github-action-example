@@ -14,7 +14,8 @@
 
 ## CICD - SecDevOps using GitHub Action 
 
-This is a sample project to demonstrate the E2E Github Action release workflow with all Security Controls and integrated with different Cloud SaaS tools offering as listed below.
+This is a sample project to demonstrate the E2E Github Action release workflow with all Security Controls Gates and this cicd workflow is integrated with different Cloud SaaS tools offering as listed below.
+
 
 1. Requirements 
     * JIRA <br />
@@ -80,6 +81,7 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
      * Terraform - [More Information](https://www.terraform.io)<br />
 20. Unit Testing
      * Junit - [More Information](https://junit.org/junit5/)<br />
+     * Jacoco - [More Information](https://www.baeldung.com/sonarqube-jacoco-code-coverage)<br />
 21. Functional Testing
      * Cucumber - [More Information](https://cucumber.io)<br />
      * Xray with Jira for Test Execution [More Information](https://docs.getxray.app/display/XRAY/About+Xray)<br />
@@ -89,11 +91,14 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
 22. Performance Testing
      * K6 - [More Information](https://k6.io)<br />
 23. Create Release Tag
-	 
+
+## Release Workflow
+![workflow](./doc/workflow.png)	 
 ## Integration with GitHub Action
-Some the sample code for integrating different SaaS tool to CICD using GitHub Action. Workflow code is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml)
+Some the sample code for integrating different SaaS tool to CICD using GitHub Action. [workflow](https://github.com/judebantony/cicd-github-action-example/tree/main/.github/workflows/workflow.yml)
+
 ### 1) Maven - Build and Unit Test
-Please check [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/.github/workflows/workflow.yml).
+Build the code is using maven and run the JUnit unit test cases, upload the test coverage result to github action . Please check [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml). 
 
 ```yaml
 
