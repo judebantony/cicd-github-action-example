@@ -93,9 +93,16 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
 23. Create Release Tag
 
 ## Release Workflow
+[Release workflow](https://github.com/judebantony/cicd-github-action-example/tree/main/.github/workflows/workflow.yml)
 ![workflow](./doc/workflow.png)	 
-## Integration with GitHub Action
-Some the sample code for integrating different SaaS tool to CICD using GitHub Action. [workflow](https://github.com/judebantony/cicd-github-action-example/tree/main/.github/workflows/workflow.yml)
+## Jira and Github Integration
+Linking your GitHub account to Jira gives your team the ability to see their branches, commit messages,build, test cases, test result(x-ray) and pull requests right in the context of the Jira tickets they’re working on. [More information](https://github.blog/2018-10-04-announcing-the-new-github-and-jira-software-cloud-integration/)
+
+![jira](./doc/jira.png)	 
+![jira](./doc/jiragithub.png)
+
+## Integration with GitHub Action 
+Some the sample code for integrating different SaaS tool to CICD using GitHub Action. 
 
 ### 1) Maven - Build and Unit Test
 Build the code is using maven and run the JUnit unit test cases, upload the test coverage result to github action . Please check [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml). 
@@ -149,6 +156,7 @@ Build the code is using maven and run the JUnit unit test cases, upload the test
 
 ```
 ### 2) Sonar Cloud - Code Quality
+Inspect the code using Sonar, enable the quality gate check and upload the result to its Cloud SaaS offering. 
 
 ```yaml
   sonar:
@@ -194,6 +202,7 @@ Build the code is using maven and run the JUnit unit test cases, upload the test
 ```
 
 ### 3) Codecov - Code Coverage
+Upload the code coverage result to Codecov SaaS offering.
 
 ```yaml
   codecov:
@@ -233,6 +242,7 @@ Build the code is using maven and run the JUnit unit test cases, upload the test
 ```
 
 ### 4) CodeQL - SAST
+Use the native Github Action CodeQL for SAST scan and upload the result to github security tab
 
 ```yaml
   codeqlScan:
@@ -266,6 +276,8 @@ Build the code is using maven and run the JUnit unit test cases, upload the test
 ```
 
 ### 5) AppScan CodeSweep - SAST 
+Use the AppScan CodeSweep for SAST scan and upload the result to github security tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
+
 
 ```yaml
   appScan:
@@ -288,6 +300,7 @@ Build the code is using maven and run the JUnit unit test cases, upload the test
 ```
 
 ### 6) Codacy - SAST 
+Use the Codacy for SAST scan and upload the result to github security tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml
   codacyScan:
@@ -314,6 +327,7 @@ Build the code is using maven and run the JUnit unit test cases, upload the test
 ```
 
 ### 7) Snyk - SCA 
+Use the Snyk for SCA scan and upload the result to github security tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml
   snykScan:
@@ -342,6 +356,7 @@ Build the code is using maven and run the JUnit unit test cases, upload the test
 ```
 
 ### 8) Dependabot - SCA 
+Use the github native Dependabot for SCA scan and upload the result to github security tab 
 
 ```yaml dependabot.yml
 
@@ -359,6 +374,7 @@ updates:
 ```
 
 ### 9) BlackDuck CoPilot - SCA 
+Use the BlackDuck for SCA scan and upload the result to github security tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml 
 
@@ -389,6 +405,7 @@ updates:
 ```
 
 ### 10) FOSSA - SCA 
+Use the FOSSA for SCA scan and upload the result to github security tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml 
 
@@ -411,6 +428,7 @@ updates:
 ```
 
 ### 11) ShiftLeft - SCA & SAST
+Use the ShiftLeft for SCA & SAST scan and upload the result to github security tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml 
 
