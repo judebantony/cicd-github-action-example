@@ -200,6 +200,7 @@ Inspect the code using Sonar, enable the quality gate check and upload the resul
           scanMetadataReportFile: target/sonar/report-task.txt     
 
 ```
+![sonar](./doc/sonar.png)
 
 ### 3) Codecov - Code Coverage
 Upload the code coverage result to Codecov SaaS offering.
@@ -240,6 +241,8 @@ Upload the code coverage result to Codecov SaaS offering.
           verbose: true     
 
 ```
+![codecov](./doc/codecov.png)
+
 
 ### 4) CodeQL - SAST
 Use the native Github Action CodeQL for SAST scan and upload the result to github security tab
@@ -274,6 +277,7 @@ Use the native Github Action CodeQL for SAST scan and upload the result to githu
         uses: github/codeql-action/analyze@v1
 
 ```
+![codeql](./doc/codeql.png)
 
 ### 5) AppScan CodeSweep - SAST 
 Use the AppScan CodeSweep for SAST scan and upload the result to github security tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
@@ -298,6 +302,8 @@ Use the AppScan CodeSweep for SAST scan and upload the result to github security
         env: 
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 ```
+
+![appscan](./doc/appScan.png)
 
 ### 6) Codacy - SAST 
 Use the Codacy for SAST scan and upload the result to github security tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
@@ -325,6 +331,8 @@ Use the Codacy for SAST scan and upload the result to github security tab using 
           with:
             sarif_file: codacy.sarif          
 ```
+
+![codacy](./doc/codacy.png)
 
 ### 7) Snyk - SCA 
 Use the Snyk for SCA scan and upload the result to github security tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
@@ -354,6 +362,7 @@ Use the Snyk for SCA scan and upload the result to github security tab using sai
           sarif_file: snyk.sarif
 
 ```
+![snky](./doc/snky.png)
 
 ### 8) Dependabot - SCA 
 Use the github native Dependabot for SCA scan and upload the result to github security tab 
@@ -403,6 +412,7 @@ Use the BlackDuck for SCA scan and upload the result to github security tab usin
 
 
 ```
+![blackduck](./doc/blackduck.png)
 
 ### 10) FOSSA - SCA 
 Use the FOSSA for SCA scan and upload the result to github security tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
@@ -426,6 +436,8 @@ Use the FOSSA for SCA scan and upload the result to github security tab using sa
 
 
 ```
+
+![fossa](./doc/fossa.png)
 
 ### 11) ShiftLeft - SCA & SAST
 Use the ShiftLeft for SCA & SAST scan and upload the result to github security tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
@@ -623,6 +635,8 @@ snykImageScan:
 
 
 ```
+![githubpackage](./doc/githubpackage.png)
+
 
 ### 17) JFrog Artifactory - Build Docker Image and Publish
 
