@@ -14,8 +14,11 @@
 
 ## CICD - SecDevOps using GitHub Action 
 
-This is a sample project to demonstrate the E2E Github Action release workflow with all Security Controls Gates and this cicd workflow is integrated with different Cloud SaaS tools offering as listed below.
+This is a sample project to demonstrate the E2E Github Action release workflow with all Security Controls Gates and this cicd workflow is integrated with different Cloud SaaS tools offering.
 
+![releaseworkflow](./doc/releaseworkflow.png)	
+
+##### Tools used are listed below
 
 1. Requirements 
     * JIRA <br />
