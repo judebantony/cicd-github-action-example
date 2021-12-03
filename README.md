@@ -922,6 +922,9 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
           path: target/cucumber-reports/cucumber.html
 
 ```
+
+![cucumber](./doc/cucumber.png)
+
 ### 22) Functional UI Test - Using BrowserStack.
 
 ```yaml 
@@ -1163,6 +1166,7 @@ Deploy the Container image to Google GKE using Harness.
 
 Harness
 ![harness](./doc/harness.png) 
+
 ### 28) Load Testing - K6.
 Load Test file is present here [here](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
 
@@ -1270,6 +1274,8 @@ Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) in Jira 
             body: ${{ steps.tag_version.outputs.changelog }}  
 
 ```
+
+![releasetag](./doc/releasetag.png)
 
 ### 31) IaC - using Terraform - Create AWS EC2.
 Set up the AWS EC2 instances using Terrform , manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
