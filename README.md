@@ -172,6 +172,9 @@ Build the code is using maven and run the JUnit unit test cases, upload the test
            files: target/surefire-reports/*.xml
 
 ```
+
+![unittest](./doc/unittest.png)
+
 ### 2) Sonar Cloud - Code Quality
 Inspect the code using Sonar, enable the quality gate check and upload the result to its Cloud SaaS offering. 
 
@@ -218,6 +221,7 @@ Inspect the code using Sonar, enable the quality gate check and upload the resul
 
 ```
 ![sonar](./doc/sonar.png)
+![qulitygate](./doc/qulitygate.png)
 
 ### 3) Codecov - Code Coverage
 Upload the code coverage result to Codecov SaaS offering.
