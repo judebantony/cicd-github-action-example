@@ -98,8 +98,21 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
 ## Jira and Github Integration
 Linking your GitHub account to Jira gives your team the ability to see their branches, commit messages,build, test cases, test result(x-ray) and pull requests right in the context of the Jira tickets they’re working on. [More information](https://github.blog/2018-10-04-announcing-the-new-github-and-jira-software-cloud-integration/)
 
-![jira](./doc/jira.png)	 
-![jira](./doc/jiragithub.png)
+![jira](./doc/jira.png)
+
+Commit and Build info is added to Jira
+
+![jiragithub](./doc/jiragithub.png)
+![githubbuild](./doc/githubbuild.png)
+
+Cucumber feature test case using Gherkin is added to Jira
+
+![githubtest](./doc/githubtest.png)
+
+Test results
+
+![githubtest](./doc/githubtestrun.png)
+![githubresult](./doc/githubresult.png)
 
 ## Integration with GitHub Action 
 Some the sample code for integrating different SaaS tool to CICD using GitHub Action. 
@@ -362,7 +375,7 @@ Use the Snyk for SCA scan and upload the result to github security tab using sai
           sarif_file: snyk.sarif
 
 ```
-![snky](./doc/snky.png)
+![snky](./doc/snyk.png)
 
 ### 8) Dependabot - SCA 
 Use the github native Dependabot for SCA scan and upload the result to github security tab 
@@ -381,6 +394,7 @@ updates:
       interval: "weekly"
 
 ```
+![dependabot](./doc/dependabot.png)
 
 ### 9) BlackDuck CoPilot - SCA 
 Use the BlackDuck for SCA scan and upload the result to github security tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
@@ -465,6 +479,8 @@ Use the ShiftLeft for SCA & SAST scan and upload the result to github security t
 
 
 ```
+
+![shiftleft](./doc/shiftleft.png)
 
 ### 12) Snyk - Infra as Code Configs Scan
 
@@ -601,6 +617,8 @@ snykImageScan:
 
 ```
 
+![jfrogjar](./doc/jfrogjar.png)
+
 ### 16) GitHub Package - Publish Artifact(jar)
 
 ```yaml 
@@ -635,8 +653,8 @@ snykImageScan:
 
 
 ```
-![githubpackage](./doc/githubpackage.png)
 
+![githubpackage](./doc/githubpackage.png)
 
 ### 17) JFrog Artifactory - Build Docker Image and Publish
 
@@ -684,6 +702,8 @@ jfrogImageBuild:
 
 
 ```
+
+![jfrogimage](./doc/jfrogimage.png)
 
 ### 18) GitHub Package - Build Docker Image and Publish
 
@@ -741,6 +761,9 @@ gitHubPakageImageBuild:
 
 
 ```
+
+![githubimage](./doc/githubimage.png)
+
 ### 19) Docker Hub - Build Docker Image and Publish
 
 ```yaml 
@@ -789,6 +812,8 @@ gitHubPakageImageBuild:
 
 
 ```
+
+![dockerhub](./doc/dockerhub.png)
 
 ### 20) CD - Deploy to Azure AKS
 
@@ -843,6 +868,8 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
 
 
 ```
+
+![aks](./doc/aks.png)
 
 ### 21) Functional Test - Using Cucumber.
 
@@ -935,6 +962,8 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
 
 ```
 
+![browserstack](./doc/browserstack.png)
+
 ### 23) Functional UI Test - Using LamdaTest.
 
 ```yaml 
@@ -980,6 +1009,8 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
 
 ```
 
+![lambdatest](./doc/lambdatest.png)
+
 ### 24) DAST Scan - Using StackHawk.
 StackHawk config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/stackhawl.yml).
 
@@ -1016,6 +1047,8 @@ StackHawk config file is present [here](https://github.com/judebantony/cicd-gith
           APP_ID: ea0079f1-648e-4bdb-aa2d-233696082b4e
 
 ```
+
+![stackhawk](./doc/stackhawk.png)
 
 ### 25) Setting up Approval Gates and Email.
 
@@ -1117,7 +1150,10 @@ Deploy the Container image to Google GKE using Harness.
         run: |
           curl -X POST -H 'content-type: application/json' --url https://app.harness.io/gateway/api/webhooks/Tlugr1ZdISx44rvm4flAiXHMb3uKG3ikyiHSbOks?accountId=aGS5Pi_WSPa9IsdlTlJc7g -d '{"application":"1FYrnQdZROqjpAQdCBIMbw"}'
 ```
+![gke](./doc/gke.png)
 
+Harness
+![harness](./doc/harness.png) 
 ### 28) Load Testing - K6.
 Load Test file is present here [here](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
 
@@ -1140,6 +1176,7 @@ Load Test file is present here [here](https://github.com/judebantony/cicd-github
           token: ${{ secrets.K6_CLOUD_API_TOKEN }}
 
 ```
+![k6](./doc/k6.png)
 
 ### 29) Functional Test using Xray and Jira.
 Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) in Jira for each story and excute as part of CI/CD. Upload the result back to Jira. XRay Test Execution config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/testexec_cloud_template.json).
@@ -1195,7 +1232,7 @@ Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) in Jira 
            curl  -X POST -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" -F info=@testexec_cloud_template.json -F results=@"target/cucumber-reports/cucumber.json" "https://xray.cloud.xpand-it.com/api/v1/import/execution/cucumber/multipart"          
 
 ```
-
+![xray](./doc/xray.png)
 
 ### 30) Release Tag Creation.
 
@@ -1305,6 +1342,7 @@ Set up the AWS EC2 instances using Terrform , manifest file is available [here](
 
 ```
 
+![teraform](./doc/teraform.png)
 
 ## Author
 
