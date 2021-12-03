@@ -97,7 +97,8 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
 
 ## Release Workflow
 [Release workflow](https://github.com/judebantony/cicd-github-action-example/tree/main/.github/workflows/workflow.yml)
-![workflow](./doc/workflow.png)	 
+![workflow](./doc/workflow.png)	
+![workflow run](https://github.com/judebantony/cicd-github-action-example/actions/runs/1500211427)	
 ## Jira and Github Integration
 Linking your GitHub account to Jira gives your team the ability to see their branches, commit messages,build, test cases, test result(x-ray) and pull requests right in the context of the Jira tickets they’re working on. [More information](https://github.blog/2018-10-04-announcing-the-new-github-and-jira-software-cloud-integration/)
 
