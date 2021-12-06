@@ -38,10 +38,10 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
 5. CI
      * Github Action - [More Information](https://github.com/features/actions) <br/>
 6. Code Quality
-    * SonarQube [More Information](https://en.wikipedia.org/wiki/SonarQube)<br />
-	     [Dashboard Example](https://sonarcloud.io/organizations/judebantony/projects)	<br />
-    * Codecov - [More Information](https://docs.codecov.com/docs) <br/>
-	    [Dashboard Example](https://codecov.io/gh/judebantony/cicd-github-action-example/commit/4b9f0f601ab2feee0e409ede57283d5b99b9182d/build)	<br />
+    * SonarQube [More Information](https://en.wikipedia.org/wiki/SonarQube)
+	  [Dashboard Example](https://sonarcloud.io/organizations/judebantony/projects)	<br />
+    * Codecov - [More Information](https://docs.codecov.com/docs)
+	  [Dashboard Example](https://codecov.io/gh/judebantony/cicd-github-action-example/commit/4b9f0f601ab2feee0e409ede57283d5b99b9182d/build)	<br />
 	  	
 7. SAST (Static Analysis Security Testing)
      * CodeQL - [More information](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-with-codeql)
@@ -49,14 +49,14 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
      * Codacy - [More Information](https://www.codacy.com/products/sonarqube-alternatives?utm_term=sonarqube&utm_campaign=SEA+-+Competitors&utm_source=adwords&utm_medium=ppc&hsa_acc=9882323101&hsa_cam=11598890837&hsa_grp=112569261106&hsa_ad=493336668133&hsa_src=g&hsa_tgt=kwd-57815990976&hsa_kw=sonarqube&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAiA4veMBhAMEiwAU4XRr_qVWrji3IRgivxyqqPc3QrEMVwBQmQoACBfPuCL5H0gE0nmn3n2LhoCcgkQAvD_BwE)
      * 42crunch - [More Information](https://platform.42crunch.com)
 8. SCA (Software Composition Analysis)
-     * Snyk - [More Information](https://snyk.io)<br />
-             [Dashboard Example](https://app.snyk.io/org/judebantony)
-     * Dependabot - [More Information](https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/)
-      BlackDuck CoPilot - [More Information](https://www.synopsys.com/blogs/software-security/introducing-black-duck-copilot/) <br />
-     		[Dashboard Example](https://copilot.blackducksoftware.com/github/repos/judebantony/cicd-github-action-example/results)
-     * FOSSA [More Information](https://fossa.com)<br />
-     		[Dashboard Example](https://app.fossa.com/projects/git%2Bgithub.com%2Fjudebantony%2Fcicd-github-action-example/refs/branch/main/0116ae3eef023ccfb56995ab2c4b10aaf5ffe1e1)
-     * Shift Left [More Information](https://www.shiftleft.io/apps/shiftleft-java-demo/vulnerabilities?scan=1&branch=demo-branch-1638196402&severity=critical)		
+     * Snyk - [More Information](https://snyk.io)
+       [Dashboard Example](https://app.snyk.io/org/judebantony)<br />
+     * Dependabot - [More Information](https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/)<br />
+     * BlackDuck CoPilot - [More Information](https://www.synopsys.com/blogs/software-security/introducing-black-duck-copilot/) 
+       [Dashboard Example](https://copilot.blackducksoftware.com/github/repos/judebantony/cicd-github-action-example/results)<br />
+     * FOSSA [More Information](https://fossa.com)
+       [Dashboard Example](https://app.fossa.com/projects/git%2Bgithub.com%2Fjudebantony%2Fcicd-github-action-example/refs/branch/main/0116ae3eef023ccfb56995ab2c4b10aaf5ffe1e1)
+     * Shift Left [More Information](https://www.shiftleft.io/apps/shiftleft-java-demo/vulnerabilities?scan=1&branch=demo-branch-1638196402&severity=critical)<br />		
 9. DAST (Dynamic Application Security Testing)
      * StackHawk - [More Information](https://www.stackhawk.com)<br />
      		[Dashboard Example](https://app.stackhawk.com/applications)
@@ -64,7 +64,8 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
      * Snyk - [More Information](https://snyk.io)<br />
 11. Secret Scan
      * Trufflehog - [More Information](https://github.com/trufflesecurity/truffleHog)<br />
-     * GitGuardian - [More Information](https://docs.gitguardian.com/internal-repositories-monitoring/integrations/ci_cd_integrations/github_actions)<br />
+     * GitGuardian - [More Information](https://docs.gitguardian.com/internal-repositories-monitoring/integrations/ci_cd_integrations/github_actions)
+     [Dashboard Example](https://dashboard.gitguardian.com/workspace/190186/analytics)<br />
 12. Maven Repository
      * Jfrog Artifactory - [More Information](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)<br />
      * Github Package - [More Information](https://github.com/trufflesecurity/truffleHog)<br />
