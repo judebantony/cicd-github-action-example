@@ -52,6 +52,7 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
      * [StackHawk](https://app.stackhawk.com/applications)
 * IaC Configs Scan
      * [Snyk](https://snyk.io)
+     * [OPA](https://www.openpolicyagent.org)
 * Secret Scan
      * [Trufflehog](https://github.com/trufflesecurity/truffleHog)
      * [GitGuardian](https://dashboard.gitguardian.com/workspace/190186/analytics)
@@ -486,7 +487,7 @@ Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the
 
 ### 12) Snyk - Infrastructure as Code Configs Scan
 
-Use [Snyk](https://snyk.io) to secure the Infrastructure as Code config files.
+Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code config files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
 
 ```yaml 
 
@@ -518,7 +519,34 @@ Use [Snyk](https://snyk.io) to secure the Infrastructure as Code config files.
 ```
 ![snky](./doc/snyk.png)
 
-### 13) Trufflehog - Secret Scan
+### 13) OPA - Infrastructure as Code Configs Scan
+
+Use [OPA](https://www.openpolicyagent.org/docs/latest/) to scan the [Infrastructure as Code config files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests) using [OPA Policies](https://github.com/judebantony/cicd-github-action-example/tree/main/opa-policies).
+
+```yaml 
+
+ opa-test:
+    name: SAST - Scan IaC Configs Using OPA
+    runs-on: ubuntu-latest
+    needs: [dependabot, snykScan, blackduck, fossaScan, shitLeftScan]
+    
+    steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: OPA-Test manifests standards.
+          uses: ameydev/ci-cd-standards-using-opa@master
+          env:
+            MANIFESTS_PATH_PATTERN: manifests/
+            LIBRARY_PATH: opa-policies/
+            DATA: data.kubernetes.admission.deny  
+
+```
+![opa](./doc/opa.png)
+
+
+### 14) Trufflehog - Secret Scan
 
 Use [Trufflehog](https://trufflesecurity.com/trufflehog) to find any secret present in the source code. 
  
@@ -541,7 +569,7 @@ Use [Trufflehog](https://trufflesecurity.com/trufflehog) to find any secret pres
 
 
 ```
-### 14) GitGuardian - Secret Scan
+### 15) GitGuardian - Secret Scan
 
 Use [GitGuardian](https://www.gitguardian.com) to find any secret present in the source code. [Github integration with GitGuardian](https://docs.gitguardian.com/internal-repositories-monitoring/integrations/ci_cd_integrations/github_actions)
  
@@ -571,7 +599,7 @@ Use [GitGuardian](https://www.gitguardian.com) to find any secret present in the
 ```
 ![gitguardian](./doc/gitguardian.png)
 
-### 15) Snyk - Container Image Scan
+### 16) Snyk - Container Image Scan
 
 Use [Snyk](https://snyk.io) to do container image scan. 
 
@@ -618,7 +646,7 @@ snykImageScan:
 ```
 ![snyk](./doc/snyk.png)
 
-### 16) Jfrog Artifactory - Publish Artifact(jar)
+### 17) Jfrog Artifactory - Publish Artifact(jar)
 
 Upload the Jar to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog+artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=CjwKCAiAhreNBhAYEiwAFGGKPHkjlShpTBfbPyMgP1l5hGLeiezWo9xCn-3ncNVZCudxMzCdNUhMDhoCIDIQAvD_BwE).
 
@@ -660,7 +688,7 @@ Upload the Jar to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=g
 
 ![jfrogjar](./doc/jfrogjar.png)
 
-### 17) GitHub Package - Publish Artifact(jar)
+### 18) GitHub Package - Publish Artifact(jar)
 
 Upload the Jar to [Github Package](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
 
@@ -699,7 +727,7 @@ Upload the Jar to [Github Package](https://docs.github.com/en/packages/learn-git
 
 ![githubpackage](./doc/githubpackage.png)
 
-### 18) JFrog Artifactory - Build Docker Image and Publish
+### 19) JFrog Artifactory - Build Docker Image and Publish
 Upload the Container Image to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog+artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=CjwKCAiAhreNBhAYEiwAFGGKPHkjlShpTBfbPyMgP1l5hGLeiezWo9xCn-3ncNVZCudxMzCdNUhMDhoCIDIQAvD_BwE).
 
 ```yaml 
@@ -749,7 +777,7 @@ jfrogImageBuild:
 
 ![jfrogimage](./doc/jfrogimage.png)
 
-### 19) GitHub Package - Build Docker Image and Publish
+### 20) GitHub Package - Build Docker Image and Publish
 Upload the Container Image to [Github Package](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
 
 ```yaml 
@@ -809,7 +837,7 @@ gitHubPakageImageBuild:
 
 ![githubimage](./doc/githubimage.png)
 
-### 20) Docker Hub - Build Docker Image and Publish
+### 21) Docker Hub - Build Docker Image and Publish
 Upload the Container Image to [Docker hub](https://hub.docker.com).
 
 ```yaml 
@@ -861,7 +889,7 @@ Upload the Container Image to [Docker hub](https://hub.docker.com).
 
 ![dockerhub](./doc/dockerhub.png)
 
-### 21) CD - Deploy to Azure AKS
+### 22) CD - Deploy to Azure AKS
 
 Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/services/kubernetes-service/), [kubernetes](https://kubernetes.io) manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
 
@@ -917,7 +945,7 @@ Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/serv
 
 ![aks](./doc/aks.png)
 
-### 22) Functional Test - Using Cucumber.
+### 23) Functional Test - Using Cucumber.
 
 Run the [Cucumber](https://cucumber.io) Test Cases and upload the result to Cucumber.io and github action. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
  
@@ -968,7 +996,7 @@ Upload the result to Cucumber.io Report
 
 ![cucumberreport](./doc/cucumberreport.png)
 
-### 23) Functional UI Test - Using BrowserStack.
+### 24) Functional UI Test - Using BrowserStack.
 
 Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) Test Cases using [BrowserStack](https://www.browserstack.com) and capture the result. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
 
@@ -1021,7 +1049,7 @@ Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) 
 
 ![browserstack](./doc/browserstack.png)
 
-### 24) Functional UI Test - Using LamdaTest.
+### 25) Functional UI Test - Using LamdaTest.
 
 Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) Test Cases using [LamdaTest](https://www.lambdatest.com/?fp_ref=aliakbar42) and capture the result. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
 
@@ -1070,7 +1098,7 @@ Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) 
 
 ![lambdatest](./doc/lambdatest.png)
 
-### 25) DAST Scan - Using StackHawk.
+### 26) DAST Scan - Using StackHawk.
 Use [StackHawk](https://www.stackhawk.com) for DAST scan for all the [OpenAPI](https://swagger.io/specification/) compliant REST APIs. StackHawk config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/stackhawl.yml).
 
 ```yaml 
@@ -1109,7 +1137,7 @@ Use [StackHawk](https://www.stackhawk.com) for DAST scan for all the [OpenAPI](h
 
 ![stackhawk](./doc/stackhawk.png)
 
-### 26) Setting up Approval Gates and Email.
+### 27) Setting up Approval Gates and Email.
 
 Set up approval gates for deployment using [Github Environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment).
 
@@ -1141,7 +1169,7 @@ Set up approval gates for deployment using [Github Environment](https://docs.git
 
 ```
 
-### 27) CD - Deploy to Azure AKS using Helm.
+### 28) CD - Deploy to Azure AKS using Helm.
 Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/services/kubernetes-service/) using [Helm](https://helm.sh), manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/helm).
 
 ```yaml 
@@ -1196,7 +1224,7 @@ Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/serv
 
 ```
 
-### 28) CD - Deploy to Google GKE using Harness.
+### 29) CD - Deploy to Google GKE using Harness.
 Deploy the Container image to [Google GKE](https://cloud.google.com/kubernetes-engine/?utm_source=google&utm_medium=cpc&utm_campaign=japac-IN-all-en-dr-bkws-all-all-trial-e-dr-1009882&utm_content=text-ad-none-none-DEV_c-CRE_468709677813-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt%20~%20Containers%20~%20Kubernetes%20Engine_Kubernetes-gke-KWID_43700033867246010-aud-970366092687%3Akwd-372556496315&userloc_9299054-network_g&utm_term=KW_google%20gke&ds_rl=1264446&gclid=CjwKCAiAhreNBhAYEiwAFGGKPBhVfsfPwkEB1Yzehiow3pcsq-P9Pv78G4P28anuVF9HtSPtoNZCFxoCqr0QAvD_BwE&gclsrc=aw.ds) using [Harness](https://harness.io).
 
 ```yaml 
@@ -1216,7 +1244,7 @@ Deploy the Container image to [Google GKE](https://cloud.google.com/kubernetes-e
 Harness
 ![harness](./doc/harness.png) 
 
-### 29) Load/Performance Testing - K6.
+### 30) Load/Performance Testing - K6.
 Performance Test using [K6](https://k6.io). Load Test file is present here [here](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
 
 ```yaml 
@@ -1240,7 +1268,7 @@ Performance Test using [K6](https://k6.io). Load Test file is present here [here
 ```
 ![k6](./doc/k6.png)
 
-### 30) Functional Test using Xray and Jira.
+### 31) Functional Test using Xray and Jira.
 Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) and [Cucumber](https://cucumber.io) in Jira for each story and excute as part of CI/CD. Upload the result back to Jira. XRay Test Execution config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/testexec_cloud_template.json).
 
 ```yaml 
@@ -1296,7 +1324,7 @@ Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) and [Cuc
 ```
 ![xray](./doc/xray.png)
 
-### 31) Release Tag Creation.
+### 32) Release Tag Creation.
 Create a release tag for the branch. 
 
 ```yaml 
@@ -1327,8 +1355,8 @@ Create a release tag for the branch.
 
 ![releasetag](./doc/releasetag.png)
 
-### 32) IaC - using Terraform - Create AWS EC2.
-Set up the AWS EC2 instances using [Terrform](https://www.terraform.io) , manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
+### 33) IaC - using Terraform - Create AWS EC2.
+Set up the AWS EC2 instances using [Terraform](https://www.terraform.io) , terraform manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
 
 ```yaml 
 
