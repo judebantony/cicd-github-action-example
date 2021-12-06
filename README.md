@@ -552,7 +552,7 @@ Use Trufflehog to find any secret find in the source code.
 
 
 ```
-### 14) Trufflehog - Secret Scan
+### 14) GitGuardian - Secret Scan
 
 Use GitGuardian to find any secret find in the source code. 
  
@@ -569,6 +569,8 @@ Use GitGuardian to find any secret find in the source code.
             fetch-depth: 0
         - name: GitGuardian scan
           uses: GitGuardian/ggshield-action@master
+          with:
+            args: -v --all-policies
           env:
             GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
             GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
