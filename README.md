@@ -69,7 +69,7 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
      * [Github Package](https://github.com/features/packages)
      * [DockerHub](https://hub.docker.com/r/judebantony/cigithubaction)
 * Deploying to Azure - AKS
-     * GitHub Action & K8S native 
+     * [GitHub Action & K8S native](https://kubernetes.io)
 * Deploying to Azure - AKS
      * [GitHub Action & Helm Chart](https://helm.sh/docs/topics/charts/)
 * Deploying to GCP - GKE 
