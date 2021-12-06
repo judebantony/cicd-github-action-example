@@ -930,6 +930,8 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
 
 ### 22) Functional Test - Using Cucumber.
 
+Run the Cucumber Test Cases and upload the result to Cucumber.io and github action. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
+ 
 ```yaml 
 
   qatest:
@@ -973,7 +975,13 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
 
 ![cucumber](./doc/cucumber.png)
 
+Upload the result to Cucumber Report
+
+![cucumberreport](./doc/cucumberreport.png)
+
 ### 23) Functional UI Test - Using BrowserStack.
+
+Run the [Selenium](https://www.selenium.dev) UI Cucumber Test Cases using [BrowserStack](https://www.browserstack.com) and capture the result. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
 
 ```yaml 
 
@@ -1026,6 +1034,8 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
 
 ### 24) Functional UI Test - Using LamdaTest.
 
+Run the [Selenium](https://www.selenium.dev) UI Cucumber Test Cases using [LamdaTest](https://www.lambdatest.com/?fp_ref=aliakbar42) and capture the result. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
+
 ```yaml 
 
   lamdaTest:
@@ -1072,7 +1082,7 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
 ![lambdatest](./doc/lambdatest.png)
 
 ### 25) DAST Scan - Using StackHawk.
-StackHawk config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/stackhawl.yml).
+Use [StackHawk](https://www.stackhawk.com) for DAST scan for all the [OpenAPI](https://swagger.io/specification/) compliant REST APIs. StackHawk config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/stackhawl.yml).
 
 ```yaml 
 
@@ -1112,6 +1122,8 @@ StackHawk config file is present [here](https://github.com/judebantony/cicd-gith
 
 ### 26) Setting up Approval Gates and Email.
 
+Set up approval gates for deployment using [Github Environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment).
+
 ```yaml 
 
  stagingdeployapproval:
@@ -1141,7 +1153,7 @@ StackHawk config file is present [here](https://github.com/judebantony/cicd-gith
 ```
 
 ### 27) CD - Deploy to Azure AKS using Helm.
-Deploy the Container image to Azure AKS using Helm, manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/helm).
+Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/services/kubernetes-service/) using [Helm](https://helm.sh), manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/helm).
 
 ```yaml 
 
@@ -1196,7 +1208,7 @@ Deploy the Container image to Azure AKS using Helm, manifest files are available
 ```
 
 ### 28) CD - Deploy to Google GKE using Harness.
-Deploy the Container image to Google GKE using Harness.
+Deploy the Container image to [Google GKE](https://cloud.google.com/kubernetes-engine/?utm_source=google&utm_medium=cpc&utm_campaign=japac-IN-all-en-dr-bkws-all-all-trial-e-dr-1009882&utm_content=text-ad-none-none-DEV_c-CRE_468709677813-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt%20~%20Containers%20~%20Kubernetes%20Engine_Kubernetes-gke-KWID_43700033867246010-aud-970366092687%3Akwd-372556496315&userloc_9299054-network_g&utm_term=KW_google%20gke&ds_rl=1264446&gclid=CjwKCAiAhreNBhAYEiwAFGGKPBhVfsfPwkEB1Yzehiow3pcsq-P9Pv78G4P28anuVF9HtSPtoNZCFxoCqr0QAvD_BwE&gclsrc=aw.ds) using [Harness](https://harness.io).
 
 ```yaml 
 
@@ -1215,8 +1227,8 @@ Deploy the Container image to Google GKE using Harness.
 Harness
 ![harness](./doc/harness.png) 
 
-### 29) Load Testing - K6.
-Load Test file is present here [here](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
+### 29) Load/Performance Testing - K6.
+Performance Test using [K6](https://k6.io). Load Test file is present here [here](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
 
 ```yaml 
 
@@ -1296,6 +1308,7 @@ Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) in Jira 
 ![xray](./doc/xray.png)
 
 ### 31) Release Tag Creation.
+Create a release tag for the branch. 
 
 ```yaml 
 
@@ -1326,7 +1339,7 @@ Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) in Jira 
 ![releasetag](./doc/releasetag.png)
 
 ### 32) IaC - using Terraform - Create AWS EC2.
-Set up the AWS EC2 instances using Terrform , manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
+Set up the AWS EC2 instances using [Terrfor](https://www.terraform.io) , manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
 
 ```yaml 
 
