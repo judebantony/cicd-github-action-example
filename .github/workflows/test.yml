@@ -16,15 +16,17 @@ jobs:
         uses: actions/checkout@v1
         with:
           fetch-depth: 0
-      - name: Convert pipeline scan output to SARIF format
-        id: convert
-        uses: Veracode/veracode-pipeline-scan-results-to-sarif@v0.1.2
+      - name: Set up JDK
+        uses: actions/setup-java@v1
         with:
-          pipeline-results-json: results.json
-          output-results-sarif: veracode-results.sarif
-          source-base-path-1: "^com/veracode:src/main/java/com/jba"
-          finding-rule-level: "3:1:0"
-      - name: upload sarif file to repository
-        uses: github/codeql-action/upload-sarif@v1
-        with: 
-          sarif_file: veracode-results.sarif
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Build
+        run: mvn -B clean package -DskipTests
+      - name: Run UnitTest and Verify 
+        run: mvn -B verify -DexcludedGroups="Smoke | Stage | BrowserStack | LamdaTest"
