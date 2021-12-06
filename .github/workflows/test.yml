@@ -47,7 +47,7 @@ jobs:
       - name: Build
         run: mvn -B clean package -DskipTests
       - name: Run UnitTest and Verify 
-        run: mvn -B verify -DexcludedGroups="Smoke | Staging | BrowserStack | LamdaTest"
+        run: mvn -B verify -DexcludedGroups="Smoke | BrowserStack | LamdaTest"
       - name: Generate JaCoCo Badge
         id: jacoco
         uses: cicirello/jacoco-badge-generator@v2
