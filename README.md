@@ -22,71 +22,71 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
 
 ##### Tools used are listed below
 
-1. Requirements 
+* Requirements 
     * [JIRA](https://judebantony.atlassian.net)
-2. Code
+* Code
     * [Spring Boot](https://spring.io/projects/spring-boot)
     * [Java](https://www.java.com/en/)
-3. SCM
+* SCM
      * [GitHub](https://github.com)	
-4. Build
+* Build
      * [Mavan](https://maven.apache.org)
-5. CI
+* CI
      * [Github Action](https://github.com/features/actions)
-6. Code Quality
+* Code Quality
     * [SonarQube](https://sonarcloud.io/organizations/judebantony/projects)
     * [Codecov](https://codecov.io/gh/judebantony/cicd-github-action-example/commit/4b9f0f601ab2feee0e409ede57283d5b99b9182d/build)
 	  	
-7. SAST (Static Analysis Security Testing)
+* SAST (Static Analysis Security Testing)
      * [CodeQL](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-with-codeql)
      * [HCL AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep)	
      * [Codacy](https://www.codacy.com/products/sonarqube-alternatives?utm_term=sonarqube&utm_campaign=SEA+-+Competitors&utm_source=adwords&utm_medium=ppc&hsa_acc=9882323101&hsa_cam=11598890837&hsa_grp=112569261106&hsa_ad=493336668133&hsa_src=g&hsa_tgt=kwd-57815990976&hsa_kw=sonarqube&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAiA4veMBhAMEiwAU4XRr_qVWrji3IRgivxyqqPc3QrEMVwBQmQoACBfPuCL5H0gE0nmn3n2LhoCcgkQAvD_BwE)
      * [42crunch](https://platform.42crunch.com)
-8. SCA (Software Composition Analysis)
+* SCA (Software Composition Analysis)
      * [Snyk](https://app.snyk.io/org/judebantony)
      * [Dependabot](https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/)
      * [BlackDuck CoPilot](https://copilot.blackducksoftware.com/github/repos/judebantony/cicd-github-action-example/results) 
      * [FOSSA](https://app.fossa.com/projects/git%2Bgithub.com%2Fjudebantony%2Fcicd-github-action-example/refs/branch/main/0116ae3eef023ccfb56995ab2c4b10aaf5ffe1e1)
      * [Shift Left](https://www.shiftleft.io/apps/shiftleft-java-demo/vulnerabilities?scan=1&branch=demo-branch-1638196402&severity=critical)		
-9. DAST (Dynamic Application Security Testing)
+* DAST (Dynamic Application Security Testing)
      * [StackHawk](https://app.stackhawk.com/applications)
-10. IaC Configs Scan
+* IaC Configs Scan
      * [Snyk](https://snyk.io)
-11. Secret Scan
+* Secret Scan
      * [Trufflehog](https://github.com/trufflesecurity/truffleHog)
      * [GitGuardian](https://dashboard.gitguardian.com/workspace/190186/analytics)
-12. Maven Repository
+* Maven Repository
      * [Jfrog Artifactory](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
      * [Github Package](https://github.com/trufflesecurity/truffleHog)
-13. Helm Repository
+* Helm Repository
      * [Jfrog Artifactiory](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
-14. Container Scan - Docker Image
+* Container Scan - Docker Image
       * [Snyk](https://snyk.io)
       * [JFrog Xray](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
-15. Container Repository
+* Container Repository
      * [JFrog Artifactory](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
      * [Github Package](https://github.com/features/packages)
      * [DockerHub](https://hub.docker.com/r/judebantony/cigithubaction)
-16. Deploying to Azure - AKS
+* Deploying to Azure - AKS
      * GitHub Action & K8S native 
-17. Deploying to Azure - AKS
+* Deploying to Azure - AKS
      * [GitHub Action & Helm Chart](https://helm.sh/docs/topics/charts/)
-18. Deploying to GCP - GKE 
+* Deploying to GCP - GKE 
      * [GitHub Action & Harness](https://harness.io)
-19. Provisioning AWS - EC2
+* Provisioning AWS - EC2
      * [Terraform](https://www.terraform.io)
-20. Unit Testing
+* Unit Testing
      * [Junit](https://junit.org/junit5/)
      * [Jacoco](https://www.baeldung.com/sonarqube-jacoco-code-coverage)
-21. Functional Testing
+* Functional Testing
      * [Cucumber](https://cucumber.io)
      * [Xray & Jira for Test Execution](https://docs.getxray.app/display/XRAY/About+Xray)
      * [Selenium](https://www.selenium.dev)
      * [BrowserStack](https://www.browserstack.com)
      * [LamdaTest](https://www.lambdatest.com)
-22. Performance Testing
+* Performance Testing
      * [K6](https://k6.io)
-23. Create Release Tag
+* Create Release Tag
 
 ## Release Workflow
 [Release workflow](https://github.com/judebantony/cicd-github-action-example/tree/main/.github/workflows/workflow.yml)
