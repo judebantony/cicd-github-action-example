@@ -7,26 +7,17 @@ on:
 jobs:
 
  
- test:
-    name: Build and Unit Test
+ opa-test:
+    name: IaC Scan Using OPA
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Check out the code
-        uses: actions/checkout@v1
-        with:
-          fetch-depth: 0
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
-      - name: Cache Maven packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2     
-      - name: Build
-        run: mvn -B clean package -DskipTests
-      - name: Run UnitTest and Verify 
-        run: mvn -B verify -DexcludedGroups="Smoke | Stage | BrowserStack | LamdaTest"
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: OPA-Test manifests standards.
+          uses: ameydev/ci-cd-standards-using-opa@master
+          env:
+            MANIFESTS_PATH_PATTERN: manifests/
+            LIBRARY_PATH: opa-policies/ci-standards 
+            DATA: data.kubernetes.admission.deny 
