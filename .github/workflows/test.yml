@@ -19,5 +19,5 @@ jobs:
           uses: ameydev/ci-cd-standards-using-opa@master
           env:
             MANIFESTS_PATH_PATTERN: manifests/
-            LIBRARY_PATH: opa-policies/ci-standards 
+            LIBRARY_PATH: opa-policies/
             DATA: data.kubernetes.admission.deny 
