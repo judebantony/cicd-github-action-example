@@ -14,6 +14,8 @@
 
 ## CICD - SecDevOps using GitHub Action 
 
+SecDevOps automatically bakes in security at every phase of the software development lifecycle, enabling development of secure software at the speed of Agile and DevOps. It integrates application and infrastructure security seamlessly into Agile and DevOps processes and tools. It addresses security issues as they emerge, when they're easier, faster, and less expensive to fix and also makes application and infrastructure security a shared responsibility of development, security, and IT operations teams.
+
 This is a sample project to demonstrate the E2E Github Action release workflow with all Security Controls Gates and integrated with different Cloud SaaS CI/CD tools chain offering.
 
 ![releaseworkflow](./doc/releaseworkflow.png)	
@@ -62,6 +64,7 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
      * Snyk - [More Information](https://snyk.io)<br />
 11. Secret Scan
      * Trufflehog - [More Information](https://github.com/trufflesecurity/truffleHog)<br />
+     * GitGuardian - [More Information](https://docs.gitguardian.com/internal-repositories-monitoring/integrations/ci_cd_integrations/github_actions)<br />
 12. Maven Repository
      * Jfrog Artifactory - [More Information](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)<br />
      * Github Package - [More Information](https://github.com/trufflesecurity/truffleHog)<br />
@@ -221,8 +224,8 @@ Inspect the code using Sonar, enable the quality gate check and upload the resul
 
 ```
 ![sonar](./doc/sonar.png)
-
-![qulitygate](./doc/qulitygate.png)
+Update the sonar quality gate information to github action build.
+![qualitygate](./doc/qulitygate.png)
 
 ### 3) Codecov - Code Coverage
 Upload the code coverage result to Codecov SaaS offering.
@@ -493,6 +496,8 @@ Use the ShiftLeft for SCA & SAST scan and upload the result to github security t
 
 ### 12) Snyk - Infra as Code Configs Scan
 
+Use Snyk to secure the Infra as Code config files.
+
 ```yaml 
 
   snykIaSScan:
@@ -521,9 +526,12 @@ Use the ShiftLeft for SCA & SAST scan and upload the result to github security t
 
 
 ```
+![snky](./doc/snyk.png)
 
 ### 13) Trufflehog - Secret Scan
 
+Use Trufflehog to find any secret find in the source code. 
+ 
 ```yaml 
 
   trufflehogScan:
@@ -543,8 +551,37 @@ Use the ShiftLeft for SCA & SAST scan and upload the result to github security t
 
 
 ```
+### 14) Trufflehog - Secret Scan
 
-### 14) Snyk - Container Image Scan
+Use GitGuardian to find any secret find in the source code. 
+ 
+```yaml 
+
+ gitguardian:
+      name: Secret Scan Using GitGuardian
+      runs-on: ubuntu-latest
+      needs: [dependabot, snykScan, blackduck, fossaScan, shitLeftScan]
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: GitGuardian scan
+          uses: GitGuardian/ggshield-action@master
+          env:
+            GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
+            GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
+            GITHUB_PULL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+            GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+            GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}   
+
+
+```
+![gitguardian](./doc/gitguardian.png)
+
+### 15) Snyk - Container Image Scan
+
+Use Snyk to do container image scan. 
 
 ```yaml 
 
@@ -587,8 +624,11 @@ snykImageScan:
 
 
 ```
+![snyk](./doc/snyk.png)
 
-### 15) Jfrog Artifactory - Publish Artifact(jar)
+### 16) Jfrog Artifactory - Publish Artifact(jar)
+
+Upload the Jar to Jfrog Artifactory.
 
 ```yaml 
 
@@ -628,7 +668,9 @@ snykImageScan:
 
 ![jfrogjar](./doc/jfrogjar.png)
 
-### 16) GitHub Package - Publish Artifact(jar)
+### 17) GitHub Package - Publish Artifact(jar)
+
+Upload the Jar to Github Package
 
 ```yaml 
 
@@ -665,7 +707,8 @@ snykImageScan:
 
 ![githubpackage](./doc/githubpackage.png)
 
-### 17) JFrog Artifactory - Build Docker Image and Publish
+### 18) JFrog Artifactory - Build Docker Image and Publish
+Upload the Container Image to Jfrog Artifactory.
 
 ```yaml 
 
@@ -714,7 +757,8 @@ jfrogImageBuild:
 
 ![jfrogimage](./doc/jfrogimage.png)
 
-### 18) GitHub Package - Build Docker Image and Publish
+### 19) GitHub Package - Build Docker Image and Publish
+Upload the Container Image to GitHub Package.
 
 ```yaml 
 
@@ -773,7 +817,8 @@ gitHubPakageImageBuild:
 
 ![githubimage](./doc/githubimage.png)
 
-### 19) Docker Hub - Build Docker Image and Publish
+### 20) Docker Hub - Build Docker Image and Publish
+Upload the Container Image to Docker hub.
 
 ```yaml 
 
@@ -824,7 +869,7 @@ gitHubPakageImageBuild:
 
 ![dockerhub](./doc/dockerhub.png)
 
-### 20) CD - Deploy to Azure AKS
+### 21) CD - Deploy to Azure AKS
 
 Deploy the Container image to Azure AKS, manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
 
@@ -880,7 +925,7 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
 
 ![aks](./doc/aks.png)
 
-### 21) Functional Test - Using Cucumber.
+### 22) Functional Test - Using Cucumber.
 
 ```yaml 
 
@@ -925,7 +970,7 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
 
 ![cucumber](./doc/cucumber.png)
 
-### 22) Functional UI Test - Using BrowserStack.
+### 23) Functional UI Test - Using BrowserStack.
 
 ```yaml 
 
@@ -976,7 +1021,7 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
 
 ![browserstack](./doc/browserstack.png)
 
-### 23) Functional UI Test - Using LamdaTest.
+### 24) Functional UI Test - Using LamdaTest.
 
 ```yaml 
 
@@ -1023,7 +1068,7 @@ Deploy the Container image to Azure AKS, manifest files are available  [here](ht
 
 ![lambdatest](./doc/lambdatest.png)
 
-### 24) DAST Scan - Using StackHawk.
+### 25) DAST Scan - Using StackHawk.
 StackHawk config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/stackhawl.yml).
 
 ```yaml 
@@ -1062,7 +1107,7 @@ StackHawk config file is present [here](https://github.com/judebantony/cicd-gith
 
 ![stackhawk](./doc/stackhawk.png)
 
-### 25) Setting up Approval Gates and Email.
+### 26) Setting up Approval Gates and Email.
 
 ```yaml 
 
@@ -1092,7 +1137,7 @@ StackHawk config file is present [here](https://github.com/judebantony/cicd-gith
 
 ```
 
-### 26) CD - Deploy to Azure AKS using Helm.
+### 27) CD - Deploy to Azure AKS using Helm.
 Deploy the Container image to Azure AKS using Helm, manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/helm).
 
 ```yaml 
@@ -1147,7 +1192,7 @@ Deploy the Container image to Azure AKS using Helm, manifest files are available
 
 ```
 
-### 27) CD - Deploy to Google GKE using Harness.
+### 28) CD - Deploy to Google GKE using Harness.
 Deploy the Container image to Google GKE using Harness.
 
 ```yaml 
@@ -1167,7 +1212,7 @@ Deploy the Container image to Google GKE using Harness.
 Harness
 ![harness](./doc/harness.png) 
 
-### 28) Load Testing - K6.
+### 29) Load Testing - K6.
 Load Test file is present here [here](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
 
 ```yaml 
@@ -1191,7 +1236,7 @@ Load Test file is present here [here](https://github.com/judebantony/cicd-github
 ```
 ![k6](./doc/k6.png)
 
-### 29) Functional Test using Xray and Jira.
+### 30) Functional Test using Xray and Jira.
 Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) in Jira for each story and excute as part of CI/CD. Upload the result back to Jira. XRay Test Execution config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/testexec_cloud_template.json).
 
 ```yaml 
@@ -1247,7 +1292,7 @@ Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) in Jira 
 ```
 ![xray](./doc/xray.png)
 
-### 30) Release Tag Creation.
+### 31) Release Tag Creation.
 
 ```yaml 
 
@@ -1277,7 +1322,7 @@ Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) in Jira 
 
 ![releasetag](./doc/releasetag.png)
 
-### 31) IaC - using Terraform - Create AWS EC2.
+### 32) IaC - using Terraform - Create AWS EC2.
 Set up the AWS EC2 instances using Terrform , manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
 
 ```yaml 
