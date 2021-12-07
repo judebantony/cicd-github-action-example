@@ -4,7 +4,7 @@
 [![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=judebantony_cicd-github-action-example&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=judebantony_cicd-github-action-example)
 [![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=judebantony_cicd-github-action-example&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/security_rating/list?id=judebantony_cicd-github-action-example)
 [![SonarCloud Code Smell](https://sonarcloud.io/api/project_badges/measure?project=judebantony_cicd-github-action-example&metric=code_smells)](https://sonarcloud.io/component_measures/metric/code_smell/list?id=judebantony_cicd-github-action-example)
-
+[![SonarCloud Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=judebantony_cicd-github-action-example&metric=ncloc)](https://sonarcloud.io/component_measures/metric/code_smell/list?id=judebantony_cicd-github-action-example)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fjudebantony%2Fcicd-github-action-example.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fjudebantony%2Fcicd-github-action-example?ref=badge_shield)
 
 [![Main Branch](https://github.com/judebantony/cicd-github-action-example/actions/workflows/test.yml/badge.svg)](https://github.com/judebantony/cicd-github-action-example/actions/workflows/test.yml)
@@ -16,9 +16,9 @@
 
 SecDevOps automatically bakes in security at every phase of the software development lifecycle, enabling development of secure software at the speed of Agile and DevOps. It integrates application and infrastructure security seamlessly into Agile and DevOps processes and tools. It addresses security issues as they emerge, when they're easier, faster, and less expensive to fix and also makes application and infrastructure security a shared responsibility of development, security, and IT operations teams.
 
-This is a sample project to demonstrate the E2E Github Action release workflow with all Security Controls Gates and integrated with different Cloud SaaS CI/CD tools chain offering.
+![secdevops](./doc/secdevops.png)
 
-![releaseworkflow](./doc/releaseworkflow.png)	
+This is a sample project to demonstrate the E2E Github Action release workflow with all Security Controls Gates and integrated with different Cloud SaaS CI/CD tools chain offering.
 
 ##### Tools used are listed below
 
@@ -90,30 +90,37 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
 * Create Release Tag
 
 ## Release Workflow
-[Release workflow](https://github.com/judebantony/cicd-github-action-example/tree/main/.github/workflows/workflow.yml)
-![workflow](./doc/workflow.png)	
-[Workflow Run](https://github.com/judebantony/cicd-github-action-example/actions/runs/1500211427)	
-## Jira and Github Integration
-[Linking your GitHub account to Jira](https://support.atlassian.com/jira-cloud-administration/docs/integrate-with-github/) gives your team the ability to see their branches, commit messages,build, test cases, test result(x-ray) and pull requests right in the context of the Jira tickets they’re working on. [More information](https://github.blog/2018-10-04-announcing-the-new-github-and-jira-software-cloud-integration/)
+This Project try to implement below CI/CD E2E release workflow using Cloud SaaS Tool sets.
+
+![releaseworkflow](./doc/releaseworkflow.png)	
+
+Sample release workflow implementation using [Github Action](https://github.com/features/actions) is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/.github/workflows/workflow.yml)
+
+![workflow](./doc/workflow.png)
+	
+Sample release workflow execution is present [here](https://github.com/judebantony/cicd-github-action-example/actions/runs/1500211427)	
+
+## Jira and Github Integration - Planning/Requirement/Test Execution
+Jira and Github Integration will provide better traceability between Planning, Requirement and Test Execution.  [Linking your GitHub account to Jira](https://support.atlassian.com/jira-cloud-administration/docs/integrate-with-github/) gives your team the ability to see their branches, commit messages,build, test cases, test result and pull requests right in the context of the Jira tickets they’re working on. More information can find [here.](https://github.blog/2018-10-04-announcing-the-new-github-and-jira-software-cloud-integration/)
 
 ![jira](./doc/jira.png)
 
-Commit and Build info is added to Jira
+GitHub Commit and GitHub Action Build information is available in Jira.
 
 ![jiragithub](./doc/jiragithub.png)
 ![githubbuild](./doc/githubbuild.png)
 
-Cucumber feature test case using Gherkin is added to Jira
+Test Plan & Test Cases using Cucumber & Gherkin is added to Jira
 
 ![githubtest](./doc/githubtest.png)
 
-Test results
+Test results will be uploaded back to Jira to provide [Requirement Traceability Matrix](https://www.tutorialspoint.com/software_testing_dictionary/requirements_traceability_matrix.htm)
 
 ![githubtest](./doc/githubtestrun.png)
 ![githubresult](./doc/githubresult.png)
 
-## Integration with GitHub Action 
-Some the sample code for integrating different SaaS tool to CICD using GitHub Action. 
+## Implementation/Integration of release workflow with GitHub Action 
+Integrating & Implementation of E2E CI/CD release workflow with different cloud SaaS tool using [Github Action](https://github.com/features/actions). 
 
 ### 1) Maven - Build and Unit Test
 Build the code is using [Maven](https://maven.apache.org) and run the [JUnit](https://junit.org/junit5/) unit test cases, upload the test coverage result to [Github Action](https://github.com/features/actions) . Please check [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml). 
@@ -215,7 +222,7 @@ Inspect the code using [Sonar](https://www.sonarqube.org), enable the quality ga
 
 ```
 ![sonar](./doc/sonar.png)
-Update the sonar quality gate information to github action build.
+Update the sonar quality gate information to Github Action.
 ![qualitygate](./doc/qulitygate.png)
 
 ### 3) Codecov - Code Coverage
