@@ -28,65 +28,64 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
     * [Spring Boot](https://spring.io/projects/spring-boot)
     * [Java](https://www.java.com/en/)
 * SCM
-     * [GitHub](https://github.com)	
+    * [GitHub](https://github.com)	
 * Build
-     * [Mavan](https://maven.apache.org)
+    * [Mavan](https://maven.apache.org)
 * CI
-     * [Github Action](https://github.com/features/actions)
+    * [Github Action](https://github.com/features/actions)
 * Code Quality
     * [SonarQube](https://sonarcloud.io/organizations/judebantony/projects)
-    * [Codecov](https://codecov.io/gh/judebantony/cicd-github-action-example/commit/4b9f0f601ab2feee0e409ede57283d5b99b9182d/build)
-	  	
+    * [Codecov](https://codecov.io/gh/judebantony/cicd-github-action-example/commit/4b9f0f601ab2feee0e409ede57283d5b99b9182d/build)  	
 * SAST (Static Analysis Security Testing)
-     * [CodeQL](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-with-codeql)
-     * [HCL AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep)	
-     * [Codacy](https://www.codacy.com/products/sonarqube-alternatives?utm_term=sonarqube&utm_campaign=SEA+-+Competitors&utm_source=adwords&utm_medium=ppc&hsa_acc=9882323101&hsa_cam=11598890837&hsa_grp=112569261106&hsa_ad=493336668133&hsa_src=g&hsa_tgt=kwd-57815990976&hsa_kw=sonarqube&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAiA4veMBhAMEiwAU4XRr_qVWrji3IRgivxyqqPc3QrEMVwBQmQoACBfPuCL5H0gE0nmn3n2LhoCcgkQAvD_BwE)
-     * [42crunch](https://platform.42crunch.com)
+    * [CodeQL](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-with-codeql)
+    * [HCL AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep)	
+    * [Codacy](https://www.codacy.com/products/sonarqube-alternatives?utm_term=sonarqube&utm_campaign=SEA+-+Competitors&utm_source=adwords&utm_medium=ppc&hsa_acc=9882323101&hsa_cam=11598890837&hsa_grp=112569261106&hsa_ad=493336668133&hsa_src=g&hsa_tgt=kwd-57815990976&hsa_kw=sonarqube&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAiA4veMBhAMEiwAU4XRr_qVWrji3IRgivxyqqPc3QrEMVwBQmQoACBfPuCL5H0gE0nmn3n2LhoCcgkQAvD_BwE)
+    * [42crunch](https://platform.42crunch.com)
 * SCA (Software Composition Analysis)
-     * [Snyk](https://app.snyk.io/org/judebantony)
-     * [Dependabot](https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/)
-     * [BlackDuck CoPilot](https://copilot.blackducksoftware.com/github/repos/judebantony/cicd-github-action-example/results) 
-     * [FOSSA](https://app.fossa.com/projects/git%2Bgithub.com%2Fjudebantony%2Fcicd-github-action-example/refs/branch/main/0116ae3eef023ccfb56995ab2c4b10aaf5ffe1e1)
-     * [Shift Left](https://www.shiftleft.io/apps/shiftleft-java-demo/vulnerabilities?scan=1&branch=demo-branch-1638196402&severity=critical)		
+    * [Snyk](https://app.snyk.io/org/judebantony)
+    * [Dependabot](https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/)
+    * [BlackDuck CoPilot](https://copilot.blackducksoftware.com/github/repos/judebantony/cicd-github-action-example/results) 
+    * [FOSSA](https://app.fossa.com/projects/git%2Bgithub.com%2Fjudebantony%2Fcicd-github-action-example/refs/branch/main/0116ae3eef023ccfb56995ab2c4b10aaf5ffe1e1)
+    * [Shift Left](https://www.shiftleft.io/apps/shiftleft-java-demo/vulnerabilities?scan=1&branch=demo-branch-1638196402&severity=critical)		
 * DAST (Dynamic Application Security Testing)
-     * [StackHawk](https://app.stackhawk.com/applications)
+    * [StackHawk](https://app.stackhawk.com/applications)
 * IaC Configs Scan
-     * [Snyk](https://snyk.io)
-     * [OPA](https://www.openpolicyagent.org)
+    * [Snyk](https://snyk.io)
+    * [OPA](https://www.openpolicyagent.org)
 * Secret Scan
-     * [Trufflehog](https://github.com/trufflesecurity/truffleHog)
-     * [GitGuardian](https://dashboard.gitguardian.com/workspace/190186/analytics)
+    * [Trufflehog](https://github.com/trufflesecurity/truffleHog)
+    * [GitGuardian](https://dashboard.gitguardian.com/workspace/190186/analytics)
 * Maven Repository
-     * [Jfrog Artifactory](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
+    * [Jfrog Artifactory](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
      * [Github Package](https://github.com/trufflesecurity/truffleHog)
 * Helm Repository
-     * [Jfrog Artifactiory](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
+    * [Jfrog Artifactiory](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
 * Container Scan - Docker Image
-     * [Snyk](https://snyk.io)
-     * [JFrog Xray](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
+    * [Snyk](https://snyk.io)
+    * [JFrog Xray](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
 * Container Repository
-     * [JFrog Artifactory](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
-     * [Github Package](https://github.com/features/packages)
-     * [DockerHub](https://hub.docker.com/r/judebantony/cigithubaction)
+    * [JFrog Artifactory](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
+    * [Github Package](https://github.com/features/packages)
+    * [DockerHub](https://hub.docker.com/r/judebantony/cigithubaction)
 * Deploying to Azure - AKS
-     * [GitHub Action & K8S native](https://kubernetes.io)
+    * [GitHub Action & K8S native](https://kubernetes.io)
 * Deploying to Azure - AKS
-     * [GitHub Action & Helm Chart](https://helm.sh/docs/topics/charts/)
+    * [GitHub Action & Helm Chart](https://helm.sh/docs/topics/charts/)
 * Deploying to GCP - GKE 
-     * [GitHub Action & Harness](https://harness.io)
+    * [GitHub Action & Harness](https://harness.io)
 * Provisioning AWS - EC2
-     * [Terraform](https://www.terraform.io)
+    * [Terraform](https://www.terraform.io)
 * Unit Testing
-     * [Junit](https://junit.org/junit5/)
-     * [Jacoco](https://www.baeldung.com/sonarqube-jacoco-code-coverage)
+    * [Junit](https://junit.org/junit5/)
+    * [Jacoco](https://www.baeldung.com/sonarqube-jacoco-code-coverage)
 * Functional Testing
-     * [Cucumber](https://cucumber.io)
-     * [Xray & Jira for Test Execution](https://docs.getxray.app/display/XRAY/About+Xray)
-     * [Selenium](https://www.selenium.dev)
-     * [BrowserStack](https://www.browserstack.com)
-     * [LamdaTest](https://www.lambdatest.com)
+    * [Cucumber](https://cucumber.io)
+    * [Xray & Jira for Test Execution](https://docs.getxray.app/display/XRAY/About+Xray)
+    * [Selenium](https://www.selenium.dev)
+    * [BrowserStack](https://www.browserstack.com)
+    * [LamdaTest](https://www.lambdatest.com)
 * Performance Testing
-     * [K6](https://k6.io)
+    * [K6](https://k6.io)
 * Create Release Tag
 
 ## Release Workflow ##
@@ -100,7 +99,7 @@ Sample release workflow implementation using [Github Action](https://github.com/
 	
 Sample release workflow execution is present [here](https://github.com/judebantony/cicd-github-action-example/actions/runs/1500211427)	
 
-## Jira and Github Integration - Planning/Requirement/Test Execution ##
+## Jira and Github Integration - (Planning/Requirement/Test Execution) ##
 Jira and Github Integration will provide better traceability between Planning, Requirement and Test Execution.  [Linking your GitHub account to Jira](https://support.atlassian.com/jira-cloud-administration/docs/integrate-with-github/) gives your team the ability to see their branches, commit messages,build, test cases, test result and pull requests right in the context of the Jira tickets they’re working on. More information can find [here.](https://github.blog/2018-10-04-announcing-the-new-github-and-jira-software-cloud-integration/)
 
 ![jira](./doc/jira.png)
@@ -119,7 +118,7 @@ Test results will be uploaded back to Jira to provide [Requirement Traceability 
 ![githubtest](./doc/githubtestrun.png)
 ![githubresult](./doc/githubresult.png)
 
-## Implementation/Integration of release workflow with GitHub Action ##
+## Integration of SaaS tools in CI/CD workflow with GitHub Action ##
 Integrating & Implementation of E2E CI/CD release workflow with different cloud SaaS tool using [Github Action](https://github.com/features/actions). 
 
 ### 1) Maven - Build and Unit Test ###
@@ -176,8 +175,8 @@ Build the code is using [Maven](https://maven.apache.org) and run the [JUnit](ht
 
 ![unittest](./doc/unittest.png)
 
-### 2) Sonar Cloud - Code Quality ###
-Inspect the code using [Sonar](https://www.sonarqube.org), enable the quality gate check and upload the result to its Cloud SaaS offering. 
+### 2) SonarQube Cloud - Code Quality ###
+Inspect the code using [SonarQube](https://www.sonarqube.org), enable the quality gate check and upload the result to its Cloud SaaS offering. 
 
 ```yaml
   sonar:
