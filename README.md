@@ -104,9 +104,17 @@ Jira and Github Integration will provide better traceability between Planning, R
 
 ![jira](./doc/jira.png)
 
-GitHub Commit and GitHub Action Build information is available in Jira.
+GitHub Commit data is appears in Jira Software.
+When a developer makes a commit, they should add a Jira Software issue key to the commit message, like this:
 
+```json
+git commit -m "JUDE-42 add a README file to the project."
+git push origin <branchname>
+```
 ![jiragithub](./doc/jiragithub.png)
+
+GitHub Action Build information is appears in Jira Software.
+
 ![githubbuild](./doc/githubbuild.png)
 
 Test Plan & Test Cases using Cucumber & Gherkin is added to Jira
