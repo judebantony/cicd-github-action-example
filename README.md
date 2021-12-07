@@ -1,4 +1,4 @@
-# cicd-github-action-example
+# CICD GitHub Action Example #
 [![Quality Gate](https://sonarcloud.io/api/project_badges/quality_gate?project=judebantony_cicd-github-action-example&branch=main)](https://sonarcloud.io/project/overview?id=judebantony_cicd-github-action-example)
 [![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=judebantony_cicd-github-action-example&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=judebantony_cicd-github-action-example)
 [![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=judebantony_cicd-github-action-example&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=judebantony_cicd-github-action-example)
@@ -12,7 +12,7 @@
 [![codecov](https://codecov.io/gh/judebantony/cicd-github-action-example/branch/main/graph/badge.svg?token=E3O3NABP1H)](https://codecov.io/gh/judebantony/cicd-github-action-example)
 
 
-## CICD - DevSecOps using GitHub Action 
+## CICD - DevSecOps using GitHub Action ##
 
 DevSecOps automatically bakes in security at every phase of the software development lifecycle, enabling development of secure software at the speed of Agile and DevOps. It integrates application and infrastructure security seamlessly into Agile and DevOps processes and tools. It addresses security issues as they emerge, when they're easier, faster, and less expensive to fix and also makes application and infrastructure security a shared responsibility of development, security, and IT operations teams.
 
@@ -20,7 +20,7 @@ DevSecOps automatically bakes in security at every phase of the software develop
 
 This is a sample project to demonstrate the E2E Github Action release workflow with all Security Controls Gates and integrated with different Cloud SaaS CI/CD tools chain offering.
 
-##### Tools used are listed below
+#### Tools used are listed below ####
 
 * Requirements 
     * [JIRA](https://judebantony.atlassian.net)
@@ -89,7 +89,7 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
      * [K6](https://k6.io)
 * Create Release Tag
 
-## Release Workflow
+## Release Workflow ##
 This Project try to implement below CI/CD E2E release workflow using Cloud SaaS Tool sets.
 
 ![releaseworkflow](./doc/releaseworkflow.png)	
@@ -100,7 +100,7 @@ Sample release workflow implementation using [Github Action](https://github.com/
 	
 Sample release workflow execution is present [here](https://github.com/judebantony/cicd-github-action-example/actions/runs/1500211427)	
 
-## Jira and Github Integration - Planning/Requirement/Test Execution
+## Jira and Github Integration - Planning/Requirement/Test Execution ##
 Jira and Github Integration will provide better traceability between Planning, Requirement and Test Execution.  [Linking your GitHub account to Jira](https://support.atlassian.com/jira-cloud-administration/docs/integrate-with-github/) gives your team the ability to see their branches, commit messages,build, test cases, test result and pull requests right in the context of the Jira tickets they’re working on. More information can find [here.](https://github.blog/2018-10-04-announcing-the-new-github-and-jira-software-cloud-integration/)
 
 ![jira](./doc/jira.png)
@@ -119,10 +119,10 @@ Test results will be uploaded back to Jira to provide [Requirement Traceability 
 ![githubtest](./doc/githubtestrun.png)
 ![githubresult](./doc/githubresult.png)
 
-## Implementation/Integration of release workflow with GitHub Action 
+## Implementation/Integration of release workflow with GitHub Action ##
 Integrating & Implementation of E2E CI/CD release workflow with different cloud SaaS tool using [Github Action](https://github.com/features/actions). 
 
-### 1) Maven - Build and Unit Test
+### 1) Maven - Build and Unit Test ###
 Build the code is using [Maven](https://maven.apache.org) and run the [JUnit](https://junit.org/junit5/) unit test cases, upload the test coverage result to [Github Action](https://github.com/features/actions) . Please check [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml). 
 
 ```yaml
@@ -176,7 +176,7 @@ Build the code is using [Maven](https://maven.apache.org) and run the [JUnit](ht
 
 ![unittest](./doc/unittest.png)
 
-### 2) Sonar Cloud - Code Quality
+### 2) Sonar Cloud - Code Quality ###
 Inspect the code using [Sonar](https://www.sonarqube.org), enable the quality gate check and upload the result to its Cloud SaaS offering. 
 
 ```yaml
@@ -225,7 +225,7 @@ Inspect the code using [Sonar](https://www.sonarqube.org), enable the quality ga
 Update the sonar quality gate information to Github Action.
 ![qualitygate](./doc/qulitygate.png)
 
-### 3) Codecov - Code Coverage
+### 3) Codecov - Code Coverage ###
 Upload the code coverage result to [Codecov](https://about.codecov.io) SaaS offering.
 
 ```yaml
@@ -267,7 +267,7 @@ Upload the code coverage result to [Codecov](https://about.codecov.io) SaaS offe
 ![codecov](./doc/codecov.png)
 
 
-### 4) CodeQL - SAST
+### 4) CodeQL - SAST ###
 Use the native Github Action [CodeQL](https://codeql.github.com) for SAST scan and upload the result to [github security](https://github.com/security) tab
 
 ```yaml
@@ -302,7 +302,7 @@ Use the native Github Action [CodeQL](https://codeql.github.com) for SAST scan a
 ```
 ![codeql](./doc/codeql.png)
 
-### 5) AppScan CodeSweep - SAST 
+### 5) AppScan CodeSweep - SAST ###
 Use the [AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) for SAST scan and upload the result to [github security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 
@@ -328,7 +328,7 @@ Use the [AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) for SAS
 
 ![appscan](./doc/appScan.png)
 
-### 6) Codacy - SAST 
+### 6) Codacy - SAST  ###
 Use the [Codacy](https://www.codacy.com) for SAST scan and upload the result to [github security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml
@@ -357,7 +357,7 @@ Use the [Codacy](https://www.codacy.com) for SAST scan and upload the result to 
 
 ![codacy](./doc/codacy.png)
 
-### 7) Snyk - SCA 
+### 7) Snyk - SCA  ###
 Use the [Snyk](https://snyk.io) for SCA scan and upload the result to [github security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml
@@ -387,7 +387,7 @@ Use the [Snyk](https://snyk.io) for SCA scan and upload the result to [github se
 ```
 ![snky](./doc/snyk.png)
 
-### 8) Dependabot - SCA 
+### 8) Dependabot - SCA  ###
 Use the github native [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/configuring-dependabot-security-updates) for SCA scan and upload the result to [github security](https://github.com/security) tab 
 
 ```yaml dependabot.yml
@@ -406,7 +406,7 @@ updates:
 ```
 ![dependabot](./doc/dependabot.png)
 
-### 9) BlackDuck CoPilot - SCA 
+### 9) BlackDuck CoPilot - SCA  ###
 Use the [BlackDuck](https://www.blackducksoftware.com) for SCA scan and upload the result to [github security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml 
@@ -438,7 +438,7 @@ Use the [BlackDuck](https://www.blackducksoftware.com) for SCA scan and upload t
 ```
 ![blackduck](./doc/blackduck.png)
 
-### 10) FOSSA - SCA 
+### 10) FOSSA - SCA  ###
 Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the result to [github security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml 
@@ -463,7 +463,7 @@ Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the 
 
 ![fossa](./doc/fossa.png)
 
-### 11) ShiftLeft - SCA & SAST
+### 11) ShiftLeft - SCA & SAST ###
 Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the result to [github security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml 
@@ -492,7 +492,7 @@ Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the
 
 ![shiftleft](./doc/shiftleft.png)
 
-### 12) Snyk - Infrastructure as Code Configs Scan
+### 12) Snyk - Infrastructure as Code Configs Scan ###
 
 Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code config files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
 
@@ -526,7 +526,7 @@ Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code config files](
 ```
 ![snky](./doc/snyk.png)
 
-### 13) OPA - Infrastructure as Code Configs Scan
+### 13) OPA - Infrastructure as Code Configs Scan ###
 
 Use [OPA](https://www.openpolicyagent.org/docs/latest/) to scan the [Infrastructure as Code config files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests) using [OPA Policies](https://github.com/judebantony/cicd-github-action-example/tree/main/opa-policies).
 
@@ -553,7 +553,7 @@ Use [OPA](https://www.openpolicyagent.org/docs/latest/) to scan the [Infrastruct
 ![opa](./doc/opa.png)
 
 
-### 14) Trufflehog - Secret Scan
+### 14) Trufflehog - Secret Scan ###
 
 Use [Trufflehog](https://trufflesecurity.com/trufflehog) to find any secret present in the source code. 
  
@@ -576,7 +576,7 @@ Use [Trufflehog](https://trufflesecurity.com/trufflehog) to find any secret pres
 
 
 ```
-### 15) GitGuardian - Secret Scan
+### 15) GitGuardian - Secret Scan ###
 
 Use [GitGuardian](https://www.gitguardian.com) to find any secret present in the source code. [Github integration with GitGuardian](https://docs.gitguardian.com/internal-repositories-monitoring/integrations/ci_cd_integrations/github_actions)
  
@@ -606,7 +606,7 @@ Use [GitGuardian](https://www.gitguardian.com) to find any secret present in the
 ```
 ![gitguardian](./doc/gitguardian.png)
 
-### 16) Snyk - Container Image Scan
+### 16) Snyk - Container Image Scan ###
 
 Use [Snyk](https://snyk.io) to do container image scan. 
 
@@ -653,7 +653,7 @@ snykImageScan:
 ```
 ![snyk](./doc/snyk.png)
 
-### 17) Jfrog Artifactory - Publish Artifact(jar)
+### 17) Jfrog Artifactory - Publish Artifact(jar) ###
 
 Upload the Jar to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog+artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=CjwKCAiAhreNBhAYEiwAFGGKPHkjlShpTBfbPyMgP1l5hGLeiezWo9xCn-3ncNVZCudxMzCdNUhMDhoCIDIQAvD_BwE).
 
@@ -695,7 +695,7 @@ Upload the Jar to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=g
 
 ![jfrogjar](./doc/jfrogjar.png)
 
-### 18) GitHub Package - Publish Artifact(jar)
+### 18) GitHub Package - Publish Artifact(jar) ###
 
 Upload the Jar to [Github Package](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
 
@@ -734,7 +734,7 @@ Upload the Jar to [Github Package](https://docs.github.com/en/packages/learn-git
 
 ![githubpackage](./doc/githubpackage.png)
 
-### 19) JFrog Artifactory - Build Docker Image and Publish
+### 19) JFrog Artifactory - Build Docker Image and Publish ###
 Upload the Container Image to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog+artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=CjwKCAiAhreNBhAYEiwAFGGKPHkjlShpTBfbPyMgP1l5hGLeiezWo9xCn-3ncNVZCudxMzCdNUhMDhoCIDIQAvD_BwE).
 
 ```yaml 
@@ -784,7 +784,7 @@ jfrogImageBuild:
 
 ![jfrogimage](./doc/jfrogimage.png)
 
-### 20) GitHub Package - Build Docker Image and Publish
+### 20) GitHub Package - Build Docker Image and Publish ###
 Upload the Container Image to [Github Package](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
 
 ```yaml 
@@ -844,7 +844,7 @@ gitHubPakageImageBuild:
 
 ![githubimage](./doc/githubimage.png)
 
-### 21) Docker Hub - Build Docker Image and Publish
+### 21) Docker Hub - Build Docker Image and Publish ###
 Upload the Container Image to [Docker hub](https://hub.docker.com).
 
 ```yaml 
@@ -896,7 +896,7 @@ Upload the Container Image to [Docker hub](https://hub.docker.com).
 
 ![dockerhub](./doc/dockerhub.png)
 
-### 22) CD - Deploy to Azure AKS
+### 22) CD - Deploy to Azure AKS ###
 
 Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/services/kubernetes-service/), [kubernetes](https://kubernetes.io) manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
 
@@ -952,7 +952,7 @@ Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/serv
 
 ![aks](./doc/aks.png)
 
-### 23) Functional Test - Using Cucumber.
+### 23) Functional Test - Using Cucumber. ###
 
 Run the [Cucumber](https://cucumber.io) Test Cases and upload the result to Cucumber.io and github action. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
  
@@ -1003,7 +1003,7 @@ Upload the result to Cucumber.io Report
 
 ![cucumberreport](./doc/cucumberreport.png)
 
-### 24) Functional UI Test - Using BrowserStack.
+### 24) Functional UI Test - Using BrowserStack. ###
 
 Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) Test Cases using [BrowserStack](https://www.browserstack.com) and capture the result. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
 
@@ -1056,7 +1056,7 @@ Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) 
 
 ![browserstack](./doc/browserstack.png)
 
-### 25) Functional UI Test - Using LamdaTest.
+### 25) Functional UI Test - Using LamdaTest. ###
 
 Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) Test Cases using [LamdaTest](https://www.lambdatest.com/?fp_ref=aliakbar42) and capture the result. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
 
@@ -1105,7 +1105,7 @@ Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) 
 
 ![lambdatest](./doc/lambdatest.png)
 
-### 26) DAST Scan - Using StackHawk.
+### 26) DAST Scan - Using StackHawk. ###
 Use [StackHawk](https://www.stackhawk.com) for DAST scan for all the [OpenAPI](https://swagger.io/specification/) compliant REST APIs. StackHawk config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/stackhawl.yml).
 
 ```yaml 
@@ -1144,7 +1144,7 @@ Use [StackHawk](https://www.stackhawk.com) for DAST scan for all the [OpenAPI](h
 
 ![stackhawk](./doc/stackhawk.png)
 
-### 27) Setting up Approval Gates and Email.
+### 27) Setting up Approval Gates and Email. ###
 
 Set up approval gates for deployment using [Github Environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment).
 
@@ -1176,7 +1176,7 @@ Set up approval gates for deployment using [Github Environment](https://docs.git
 
 ```
 
-### 28) CD - Deploy to Azure AKS using Helm.
+### 28) CD - Deploy to Azure AKS using Helm. ###
 Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/services/kubernetes-service/) using [Helm](https://helm.sh), manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/helm).
 
 ```yaml 
@@ -1231,7 +1231,7 @@ Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/serv
 
 ```
 
-### 29) CD - Deploy to Google GKE using Harness.
+### 29) CD - Deploy to Google GKE using Harness. ###
 Deploy the Container image to [Google GKE](https://cloud.google.com/kubernetes-engine/?utm_source=google&utm_medium=cpc&utm_campaign=japac-IN-all-en-dr-bkws-all-all-trial-e-dr-1009882&utm_content=text-ad-none-none-DEV_c-CRE_468709677813-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt%20~%20Containers%20~%20Kubernetes%20Engine_Kubernetes-gke-KWID_43700033867246010-aud-970366092687%3Akwd-372556496315&userloc_9299054-network_g&utm_term=KW_google%20gke&ds_rl=1264446&gclid=CjwKCAiAhreNBhAYEiwAFGGKPBhVfsfPwkEB1Yzehiow3pcsq-P9Pv78G4P28anuVF9HtSPtoNZCFxoCqr0QAvD_BwE&gclsrc=aw.ds) using [Harness](https://harness.io).
 
 ```yaml 
@@ -1251,7 +1251,7 @@ Deploy the Container image to [Google GKE](https://cloud.google.com/kubernetes-e
 Harness
 ![harness](./doc/harness.png) 
 
-### 30) Load/Performance Testing - K6.
+### 30) Load/Performance Testing - K6. ###
 Performance Test using [K6](https://k6.io). Load Test file is present here [here](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
 
 ```yaml 
@@ -1275,7 +1275,7 @@ Performance Test using [K6](https://k6.io). Load Test file is present here [here
 ```
 ![k6](./doc/k6.png)
 
-### 31) Functional Test using Xray and Jira.
+### 31) Functional Test using Xray and Jira. ###
 Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) and [Cucumber](https://cucumber.io) in Jira for each story and excute as part of CI/CD. Upload the result back to Jira. XRay Test Execution config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/testexec_cloud_template.json).
 
 ```yaml 
@@ -1331,7 +1331,7 @@ Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) and [Cuc
 ```
 ![xray](./doc/xray.png)
 
-### 32) Release Tag Creation.
+### 32) Release Tag Creation. ###
 Create a release tag for the branch. 
 
 ```yaml 
@@ -1362,7 +1362,7 @@ Create a release tag for the branch.
 
 ![releasetag](./doc/releasetag.png)
 
-### 33) IaC - using Terraform - Create AWS EC2.
+### 33) IaC - using Terraform - Create AWS EC2. ###
 Set up the AWS EC2 instances using [Terraform](https://www.terraform.io) , terraform manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
 
 ```yaml 
