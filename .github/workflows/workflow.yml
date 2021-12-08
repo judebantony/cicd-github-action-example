@@ -852,11 +852,28 @@ jobs:
             target: 'http://35.194.14.180/api-docs'
             rules_file_name: 'zap/rules.tsv'
             cmd_options: '-a'
+            
+  test_swagger_editor_validator:
+    runs-on: ubuntu-latest
+    name: Swagger Editor Validator Remote
+    needs: [stackhawkScan, zap_scan]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Download OpenAPI Spec
+        run: |
+          curl http://35.194.14.180/api-docs > openapi.json
+      - name: Validate OpenAPI definition
+        uses: char0n/swagger-editor-validate@v1.2.1
+        with:
+          definition-file: openapi.json            
  
   stagingdeployapproval:
     name: Waiting for Staging Deployment Approval
     runs-on: ubuntu-latest
-    needs: [stackhawkScan, zap_scan]
+    needs: [test_swagger_editor_validator]
     environment: staging
     
     steps:

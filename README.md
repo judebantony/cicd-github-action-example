@@ -53,6 +53,8 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
 * DAST (Dynamic Application Security Testing)
     * [StackHawk](https://app.stackhawk.com/applications)
     * [OWASP ZAP](https://www.zaproxy.org)
+* API Validator
+    * [Swagger Editor Validator](https://swagger.io/blog/api-design/validate-openapi-definitions-swagger-editor/)  
 * IaC Configs Scan
     * [Snyk](https://snyk.io)
     * [OPA](https://www.openpolicyagent.org)
@@ -241,7 +243,7 @@ Update the sonar quality gate information to Github Action.
 ![qualitygate](./doc/qulitygate.png)
 
 ### 3) Codecov - Code Coverage ###
-Codecov](https://about.codecov.io) improve code quality and workflow with highly integrated tools to group, merge, archive, and compare coverage reports.
+[Codecov](https://about.codecov.io) improve code quality and workflow with highly integrated tools to group, merge, archive, and compare coverage reports.
 Upload the code coverage result to [Codecov](https://about.codecov.io) SaaS offering.
 
 ```yaml
@@ -349,6 +351,8 @@ Use the [AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) for SAS
 ![appscan](./doc/appScan.png)
 
 ### 6) Codacy - SAST  ###
+[Codacy](https://www.codacy.com) automatically analyzes your source code and identifies issues as you go, helping you develop software more efficiently with fewer issues down the line. Through static code review analysis, Codacy notifies you of security issues, code coverage, code duplication, and code complexity in every commit and pull request.
+
 Use the [Codacy](https://www.codacy.com) for SAST scan and upload the result to [github security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml
@@ -378,6 +382,8 @@ Use the [Codacy](https://www.codacy.com) for SAST scan and upload the result to 
 ![codacy](./doc/codacy.png)
 
 ### 7) Snyk - SCA  ###
+[Snyk](https://snyk.io) (pronounced sneak) is a developer security platform for securing code, dependencies, containers, and infrastructure as code.
+
 Use the [Snyk](https://snyk.io) for SCA scan and upload the result to [github security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml
@@ -513,6 +519,7 @@ Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the
 ![shiftleft](./doc/shiftleft.png)
 
 ### 12) Snyk - Infrastructure as Code Configs Scan ###
+[Snyk](https://snyk.io) (pronounced sneak) is a developer security platform for securing code, dependencies, containers, and infrastructure as code.
 
 Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code config files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
 
@@ -627,6 +634,7 @@ Use [GitGuardian](https://www.gitguardian.com) to find any secret present in the
 ![gitguardian](./doc/gitguardian.png)
 
 ### 16) Snyk - Container Image Scan ###
+[Snyk](https://snyk.io) (pronounced sneak) is a developer security platform for securing code, dependencies, containers, and infrastructure as code.
 
 Use [Snyk](https://snyk.io) to do container image scan. 
 
@@ -1193,6 +1201,39 @@ Use [OWASP ZAP](https://github.com/marketplace/actions/owasp-zap-api-scan) for D
 ![zapresult](./doc/zapresult.png)
 Scan result is uploaded in Github Action.
 ![zapbuild](./doc/zapbuild.png)
+Issue created on GitHub
+![zapissue](./doc/zapissue.png)
+
+### 28) API Validator - Using Swagger Editor Validator. ###
+[Swagger Editor](https://swagger.io/blog/api-design/validate-openapi-definitions-swagger-editor/) lets you edit Swagger API specifications in YAML inside your browser and to preview documentations in real time. Valid Swagger JSON descriptions can then be generated and used with the full Swagger tooling (code generation, documentation, etc).
+
+
+Use [Swagger Editor Validator](https://swagger.io/blog/api-design/validate-openapi-definitions-swagger-editor/) for validating the [OpenAPI Specification](https://swagger.io/specification/) of REST APIs .
+
+```yaml 
+
+ test_swagger_editor_validator:
+    runs-on: ubuntu-latest
+    name: Swagger Editor Validator Remote
+    needs: [stackhawkScan, zap_scan]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Download OpenAPI Spec
+        run: |
+          curl http://35.194.14.180/api-docs > openapi.json
+      - name: Validate OpenAPI definition
+        uses: char0n/swagger-editor-validate@v1.2.1
+        with:
+          definition-file: openapi.json   
+
+```
+![zapresult](./doc/zapresult.png)
+Scan result is uploaded in Github Action.
+![zapbuild](./doc/zapbuild.png)
+
 
 ### 28) Setting up Approval Gates and Email. ###
 
