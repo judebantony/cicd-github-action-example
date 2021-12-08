@@ -41,6 +41,9 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
     * [HCL AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep)	
     * [Codacy](https://www.codacy.com/products/sonarqube-alternatives?utm_term=sonarqube&utm_campaign=SEA+-+Competitors&utm_source=adwords&utm_medium=ppc&hsa_acc=9882323101&hsa_cam=11598890837&hsa_grp=112569261106&hsa_ad=493336668133&hsa_src=g&hsa_tgt=kwd-57815990976&hsa_kw=sonarqube&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAiA4veMBhAMEiwAU4XRr_qVWrji3IRgivxyqqPc3QrEMVwBQmQoACBfPuCL5H0gE0nmn3n2LhoCcgkQAvD_BwE)
     * [42crunch](https://platform.42crunch.com)
+    * [Fortify](https://www.microfocus.com/en-us/cyberres/application-security/static-code-analyzer?utm_campaign=7018e000000PgpeAAC&utm_content=Search-NB-SEC-Fortify-APJ&gclid=Cj0KCQiAzMGNBhCyARIsANpUkzNu_PaYL3ERhZ-KktUnSxHBTZbFkEOqZYAHFDfE-7m4jviXVhtoUKAaAsSFEALw_wcB)
+    * [Coverity](https://www.synopsys.com/software-integrity/security-testing/static-analysis-sast.html?utm_source=google&utm_medium=cpc&utm_term=&utm_campaign=G_S_Coverity_BMM_India&cmp=ps-SIG-G_S_Coverity_BMM_India&gclid=Cj0KCQiAzMGNBhCyARIsANpUkzNY7xgotkaFx4ZukqPDQdZjn6tKU_xYAdWO_Y2t5kD_YpiP5m7DYdAaAlYREALw_wcB)
+    * [Checkmarx](https://checkmarx.com)
 * SCA (Software Composition Analysis)
     * [Snyk](https://app.snyk.io/org/judebantony)
     * [Dependabot](https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/)
@@ -1484,4 +1487,8 @@ Set up the AWS EC2 instances using [Terraform](https://www.terraform.io) , terra
 
 ## Author
 
-Jude Antony ([LinkedIn](https://www.linkedin.com/in/jude-antony-2b208219/))
+* **Jude Antony** ([LinkedIn](https://www.linkedin.com/in/jude-antony-2b208219/)) - ([GitHub](https://github.com/judebantony))
+
+## License
+
+This project is licensed under the Apache License - see the [LICENSE](LICENSE) file for details
