@@ -30,3 +30,24 @@ jobs:
         run: mvn -B clean package -DskipTests
       - name: Run UnitTest and Verify 
         run: mvn -B verify -DexcludedGroups="Smoke | Stage | BrowserStack | LamdaTest"
+  
+ zap_scan:
+      runs-on: ubuntu-latest
+      name: DAST Scan using OWASP ZAP
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Download OpenAPI Spec
+          run: |
+           curl http://35.194.14.180/api-docs > openapi.json  
+        - name: ZAP Scan
+          uses: zaproxy/action-api-scan@v0.1.0
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            docker_name: 'owasp/zap2docker-stable'
+            format: openapi
+            target: 'http://35.194.14.180/api-docs'
+            rules_file_name: 'zap/rules.tsv'
+            cmd_options: '-a'
