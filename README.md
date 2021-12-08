@@ -1230,12 +1230,10 @@ Use [Swagger Editor Validator](https://swagger.io/blog/api-design/validate-opena
           definition-file: openapi.json   
 
 ```
-![zapresult](./doc/zapresult.png)
-Scan result is uploaded in Github Action.
-![zapbuild](./doc/zapbuild.png)
+![swaggereditor](./doc/swaggereditor.png)
 
 
-### 28) Setting up Approval Gates and Email. ###
+### 29) Setting up Approval Gates and Email. ###
 
 Set up approval gates for deployment using [Github Environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment).
 
@@ -1267,7 +1265,7 @@ Set up approval gates for deployment using [Github Environment](https://docs.git
 
 ```
 
-### 29) CD - Deploy to Azure AKS using Helm. ###
+### 30) CD - Deploy to Azure AKS using Helm. ###
 Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/services/kubernetes-service/) using [Helm](https://helm.sh), manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/helm).
 
 ```yaml 
@@ -1322,7 +1320,7 @@ Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/serv
 
 ```
 
-### 30) CD - Deploy to Google GKE using Harness. ###
+### 31) CD - Deploy to Google GKE using Harness. ###
 Deploy the Container image to [Google GKE](https://cloud.google.com/kubernetes-engine/?utm_source=google&utm_medium=cpc&utm_campaign=japac-IN-all-en-dr-bkws-all-all-trial-e-dr-1009882&utm_content=text-ad-none-none-DEV_c-CRE_468709677813-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt%20~%20Containers%20~%20Kubernetes%20Engine_Kubernetes-gke-KWID_43700033867246010-aud-970366092687%3Akwd-372556496315&userloc_9299054-network_g&utm_term=KW_google%20gke&ds_rl=1264446&gclid=CjwKCAiAhreNBhAYEiwAFGGKPBhVfsfPwkEB1Yzehiow3pcsq-P9Pv78G4P28anuVF9HtSPtoNZCFxoCqr0QAvD_BwE&gclsrc=aw.ds) using [Harness](https://harness.io).
 
 ```yaml 
@@ -1342,7 +1340,7 @@ Deploy the Container image to [Google GKE](https://cloud.google.com/kubernetes-e
 Harness
 ![harness](./doc/harness.png) 
 
-### 31) Load/Performance Testing - K6. ###
+### 32) Load/Performance Testing - K6. ###
 Performance Test using [K6](https://k6.io). Load Test file is present here [here](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
 
 ```yaml 
@@ -1366,7 +1364,7 @@ Performance Test using [K6](https://k6.io). Load Test file is present here [here
 ```
 ![k6](./doc/k6.png)
 
-### 32) Functional Test using Xray and Jira. ###
+### 33) Functional Test using Xray and Jira. ###
 Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) and [Cucumber](https://cucumber.io) in Jira for each story and excute as part of CI/CD. Upload the result back to Jira. XRay Test Execution config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/testexec_cloud_template.json).
 
 ```yaml 
@@ -1422,7 +1420,7 @@ Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) and [Cuc
 ```
 ![xray](./doc/xray.png)
 
-### 33) Release Tag Creation. ###
+### 34) Release Tag Creation. ###
 Create a release tag for the branch. 
 
 ```yaml 
@@ -1453,7 +1451,7 @@ Create a release tag for the branch.
 
 ![releasetag](./doc/releasetag.png)
 
-### 34) IaC - using Terraform - Create AWS EC2. ###
+### 35) IaC - using Terraform - Create AWS EC2. ###
 Set up the AWS EC2 instances using [Terraform](https://www.terraform.io) , terraform manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
 
 ```yaml 
