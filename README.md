@@ -468,6 +468,8 @@ Use the [Black Duck](https://www.blackducksoftware.com) for SCA scan and upload 
 ![blackduck](./doc/blackduck.png)
 
 ### 10) FOSSA - SCA  ###
+Accelerate open source adoption with scalable, end-to-end management for third-party code, license compliance and vulnerabilities.
+
 Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml 
@@ -493,6 +495,8 @@ Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the 
 ![fossa](./doc/fossa.png)
 
 ### 11) ShiftLeft - SCA & SAST ###
+ShiftLeft provides an early, accurate picture of risk so devs can quickly secure code and stay focused on the transformation. 
+
 Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml 
