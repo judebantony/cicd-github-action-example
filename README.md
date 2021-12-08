@@ -468,7 +468,7 @@ Use the [Black Duck](https://www.blackducksoftware.com) for SCA scan and upload 
 ![blackduck](./doc/blackduck.png)
 
 ### 10) FOSSA - SCA  ###
-Accelerate open source adoption with scalable, end-to-end management for third-party code, license compliance and vulnerabilities.
+[FOSSA](https://fossa.com/variant/homepage) accelerate open source adoption with scalable, end-to-end management for third-party code, license compliance and vulnerabilities.
 
 Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
@@ -495,7 +495,7 @@ Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the 
 ![fossa](./doc/fossa.png)
 
 ### 11) ShiftLeft - SCA & SAST ###
-ShiftLeft provides an early, accurate picture of risk so devs can quickly secure code and stay focused on the transformation. 
+[ShiftLeft](https://www.shiftleft.io) provides an early, accurate picture of risk so devs can quickly secure code and stay focused on the transformation. 
 
 Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
@@ -562,6 +562,8 @@ Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code Config Files](
 
 ### 13) OPA - Infrastructure as Code Configs Scan ###
 
+The [Open Policy Agent](https://www.openpolicyagent.org/docs/latest/)  (OPA, pronounced “oh-pa”) is an open source, general-purpose policy engine that unifies policy enforcement across the stack. OPA provides a high-level declarative language that lets you specify policy as code and simple APIs to offload policy decision-making from your software. You can use OPA to enforce policies in microservices, Kubernetes, CI/CD pipelines, API gateways, and more.
+
 Use [OPA](https://www.openpolicyagent.org/docs/latest/) to scan the [Infrastructure as Code Config Files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests) using [OPA Policies](https://github.com/judebantony/cicd-github-action-example/tree/main/opa-policies).
 
 ```yaml 
@@ -589,6 +591,8 @@ Use [OPA](https://www.openpolicyagent.org/docs/latest/) to scan the [Infrastruct
 
 ### 14) Trufflehog - Secret Scan ###
 
+[Trufflehog](https://trufflesecurity.com/trufflehog) runs behind the scenes to scan your environment for secrets like private keys and credentials, so you can protect your data before a breach occurs.
+
 Use [Trufflehog](https://trufflesecurity.com/trufflehog) to find any secret present in the source code. 
  
 ```yaml 
@@ -611,6 +615,7 @@ Use [Trufflehog](https://trufflesecurity.com/trufflehog) to find any secret pres
 
 ```
 ### 15) GitGuardian - Secret Scan ###
+[GitGuardian](https://www.gitguardian.com) is a developers-first solution scanning GitHub activity in real-time for API secret tokens, database credentials, certificates.
 
 Use [GitGuardian](https://www.gitguardian.com) to find any secret present in the source code. [Github integration with GitGuardian](https://docs.gitguardian.com/internal-repositories-monitoring/integrations/ci_cd_integrations/github_actions)
  
@@ -690,6 +695,8 @@ snykImageScan:
 
 ### 17) Jfrog Artifactory - Publish Artifact(jar) ###
 
+[Jfrog Artifactory](https://jfrog.com/) is the only Universal Repository Manager supporting all major packaging formats, build tools and CI servers.
+
 Upload the Jar to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog+artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=CjwKCAiAhreNBhAYEiwAFGGKPHkjlShpTBfbPyMgP1l5hGLeiezWo9xCn-3ncNVZCudxMzCdNUhMDhoCIDIQAvD_BwE).
 
 ```yaml 
@@ -732,7 +739,9 @@ Upload the Jar to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=g
 
 ### 18) GitHub Package - Publish Artifact(jar) ###
 
-Upload the Jar to [Github Package](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
+[Github Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) is a software package hosting service that allows you to host your software packages privately or publicly and use packages as dependencies in your projects.
+
+Upload the Jar to [Github Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
 
 ```yaml 
 
@@ -770,6 +779,9 @@ Upload the Jar to [Github Package](https://docs.github.com/en/packages/learn-git
 ![githubpackage](./doc/githubpackage.png)
 
 ### 19) JFrog Artifactory - Build Docker Image and Publish ###
+
+[Jfrog Artifactory](https://jfrog.com/) is the only Universal Repository Manager supporting all major packaging formats, build tools and CI servers.
+
 Upload the Container Image to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog+artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=CjwKCAiAhreNBhAYEiwAFGGKPHkjlShpTBfbPyMgP1l5hGLeiezWo9xCn-3ncNVZCudxMzCdNUhMDhoCIDIQAvD_BwE).
 
 ```yaml 
@@ -820,6 +832,9 @@ jfrogImageBuild:
 ![jfrogimage](./doc/jfrogimage.png)
 
 ### 20) GitHub Package - Build Docker Image and Publish ###
+
+[Github Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) is a software package hosting service that allows you to host your software packages privately or publicly and use packages as dependencies in your projects.
+
 Upload the Container Image to [Github Package](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
 
 ```yaml 
@@ -880,6 +895,9 @@ gitHubPakageImageBuild:
 ![githubimage](./doc/githubimage.png)
 
 ### 21) Docker Hub - Build Docker Image and Publish ###
+
+[Docker hub](https://hub.docker.com) is the world's easiest way to create, manage, and deliver your teams' container applications.
+
 Upload the Container Image to [Docker hub](https://hub.docker.com).
 
 ```yaml 
@@ -932,6 +950,8 @@ Upload the Container Image to [Docker hub](https://hub.docker.com).
 ![dockerhub](./doc/dockerhub.png)
 
 ### 22) CD - Deploy to Azure AKS ###
+
+AKS allows you to quickly deploy a production ready Kubernetes cluster in Azure.
 
 Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/services/kubernetes-service/), [kubernetes](https://kubernetes.io) manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
 
@@ -989,6 +1009,8 @@ Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/serv
 
 ### 23) Functional Test - Using Cucumber. ###
 
+[Cucumber](https://cucumber.io) Open is the world's leading tool for BDD.
+
 Run the [Cucumber](https://cucumber.io) Test Cases and upload the result to Cucumber.io and github action. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
  
 ```yaml 
@@ -1039,6 +1061,9 @@ Upload the result to Cucumber.io Report
 ![cucumberreport](./doc/cucumberreport.png)
 
 ### 24) Functional UI Test - Using BrowserStack. ###
+[BrowserStack](https://www.browserstack.com) is an Indian cloud web and mobile testing platform that provides developers with the ability to test their websites and mobile applications across on-demand browsers, operating systems and real mobile devices.
+
+[Selenium](https://www.selenium.dev) is an open-source umbrella project for a range of tools and libraries aimed at supporting web browser automation. Selenium provides a playback tool for authoring functional tests without the need to learn a test scripting language.
 
 Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) Test Cases using [BrowserStack](https://www.browserstack.com) and capture the result. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
 
@@ -1093,6 +1118,8 @@ Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) 
 
 ### 25) Functional UI Test - Using LamdaTest. ###
 
+Run your [Selenium](https://www.selenium.dev) test automation scripts across online selenium grid of desktop, Android and iOS mobile browsers. Develop, test, and deliver faster every time with automated cross browser testing using LambdaTest online Automation Browser Testing Grid.
+
 Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) Test Cases using [LamdaTest](https://www.lambdatest.com/?fp_ref=aliakbar42) and capture the result. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
 
 ```yaml 
@@ -1141,6 +1168,8 @@ Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) 
 ![lambdatest](./doc/lambdatest.png)
 
 ### 26) DAST Scan - Using StackHawk. ###
+[StackHawk](https://www.stackhawk.com) makes it simple for developers to find, triage, and fix application security bugs. Scan your application for AppSec bugs in the code your team wrote, triage and fix with provided documentation, and automate in your pipeline to prevent future bugs from hitting prod.
+
 Use [StackHawk](https://www.stackhawk.com) for DAST scan for all the [OpenAPI](https://swagger.io/specification/) compliant REST APIs. StackHawk config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/stackhawl.yml).
 
 ```yaml 
@@ -1180,6 +1209,9 @@ Use [StackHawk](https://www.stackhawk.com) for DAST scan for all the [OpenAPI](h
 ![stackhawk](./doc/stackhawk.png)
 
 ### 27) DAST Scan - Using OWASP ZAP. ###
+
+[OWASP ZAP](https://github.com/marketplace/actions/owasp-zap-api-scan) is an open-source web application security scanner. It is intended to be used by both those new to application security as well as professional penetration testers. It is one of the most active Open Web Application Security Project projects and has been given Flagship status.
+
 Use [OWASP ZAP](https://github.com/marketplace/actions/owasp-zap-api-scan) for DAST scan for all the [OpenAPI](https://swagger.io/specification/) compliant REST APIs. OWASP ZAP rule file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/zap/).
 
 ```yaml 
@@ -1273,6 +1305,8 @@ Set up approval gates for deployment using [Github Environment](https://docs.git
 ```
 
 ### 30) CD - Deploy to Azure AKS using Helm. ###
+[Helm](https://helm.sh) helps you manage Kubernetes applications — Helm Charts help you define, install, and upgrade even the most complex Kubernetes application.
+
 Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/services/kubernetes-service/) using [Helm](https://helm.sh), manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/helm).
 
 ```yaml 
@@ -1328,6 +1362,9 @@ Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/serv
 ```
 
 ### 31) CD - Deploy to Google GKE using Harness. ###
+
+The [Harness](https://harness.io) Software Delivery Platform includes Continuous Integration, Continuous Delivery, Continuous Efficiency, Continuous Verification, and Continuous Features. The platform is designed to help companies accelerate their cloud initiatives as well as their adoption of containers and orchestration tools like Kubernetes and Amazon ECS.
+
 Deploy the Container image to [Google GKE](https://cloud.google.com/kubernetes-engine/?utm_source=google&utm_medium=cpc&utm_campaign=japac-IN-all-en-dr-bkws-all-all-trial-e-dr-1009882&utm_content=text-ad-none-none-DEV_c-CRE_468709677813-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt%20~%20Containers%20~%20Kubernetes%20Engine_Kubernetes-gke-KWID_43700033867246010-aud-970366092687%3Akwd-372556496315&userloc_9299054-network_g&utm_term=KW_google%20gke&ds_rl=1264446&gclid=CjwKCAiAhreNBhAYEiwAFGGKPBhVfsfPwkEB1Yzehiow3pcsq-P9Pv78G4P28anuVF9HtSPtoNZCFxoCqr0QAvD_BwE&gclsrc=aw.ds) using [Harness](https://harness.io).
 
 ```yaml 
@@ -1348,6 +1385,8 @@ Harness
 ![harness](./doc/harness.png) 
 
 ### 32) Load/Performance Testing - K6. ###
+[K6](https://k6.io) is an open-source load testing tool and cloud service providing the best developer experience for API performance testing.
+
 Performance Test using [K6](https://k6.io). Load Test file is present here [here](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
 
 ```yaml 
@@ -1459,6 +1498,8 @@ Create a release tag for the branch.
 ![releasetag](./doc/releasetag.png)
 
 ### 35) IaC - using Terraform - Create AWS EC2. ###
+[Terraform](https://www.terraform.io) is an open-source infrastructure as code software tool created by HashiCorp. Users define and provide data center infrastructure using a declarative configuration language known as HashiCorp Configuration Language, or optionally JSON.
+
 Set up the AWS EC2 instances using [Terraform](https://www.terraform.io) , terraform manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
 
 ```yaml 
