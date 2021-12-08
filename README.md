@@ -1411,6 +1411,8 @@ Performance Test using [K6](https://k6.io). Load Test file is present here [here
 ![k6](./doc/k6.png)
 
 ### 33) Functional Test using Xray and Jira. ###
+[XRay](https://www.getxray.app) is a Test Management tool. Built for every member of your team to plan, test, track and release great software · Manage all your Tests as Jira issues.
+
 Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) and [Cucumber](https://cucumber.io) in Jira for each story and execute as part of CI/CD. Upload the result back to Jira. XRay Test Execution config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/testexec_cloud_template.json).
 
 ```yaml 
