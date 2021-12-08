@@ -244,6 +244,7 @@ Update the sonar quality gate information to Github Action.
 
 ### 3) Codecov - Code Coverage ###
 [Codecov](https://about.codecov.io) improve code quality and workflow with highly integrated tools to group, merge, archive, and compare coverage reports.
+
 Upload the code coverage result to [Codecov](https://about.codecov.io) SaaS offering.
 
 ```yaml
@@ -288,7 +289,7 @@ Upload the code coverage result to [Codecov](https://about.codecov.io) SaaS offe
 ### 4) CodeQL - SAST ###
 [CodeQL](https://codeql.github.com) is the code analysis engine developed by GitHub to automate security checks. You can analyze your code using CodeQL and display the results as code scanning alerts.
 
-Use the native Github Action [CodeQL](https://codeql.github.com) for SAST scan and upload the result to [github security](https://github.com/security) tab
+Use the native Github Action [CodeQL](https://codeql.github.com) for SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab
 
 ```yaml
   codeqlScan:
@@ -325,7 +326,7 @@ Use the native Github Action [CodeQL](https://codeql.github.com) for SAST scan a
 ### 5) AppScan CodeSweep - SAST ###
 [HCL AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) is a free to use security tool, designed for beginners and professionals alike, who need a quick, simple, and platform friendly program.
 
-Use the [AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) for SAST scan and upload the result to [github security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
+Use the [AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) for SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 
 ```yaml
@@ -353,7 +354,7 @@ Use the [AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) for SAS
 ### 6) Codacy - SAST  ###
 [Codacy](https://www.codacy.com) automatically analyzes your source code and identifies issues as you go, helping you develop software more efficiently with fewer issues down the line. Through static code review analysis, Codacy notifies you of security issues, code coverage, code duplication, and code complexity in every commit and pull request.
 
-Use the [Codacy](https://www.codacy.com) for SAST scan and upload the result to [github security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
+Use the [Codacy](https://www.codacy.com) for SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml
   codacyScan:
@@ -384,7 +385,7 @@ Use the [Codacy](https://www.codacy.com) for SAST scan and upload the result to 
 ### 7) Snyk - SCA  ###
 [Snyk](https://snyk.io) (pronounced sneak) is a developer security platform for securing code, dependencies, containers, and infrastructure as code.
 
-Use the [Snyk](https://snyk.io) for SCA scan and upload the result to [github security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
+Use the [Snyk](https://snyk.io) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml
   snykScan:
@@ -414,7 +415,7 @@ Use the [Snyk](https://snyk.io) for SCA scan and upload the result to [github se
 ![snky](./doc/snyk.png)
 
 ### 8) Dependabot - SCA  ###
-Use the github native [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/configuring-dependabot-security-updates) for SCA scan and upload the result to [github security](https://github.com/security) tab 
+Use the github native [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/configuring-dependabot-security-updates) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab 
 
 ```yaml dependabot.yml
 
@@ -433,7 +434,9 @@ updates:
 ![dependabot](./doc/dependabot.png)
 
 ### 9) BlackDuck CoPilot - SCA  ###
-Use the [BlackDuck](https://www.blackducksoftware.com) for SCA scan and upload the result to [github security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
+[Black Duck](https://www.blackducksoftware.com) is a complete open source management solution, which fully discovers all open source in your code. It can map components to known vulnerabilities, and identify license and component quality risks.
+
+Use the [Black Duck](https://www.blackducksoftware.com) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml 
 
@@ -465,7 +468,7 @@ Use the [BlackDuck](https://www.blackducksoftware.com) for SCA scan and upload t
 ![blackduck](./doc/blackduck.png)
 
 ### 10) FOSSA - SCA  ###
-Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the result to [github security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
+Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml 
 
@@ -490,7 +493,7 @@ Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the 
 ![fossa](./doc/fossa.png)
 
 ### 11) ShiftLeft - SCA & SAST ###
-Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the result to [github security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
+Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 ```yaml 
 
@@ -521,7 +524,7 @@ Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the
 ### 12) Snyk - Infrastructure as Code Configs Scan ###
 [Snyk](https://snyk.io) (pronounced sneak) is a developer security platform for securing code, dependencies, containers, and infrastructure as code.
 
-Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code config files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
+Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code Config Files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
 
 ```yaml 
 
@@ -555,7 +558,7 @@ Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code config files](
 
 ### 13) OPA - Infrastructure as Code Configs Scan ###
 
-Use [OPA](https://www.openpolicyagent.org/docs/latest/) to scan the [Infrastructure as Code config files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests) using [OPA Policies](https://github.com/judebantony/cicd-github-action-example/tree/main/opa-policies).
+Use [OPA](https://www.openpolicyagent.org/docs/latest/) to scan the [Infrastructure as Code Config Files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests) using [OPA Policies](https://github.com/judebantony/cicd-github-action-example/tree/main/opa-policies).
 
 ```yaml 
 
@@ -1365,7 +1368,7 @@ Performance Test using [K6](https://k6.io). Load Test file is present here [here
 ![k6](./doc/k6.png)
 
 ### 33) Functional Test using Xray and Jira. ###
-Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) and [Cucumber](https://cucumber.io) in Jira for each story and excute as part of CI/CD. Upload the result back to Jira. XRay Test Execution config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/testexec_cloud_template.json).
+Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) and [Cucumber](https://cucumber.io) in Jira for each story and execute as part of CI/CD. Upload the result back to Jira. XRay Test Execution config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/testexec_cloud_template.json).
 
 ```yaml 
 
