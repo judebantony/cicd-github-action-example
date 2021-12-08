@@ -11,14 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Swagger Editor Validator Remote
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
           fetch-depth: 0
       - name: Download OpenAPI Spec
         run: |
           curl http://35.194.14.180/api-docs > openapi.json
-      
       - name: Validate OpenAPI definition
-        uses: char0n/swagger-editor-validate@v1
+        uses: char0n/swagger-editor-validate@v1.2.1
         with:
           definition-file: openapi.json  
