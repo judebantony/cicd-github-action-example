@@ -7,27 +7,18 @@ on:
 jobs:
 
  
- test:
-    name: Build and Unit Test
+ test_swagger_editor_validator_remote:
     runs-on: ubuntu-latest
-    
+    name: Swagger Editor Validator Remote
     steps:
-      - name: Check out the code
-        uses: actions/checkout@v1
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Set up JDK
-        uses: actions/setup-java@v1
+      - name: Download OpenAPI Spec
+        run: |
+          curl http://35.194.14.180/api-docs > openapi.json
+      
+      - name: Validate OpenAPI definition
+        uses: char0n/swagger-editor-validate@v1
         with:
-          java-version: 1.8
-      - name: Cache Maven packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2     
-      - name: Build
-        run: mvn -B clean package -DskipTests
-      - name: Run UnitTest and Verify 
-        run: mvn -B verify -DexcludedGroups="Smoke | Stage | BrowserStack | LamdaTest"
-  
+          definition-file: openapi.json  

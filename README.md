@@ -134,6 +134,8 @@ Test results will be uploaded back to Jira to provide [Requirement Traceability 
 Integrating & Implementation of E2E CI/CD release workflow with different cloud SaaS tool using [Github Action](https://github.com/features/actions). 
 
 ### 1) Maven - Build and Unit Test ###
+[Apache Maven](https://maven.apache.org) is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information.
+
 Build the code is using [Maven](https://maven.apache.org) and run the [JUnit](https://junit.org/junit5/) unit test cases, upload the test coverage result to [Github Action](https://github.com/features/actions) . Please check [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml). 
 
 ```yaml
@@ -188,6 +190,8 @@ Build the code is using [Maven](https://maven.apache.org) and run the [JUnit](ht
 ![unittest](./doc/unittest.png)
 
 ### 2) SonarQube Cloud - Code Quality ###
+[SonarQube](https://www.sonarqube.org) is an open-source platform developed by SonarSource for continuous inspection of code quality to perform automatic reviews with static analysis of code to detect bugs, code smells, and security vulnerabilities on 20+ programming languages.
+
 Inspect the code using [SonarQube](https://www.sonarqube.org), enable the quality gate check and upload the result to its Cloud SaaS offering. 
 
 ```yaml
@@ -237,6 +241,7 @@ Update the sonar quality gate information to Github Action.
 ![qualitygate](./doc/qulitygate.png)
 
 ### 3) Codecov - Code Coverage ###
+Codecov](https://about.codecov.io) improve code quality and workflow with highly integrated tools to group, merge, archive, and compare coverage reports.
 Upload the code coverage result to [Codecov](https://about.codecov.io) SaaS offering.
 
 ```yaml
@@ -279,6 +284,8 @@ Upload the code coverage result to [Codecov](https://about.codecov.io) SaaS offe
 
 
 ### 4) CodeQL - SAST ###
+[CodeQL](https://codeql.github.com) is the code analysis engine developed by GitHub to automate security checks. You can analyze your code using CodeQL and display the results as code scanning alerts.
+
 Use the native Github Action [CodeQL](https://codeql.github.com) for SAST scan and upload the result to [github security](https://github.com/security) tab
 
 ```yaml
@@ -314,6 +321,8 @@ Use the native Github Action [CodeQL](https://codeql.github.com) for SAST scan a
 ![codeql](./doc/codeql.png)
 
 ### 5) AppScan CodeSweep - SAST ###
+[HCL AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) is a free to use security tool, designed for beginners and professionals alike, who need a quick, simple, and platform friendly program.
+
 Use the [AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) for SAST scan and upload the result to [github security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
 
 
