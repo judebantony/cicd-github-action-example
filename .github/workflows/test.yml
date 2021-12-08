@@ -39,9 +39,6 @@ jobs:
           uses: actions/checkout@v2
           with:
             fetch-depth: 0
-        - name: Download OpenAPI Spec
-          run: |
-           curl http://35.194.14.180/api-docs > openapi.json  
         - name: ZAP Scan
           uses: zaproxy/action-api-scan@v0.1.0
           with:

@@ -833,11 +833,30 @@ jobs:
           APP_ENV: Development
           APP_ID: ea0079f1-648e-4bdb-aa2d-233696082b4e
 
+  zap_scan:
+      runs-on: ubuntu-latest
+      name: DAST Scan using OWASP ZAP
+      needs: [qatest, browserStackTest, lamdaTest]
+       
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: ZAP Scan
+          uses: zaproxy/action-api-scan@v0.1.0
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            docker_name: 'owasp/zap2docker-stable'
+            format: openapi
+            target: 'http://35.194.14.180/api-docs'
+            rules_file_name: 'zap/rules.tsv'
+            cmd_options: '-a'
  
   stagingdeployapproval:
     name: Waiting for Staging Deployment Approval
     runs-on: ubuntu-latest
-    needs: [stackhawkScan]
+    needs: [stackhawkScan, zap_scan]
     environment: staging
     
     steps:

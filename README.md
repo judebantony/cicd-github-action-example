@@ -49,6 +49,7 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
     * [Shift Left](https://www.shiftleft.io/apps/shiftleft-java-demo/vulnerabilities?scan=1&branch=demo-branch-1638196402&severity=critical)		
 * DAST (Dynamic Application Security Testing)
     * [StackHawk](https://app.stackhawk.com/applications)
+    * [OWASP ZAP](https://www.zaproxy.org)
 * IaC Configs Scan
     * [Snyk](https://snyk.io)
     * [OPA](https://www.openpolicyagent.org)
@@ -1150,6 +1151,36 @@ Use [StackHawk](https://www.stackhawk.com) for DAST scan for all the [OpenAPI](h
 ```
 
 ![stackhawk](./doc/stackhawk.png)
+
+### 27) DAST Scan - Using OWASP ZAP. ###
+Use [OWASP ZAP](https://github.com/marketplace/actions/owasp-zap-api-scan) for DAST scan for all the [OpenAPI](https://swagger.io/specification/) compliant REST APIs. OWASP ZAP rule file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/zap/).
+
+```yaml 
+
+  zap_scan:
+      runs-on: ubuntu-latest
+      name: DAST Scan using OWASP ZAP
+      needs: [qatest, browserStackTest, lamdaTest]
+       
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: ZAP Scan
+          uses: zaproxy/action-api-scan@v0.1.0
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            docker_name: 'owasp/zap2docker-stable'
+            format: openapi
+            target: 'http://35.194.14.180/api-docs'
+            rules_file_name: 'zap/rules.tsv'
+            cmd_options: '-a'
+
+```
+![zapresult](./doc/zapresult.png)
+Scan result is uploaded in Github Action.
+![zapbuild](./doc/zapbuild.png)
 
 ### 27) Setting up Approval Gates and Email. ###
 
