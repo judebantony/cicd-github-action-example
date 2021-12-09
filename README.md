@@ -105,17 +105,18 @@ Sample release workflow implementation using [Github Action](https://github.com/
 Sample release workflow execution is present [here](https://github.com/judebantony/cicd-github-action-example/actions/runs/1500211427)	
 
 ## Jira and Github Integration - (Planning/Requirement/Test Execution) ##
-Jira and Github Integration will provide better traceability between Planning, Requirement and Test Execution.  [Linking your GitHub account to Jira](https://support.atlassian.com/jira-cloud-administration/docs/integrate-with-github/) gives your team the ability to see their branches, commit messages,build, test cases, test result and pull requests right in the context of the Jira tickets they’re working on. More information can find [here.](https://github.blog/2018-10-04-announcing-the-new-github-and-jira-software-cloud-integration/)
+Jira and Github Integration will provide better traceability between Planning, Requirement, Code, Build and Test Execution.  [Linking your GitHub to Jira](https://support.atlassian.com/jira-cloud-administration/docs/integrate-with-github/) gives team the ability to see their branches, commit messages, build, test cases & results, pull requests and release information in the context of Jira tickets. More information can find [here.](https://github.blog/2018-10-04-announcing-the-new-github-and-jira-software-cloud-integration/)
 
 ![jira](./doc/jira.png)
 
-GitHub Commit data is appears in Jira Software.
 When a developer makes a commit, they should add a Jira Software issue key to the commit message, like this:
 
 ```json
 git commit -m "JUDE-42 add a README file to the project."
 git push origin <branchname>
 ```
+
+GitHub Commit data is appears in Jira Software.
 ![jiragithub](./doc/jiragithub.png)
 
 GitHub Action Build information is appears in Jira Software.
