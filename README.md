@@ -718,7 +718,7 @@ Snyk dashboard:-
 
 [Jfrog Artifactory](https://jfrog.com/) is the only Universal Repository Manager supporting all major packaging formats, build tools and CI servers.
 
-Upload the Jar to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog+artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=CjwKCAiAhreNBhAYEiwAFGGKPHkjlShpTBfbPyMgP1l5hGLeiezWo9xCn-3ncNVZCudxMzCdNUhMDhoCIDIQAvD_BwE).
+Publish the Jar to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog+artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=CjwKCAiAhreNBhAYEiwAFGGKPHkjlShpTBfbPyMgP1l5hGLeiezWo9xCn-3ncNVZCudxMzCdNUhMDhoCIDIQAvD_BwE).
 
 ```yaml 
 
@@ -755,14 +755,14 @@ Upload the Jar to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=g
 
 
 ```
-
+Jfrog Artifactory UI:-
 ![jfrogjar](./doc/jfrogjar.png)
 
 ### 18) GitHub Package - Publish Artifact(jar) ###
 
 [Github Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) is a software package hosting service that allows you to host your software packages privately or publicly and use packages as dependencies in your projects.
 
-Upload the Jar to [Github Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
+Publish the Jar to [Github Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
 
 ```yaml 
 
@@ -796,14 +796,14 @@ Upload the Jar to [Github Packages](https://docs.github.com/en/packages/learn-gi
 
 
 ```
-
+GitHub Package UI:-
 ![githubpackage](./doc/githubpackage.png)
 
 ### 19) JFrog Artifactory - Build Docker Image and Publish ###
 
 [Jfrog Artifactory](https://jfrog.com/) is the only Universal Repository Manager supporting all major packaging formats, build tools and CI servers.
 
-Upload the Container Image to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog+artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=CjwKCAiAhreNBhAYEiwAFGGKPHkjlShpTBfbPyMgP1l5hGLeiezWo9xCn-3ncNVZCudxMzCdNUhMDhoCIDIQAvD_BwE).
+Publish the Container Image to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog+artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=CjwKCAiAhreNBhAYEiwAFGGKPHkjlShpTBfbPyMgP1l5hGLeiezWo9xCn-3ncNVZCudxMzCdNUhMDhoCIDIQAvD_BwE).
 
 ```yaml 
 
@@ -849,14 +849,14 @@ jfrogImageBuild:
 
 
 ```
-
+Jfrog Artifactory Image Registry UI:-
 ![jfrogimage](./doc/jfrogimage.png)
 
 ### 20) GitHub Package - Build Docker Image and Publish ###
 
 [Github Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) is a software package hosting service that allows you to host your software packages privately or publicly and use packages as dependencies in your projects.
 
-Upload the Container Image to [Github Package](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
+Publish the Container Image to [Github Package](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
 
 ```yaml 
 
@@ -912,14 +912,14 @@ gitHubPakageImageBuild:
 
 
 ```
-
+GitHub Package Image Registry UI:-
 ![githubimage](./doc/githubimage.png)
 
 ### 21) Docker Hub - Build Docker Image and Publish ###
 
 [Docker hub](https://hub.docker.com) is the world's easiest way to create, manage, and deliver your teams' container applications.
 
-Upload the Container Image to [Docker hub](https://hub.docker.com).
+Publish the Container Image to [Docker hub](https://hub.docker.com).
 
 ```yaml 
 
@@ -967,14 +967,14 @@ Upload the Container Image to [Docker hub](https://hub.docker.com).
 
 
 ```
-
+Docker Hub Image Registry UI:-
 ![dockerhub](./doc/dockerhub.png)
 
 ### 22) CD - Deploy to Azure AKS ###
 
-AKS allows you to quickly deploy a production ready Kubernetes cluster in Azure.
+[AKS](https://azure.microsoft.com/en-in/services/kubernetes-service/) allows you to quickly deploy a production ready [Kubernetes](https://kubernetes.io) cluster in [Azure](https://azure.microsoft.com/).
 
-Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/services/kubernetes-service/), [kubernetes](https://kubernetes.io) manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
+Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/services/kubernetes-service/) using [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) and GitHub Action, [kubeconfig](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/) manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
 
 ```yaml 
 
@@ -1025,14 +1025,14 @@ Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/serv
 
 
 ```
-
+AKS Console:-
 ![aks](./doc/aks.png)
 
 ### 23) Functional Test - Using Cucumber. ###
 
-[Cucumber](https://cucumber.io) Open is the world's leading tool for BDD.
+[Cucumber](https://cucumber.io) is the world's leading tool for BDD.
 
-Run the [Cucumber](https://cucumber.io) Test Cases and upload the result to Cucumber.io and github action. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
+Run the [Cucumber](https://cucumber.io) Test Cases and upload the result to cucumber.io and GitHub Action. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
  
 ```yaml 
 
@@ -1074,11 +1074,10 @@ Run the [Cucumber](https://cucumber.io) Test Cases and upload the result to Cucu
           path: target/cucumber-reports/cucumber.html
 
 ```
-
+Cucumber Report:-
 ![cucumber](./doc/cucumber.png)
 
-Upload the result to Cucumber.io Report
-
+Cucumber.io Report:-
 ![cucumberreport](./doc/cucumberreport.png)
 
 ### 24) Functional UI Test - Using BrowserStack. ###
@@ -1086,7 +1085,7 @@ Upload the result to Cucumber.io Report
 
 [Selenium](https://www.selenium.dev) is an open-source umbrella project for a range of tools and libraries aimed at supporting web browser automation. Selenium provides a playback tool for authoring functional tests without the need to learn a test scripting language.
 
-Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) Test Cases using [BrowserStack](https://www.browserstack.com) and capture the result. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
+Run the [Selenium](https://www.selenium.dev) [Cucumber](https://cucumber.io) based UI Test Cases using [BrowserStack](https://www.browserstack.com) [Selenium Grid](https://www.selenium.dev/documentation/grid/) and capture the result in their Cloud SaaS offering. The test case feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
 
 ```yaml 
 
@@ -1134,14 +1133,14 @@ Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) 
           local-testing: stop
 
 ```
-
+BrowserStack dashboard:-
 ![browserstack](./doc/browserstack.png)
 
 ### 25) Functional UI Test - Using LamdaTest. ###
 
 Run your [Selenium](https://www.selenium.dev) test automation scripts across online selenium grid of desktop, Android and iOS mobile browsers. Develop, test, and deliver faster every time with automated cross browser testing using LambdaTest online Automation Browser Testing Grid.
 
-Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) Test Cases using [LamdaTest](https://www.lambdatest.com/?fp_ref=aliakbar42) and capture the result. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
+Execute the [Selenium](https://www.selenium.dev) [Cucumber](https://cucumber.io) based UI Test Cases using [LamdaTest](https://www.lambdatest.com/?fp_ref=aliakbar42) and capture the result. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
 
 ```yaml 
 
@@ -1185,13 +1184,13 @@ Run the [Selenium](https://www.selenium.dev) UI [Cucumber](https://cucumber.io) 
            path: ${{ steps.tunnel.outputs.logFileName }}          
 
 ```
-
+LambdaTest dashboard:-
 ![lambdatest](./doc/lambdatest.png)
 
 ### 26) DAST Scan - Using StackHawk. ###
 [StackHawk](https://www.stackhawk.com) makes it simple for developers to find, triage, and fix application security bugs. Scan your application for AppSec bugs in the code your team wrote, triage and fix with provided documentation, and automate in your pipeline to prevent future bugs from hitting prod.
 
-Use [StackHawk](https://www.stackhawk.com) for DAST scan for all the [OpenAPI](https://swagger.io/specification/) compliant REST APIs. StackHawk config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/stackhawl.yml).
+Use [StackHawk](https://www.stackhawk.com) for DAST scan for all the [OpenAPI](https://swagger.io/specification/) (REST APIs). StackHawk config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/stackhawl.yml).
 
 ```yaml 
 
@@ -1226,14 +1225,14 @@ Use [StackHawk](https://www.stackhawk.com) for DAST scan for all the [OpenAPI](h
           APP_ID: ea0079f1-648e-4bdb-aa2d-233696082b4e
 
 ```
-
+StackHawk dashboard:-
 ![stackhawk](./doc/stackhawk.png)
 
 ### 27) DAST Scan - Using OWASP ZAP. ###
 
 [OWASP ZAP](https://github.com/marketplace/actions/owasp-zap-api-scan) is an open-source web application security scanner. It is intended to be used by both those new to application security as well as professional penetration testers. It is one of the most active Open Web Application Security Project projects and has been given Flagship status.
 
-Use [OWASP ZAP](https://github.com/marketplace/actions/owasp-zap-api-scan) for DAST scan for all the [OpenAPI](https://swagger.io/specification/) compliant REST APIs. OWASP ZAP rule file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/zap/).
+Use [OWASP ZAP](https://github.com/marketplace/actions/owasp-zap-api-scan) for DAST scan for all the [OpenAPI](https://swagger.io/specification/) (REST APIs). OWASP ZAP rule file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/zap/).
 
 ```yaml 
 
@@ -1258,8 +1257,9 @@ Use [OWASP ZAP](https://github.com/marketplace/actions/owasp-zap-api-scan) for D
             cmd_options: '-a'
 
 ```
+ZAP Scan Report:- 
 ![zapresult](./doc/zapresult.png)
-Scan result is uploaded in Github Action.
+Result is uploaded in Github Action.
 ![zapbuild](./doc/zapbuild.png)
 Issue created on GitHub
 ![zapissue](./doc/zapissue.png)
@@ -1290,12 +1290,13 @@ Use [Swagger Editor Validator](https://swagger.io/blog/api-design/validate-opena
           definition-file: openapi.json   
 
 ```
+Build output:-
 ![swaggereditor](./doc/swaggereditor.png)
 
 
 ### 29) Setting up Approval Gates and Email. ###
 
-Set up approval gates for deployment using [Github Environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment).
+Approval gates for deployment using [Github Environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment) feature.
 
 ```yaml 
 
