@@ -109,17 +109,17 @@ Jira and Github Integration will provide better traceability between Planning, R
 
 ![jira](./doc/jira.png)
 
-When a developer makes a commit, they should add a Jira Software issue key to the commit message, like this:
+When a developer makes a commit, they should add a Jira issue key to the commit message as shown below:
 
 ```json
 git commit -m "JUDE-42 add a README file to the project."
 git push origin <branchname>
 ```
 
-GitHub Commit data is appears in Jira Software.
+Then GitHub Commit information would appear in Jira as shown below.
 ![jiragithub](./doc/jiragithub.png)
 
-GitHub Action Build information is appears in Jira Software.
+Once GitHub Action build is completed, build information get reflected in Jira as shown below.
 
 ![githubbuild](./doc/githubbuild.png)
 
