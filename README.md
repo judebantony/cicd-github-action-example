@@ -249,15 +249,15 @@ Results are uploaded to [SonarQube](https://www.sonarqube.org) Cloud SaaS offeri
           scanMetadataReportFile: target/sonar/report-task.txt     
 
 ```
-SonarQube Dashbord:-
+SonarQube dashbord:-
 ![sonar](./doc/sonar.png)
-Quality Gate Check:-.
+Quality Gate Check:-
 ![qualitygate](./doc/qulitygate.png)
 
 ### 3) Codecov - Code Coverage ###
 [Codecov](https://about.codecov.io) improve code quality and workflow with highly integrated tools to group, merge, archive, and compare coverage reports.
 
-Upload the code coverage result to [Codecov](https://about.codecov.io) SaaS offering.
+Uploaded the code coverage result to [Codecov](https://about.codecov.io) Cloud SaaS offering.
 
 ```yaml
   codecov:
@@ -295,13 +295,14 @@ Upload the code coverage result to [Codecov](https://about.codecov.io) SaaS offe
           verbose: true     
 
 ```
+CodeCov dashboard:-
 ![codecov](./doc/codecov.png)
 
 
 ### 4) CodeQL - SAST ###
 [CodeQL](https://codeql.github.com) is the code analysis engine developed by GitHub to automate security checks. You can analyze your code using CodeQL and display the results as code scanning alerts.
 
-Use the native Github Action [CodeQL](https://codeql.github.com) for SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab
+Use the native Github Action [CodeQL](https://codeql.github.com) for SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab.
 
 ```yaml
   codeqlScan:
@@ -333,12 +334,13 @@ Use the native Github Action [CodeQL](https://codeql.github.com) for SAST scan a
         uses: github/codeql-action/analyze@v1
 
 ```
+GitHub Advanced Security Tab:-
 ![codeql](./doc/codeql.png)
 
 ### 5) AppScan CodeSweep - SAST ###
 [HCL AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) is a free to use security tool, designed for beginners and professionals alike, who need a quick, simple, and platform friendly program.
 
-Use the [AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) for SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
+Use the [AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) for SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format.
 
 
 ```yaml
@@ -360,13 +362,13 @@ Use the [AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) for SAS
         env: 
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 ```
-
+HCL AppScan CodeSweep dashboard:-
 ![appscan](./doc/appScan.png)
 
 ### 6) Codacy - SAST  ###
 [Codacy](https://www.codacy.com) automatically analyzes your source code and identifies issues as you go, helping you develop software more efficiently with fewer issues down the line. Through static code review analysis, Codacy notifies you of security issues, code coverage, code duplication, and code complexity in every commit and pull request.
 
-Use the [Codacy](https://www.codacy.com) for SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
+Use the [Codacy](https://www.codacy.com) for SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format.
 
 ```yaml
   codacyScan:
@@ -391,13 +393,13 @@ Use the [Codacy](https://www.codacy.com) for SAST scan and upload the result to 
           with:
             sarif_file: codacy.sarif          
 ```
-
+Codacy dashboard.
 ![codacy](./doc/codacy.png)
 
 ### 7) Snyk - SCA  ###
 [Snyk](https://snyk.io) (pronounced sneak) is a developer security platform for securing code, dependencies, containers, and infrastructure as code.
 
-Use the [Snyk](https://snyk.io) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
+Use the [Snyk](https://snyk.io) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format.
 
 ```yaml
   snykScan:
@@ -424,10 +426,11 @@ Use the [Snyk](https://snyk.io) for SCA scan and upload the result to [GitHub Ad
           sarif_file: snyk.sarif
 
 ```
+Snyk dashboard:-
 ![snky](./doc/snyk.png)
 
 ### 8) Dependabot - SCA  ###
-Use the github native [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/configuring-dependabot-security-updates) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab 
+Use the github native [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/configuring-dependabot-security-updates) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab.
 
 ```yaml dependabot.yml
 
@@ -443,12 +446,13 @@ updates:
       interval: "weekly"
 
 ```
+Dependabot dashboard:-
 ![dependabot](./doc/dependabot.png)
 
 ### 9) BlackDuck CoPilot - SCA  ###
 [Black Duck](https://www.blackducksoftware.com) is a complete open source management solution, which fully discovers all open source in your code. It can map components to known vulnerabilities, and identify license and component quality risks.
 
-Use the [Black Duck](https://www.blackducksoftware.com) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
+Use the [Black Duck](https://www.blackducksoftware.com) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format.
 
 ```yaml 
 
@@ -477,12 +481,13 @@ Use the [Black Duck](https://www.blackducksoftware.com) for SCA scan and upload 
 
 
 ```
+BlackDuck CoPilot dashboard-
 ![blackduck](./doc/blackduck.png)
 
 ### 10) FOSSA - SCA  ###
 [FOSSA](https://fossa.com/variant/homepage) accelerate open source adoption with scalable, end-to-end management for third-party code, license compliance and vulnerabilities.
 
-Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
+Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format.
 
 ```yaml 
 
@@ -503,13 +508,13 @@ Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the 
 
 
 ```
-
+FOSSA dashboard:-
 ![fossa](./doc/fossa.png)
 
 ### 11) ShiftLeft - SCA & SAST ###
 [ShiftLeft](https://www.shiftleft.io) provides an early, accurate picture of risk so devs can quickly secure code and stay focused on the transformation. 
 
-Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format
+Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format.
 
 ```yaml 
 
@@ -534,13 +539,13 @@ Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the
 
 
 ```
-
+ShiftLeft dashboard:-
 ![shiftleft](./doc/shiftleft.png)
 
-### 12) Snyk - Infrastructure as Code Configs Scan ###
+### 12) Snyk - Infrastructure as Code Scan ###
 [Snyk](https://snyk.io) (pronounced sneak) is a developer security platform for securing code, dependencies, containers, and infrastructure as code.
 
-Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code Config Files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
+Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code Files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
 
 ```yaml 
 
@@ -570,13 +575,14 @@ Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code Config Files](
 
 
 ```
+Snyk dashboard:-
 ![snky](./doc/snyk.png)
 
-### 13) OPA - Infrastructure as Code Configs Scan ###
+### 13) OPA - Infrastructure as Code Scan ###
 
 The [Open Policy Agent](https://www.openpolicyagent.org/docs/latest/)  (OPA, pronounced “oh-pa”) is an open source, general-purpose policy engine that unifies policy enforcement across the stack. OPA provides a high-level declarative language that lets you specify policy as code and simple APIs to offload policy decision-making from your software. You can use OPA to enforce policies in microservices, Kubernetes, CI/CD pipelines, API gateways, and more.
 
-Use [OPA](https://www.openpolicyagent.org/docs/latest/) to scan the [Infrastructure as Code Config Files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests) using [OPA Policies](https://github.com/judebantony/cicd-github-action-example/tree/main/opa-policies).
+Use [OPA](https://www.openpolicyagent.org/docs/latest/) to scan the [Infrastructure as Code Files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests) using [OPA Policies](https://github.com/judebantony/cicd-github-action-example/tree/main/opa-policies).
 
 ```yaml 
 
@@ -598,6 +604,7 @@ Use [OPA](https://www.openpolicyagent.org/docs/latest/) to scan the [Infrastruct
             DATA: data.kubernetes.admission.deny  
 
 ```
+OPA result:-
 ![opa](./doc/opa.png)
 
 
@@ -605,7 +612,7 @@ Use [OPA](https://www.openpolicyagent.org/docs/latest/) to scan the [Infrastruct
 
 [Trufflehog](https://trufflesecurity.com/trufflehog) runs behind the scenes to scan your environment for secrets like private keys and credentials, so you can protect your data before a breach occurs.
 
-Use [Trufflehog](https://trufflesecurity.com/trufflehog) to find any secret present in the source code. 
+Use [Trufflehog](https://trufflesecurity.com/trufflehog) to find any secrets present in the source code. 
  
 ```yaml 
 
@@ -629,7 +636,7 @@ Use [Trufflehog](https://trufflesecurity.com/trufflehog) to find any secret pres
 ### 15) GitGuardian - Secret Scan ###
 [GitGuardian](https://www.gitguardian.com) is a developers-first solution scanning GitHub activity in real-time for API secret tokens, database credentials, certificates.
 
-Use [GitGuardian](https://www.gitguardian.com) to find any secret present in the source code. [Github integration with GitGuardian](https://docs.gitguardian.com/internal-repositories-monitoring/integrations/ci_cd_integrations/github_actions)
+Use [GitGuardian](https://www.gitguardian.com) to find any secrets present in the source code. Github integration with GitGuardian is present [here](https://docs.gitguardian.com/internal-repositories-monitoring/integrations/ci_cd_integrations/github_actions).
  
 ```yaml 
 
@@ -655,12 +662,13 @@ Use [GitGuardian](https://www.gitguardian.com) to find any secret present in the
 
 
 ```
+GitGuardian dashboard:-
 ![gitguardian](./doc/gitguardian.png)
 
 ### 16) Snyk - Container Image Scan ###
 [Snyk](https://snyk.io) (pronounced sneak) is a developer security platform for securing code, dependencies, containers, and infrastructure as code.
 
-Use [Snyk](https://snyk.io) to do container image scan. 
+Use [Snyk](https://snyk.io) to perform container image scan. 
 
 ```yaml 
 
@@ -703,6 +711,7 @@ snykImageScan:
 
 
 ```
+Snyk dashboard:-
 ![snyk](./doc/snyk.png)
 
 ### 17) Jfrog Artifactory - Publish Artifact(jar) ###
