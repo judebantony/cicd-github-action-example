@@ -94,8 +94,8 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
     * [K6](https://k6.io)
 * Create Release Tag
 
-## Release Workflow ##
-This Project try to implement below CI/CD E2E release workflow using Cloud SaaS Tool sets.
+## CI/CD E2E Release Workflow ##
+This Project implements the below CI/CD E2E release workflow integrated with CI, CD, Security Scans, and Test automation using Cloud SaaS tool sets.
 
 ![releaseworkflow](./doc/releaseworkflow.png)	
 
