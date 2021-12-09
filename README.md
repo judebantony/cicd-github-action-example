@@ -94,7 +94,7 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
 * Create Release Tag
 
 ## CI/CD E2E Release Workflow ##
-This Project implements the below CI/CD E2E release workflow integrated with CI, CD, Security Scans, and Test automation using Cloud SaaS tool sets.
+This Project implements the below CI/CD E2E release workflow integrated with CI, CD, Security Scans, IaC and Test automation using Cloud SaaS tool sets.
 
 ![releaseworkflow](./doc/releaseworkflow.png)	
 
