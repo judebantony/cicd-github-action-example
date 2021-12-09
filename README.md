@@ -123,7 +123,16 @@ Once GitHub Action build is completed, build information get reflected in Jira a
 
 ![githubbuild](./doc/githubbuild.png)
 
-Test Plan & Test Cases using Cucumber & Gherkin is added to Jira
+Using Cucumber & Gherkin, we can add Test Plan & Test Cases to a specific story in Jira.
+
+```java
+Feature: Test Health Check Rest API
+  Scenario: Health Check Api call is successful 
+
+    Given user wants to call health check api
+    When user call health check api with the url "http://35.194.14.180/api/v1"
+    Then return result
+```
 
 ![githubtest](./doc/githubtest.png)
 
