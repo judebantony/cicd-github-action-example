@@ -141,13 +141,14 @@ Test results will be uploaded back to Jira to provide [Requirement Traceability 
 ![githubtest](./doc/githubtestrun.png)
 ![githubresult](./doc/githubresult.png)
 
-## Integration of SaaS tools in CI/CD workflow with GitHub Action ##
-Integrating & Implementation of E2E CI/CD release workflow with different cloud SaaS tool using [Github Action](https://github.com/features/actions). 
+## Integrating Cloud SaaS DevSecOps tools using GitHub Action ##
+Integration & Implementation of E2E CI/CD release workflow using [Github Action](https://github.com/features/actions), this has been achieved using different Cloud SaaS tools listed below.
 
 ### 1) Maven - Build and Unit Test ###
 [Apache Maven](https://maven.apache.org) is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information.
 
-Build the code is using [Maven](https://maven.apache.org) and run the [JUnit](https://junit.org/junit5/) unit test cases, upload the test coverage result to [Github Action](https://github.com/features/actions) . Please check [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml). 
+Code is build using [Maven](https://maven.apache.org) and unit test cases are executed using [JUnit](https://junit.org/junit5/)
+The test coverage result, which is aggregated by [Jacoco](https://www.baeldung.com/sonarqube-jacoco-code-coverage) would be uploaded to [Github Action](https://github.com/features/actions) as artifacts. Please check [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml) as well. 
 
 ```yaml
 
@@ -197,13 +198,14 @@ Build the code is using [Maven](https://maven.apache.org) and run the [JUnit](ht
            files: target/surefire-reports/*.xml
 
 ```
-
+Sample test result:- 
 ![unittest](./doc/unittest.png)
 
 ### 2) SonarQube Cloud - Code Quality ###
 [SonarQube](https://www.sonarqube.org) is an open-source platform developed by SonarSource for continuous inspection of code quality to perform automatic reviews with static analysis of code to detect bugs, code smells, and security vulnerabilities on 20+ programming languages.
 
-Inspect the code using [SonarQube](https://www.sonarqube.org), enable the quality gate check and upload the result to its Cloud SaaS offering. 
+Inspect the code using [SonarQube](https://www.sonarqube.org) and enable the Quality Gate Check in CI/CD workflow. 
+Results are uploaded to [SonarQube](https://www.sonarqube.org) Cloud SaaS offering. 
 
 ```yaml
   sonar:
@@ -247,8 +249,9 @@ Inspect the code using [SonarQube](https://www.sonarqube.org), enable the qualit
           scanMetadataReportFile: target/sonar/report-task.txt     
 
 ```
+SonarQube Dashbord:-
 ![sonar](./doc/sonar.png)
-Update the sonar quality gate information to Github Action.
+Quality Gate Check:-.
 ![qualitygate](./doc/qulitygate.png)
 
 ### 3) Codecov - Code Coverage ###
