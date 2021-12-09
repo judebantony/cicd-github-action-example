@@ -18,20 +18,20 @@ DevSecOps automatically bakes in security at every phase of the software develop
 
 ![secdevops](./doc/secdevops.png)
 
-This is a sample project to demonstrate the E2E Github Action release workflow with all Security Controls Gates and integrated with different Cloud SaaS CI/CD tools chain offering.
+This is a sample project to demonstrate the E2E Github Action release workflow with all Security Controls gates integrated with different Cloud SaaS CI/CD tools offering.
 
 #### Tools used are listed below ####
 
-* Requirements 
+* Requirements & Planning
     * [JIRA](https://judebantony.atlassian.net)
-* Code
+* Language used
     * [Spring Boot](https://spring.io/projects/spring-boot)
     * [Java](https://www.java.com/en/)
 * SCM
     * [GitHub](https://github.com)	
 * Build
     * [Mavan](https://maven.apache.org)
-* CI
+* Continuous Integration 
     * [Github Action](https://github.com/features/actions)
 * Code Quality
     * [SonarQube](https://sonarcloud.io/organizations/judebantony/projects)
@@ -53,9 +53,9 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
 * DAST (Dynamic Application Security Testing)
     * [StackHawk](https://app.stackhawk.com/applications)
     * [OWASP ZAP](https://www.zaproxy.org)
-* API Validator
+* OpenAPI Spec Validator
     * [Swagger Editor Validator](https://swagger.io/blog/api-design/validate-openapi-definitions-swagger-editor/)  
-* IaC Configs Scan
+* Infra as Code Scan
     * [Snyk](https://snyk.io)
     * [OPA](https://www.openpolicyagent.org)
 * Secret Scan
@@ -75,11 +75,10 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
     * [DockerHub](https://hub.docker.com/r/judebantony/cigithubaction)
 * Deploying to Azure - AKS
     * [GitHub Action & K8S native](https://kubernetes.io)
-* Deploying to Azure - AKS
     * [GitHub Action & Helm Chart](https://helm.sh/docs/topics/charts/)
 * Deploying to GCP - GKE 
     * [GitHub Action & Harness](https://harness.io)
-* Provisioning AWS - EC2
+* Provisioning(IaC) AWS - EC2
     * [Terraform](https://www.terraform.io)
 * Unit Testing
     * [Junit](https://junit.org/junit5/)
