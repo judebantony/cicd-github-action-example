@@ -1327,9 +1327,9 @@ Approval gates for deployment using [Github Environment](https://docs.github.com
 ```
 
 ### 30) CD - Deploy to Azure AKS using Helm. ###
-[Helm](https://helm.sh) helps you manage Kubernetes applications — Helm Charts help you define, install, and upgrade even the most complex Kubernetes application.
+[Helm](https://helm.sh) helps you manage [Kubernetes](https://kubernetes.io) applications — Helm Charts help you define, install, and upgrade even the most complex [Kubernetes](https://kubernetes.io) application.
 
-Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/services/kubernetes-service/) using [Helm](https://helm.sh), manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/helm).
+Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/services/kubernetes-service/) using [Helm](https://helm.sh), manifest files are available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/helm).
 
 ```yaml 
 
@@ -1382,10 +1382,11 @@ Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/serv
               ./helm/aks \
 
 ```
-
+AKS Console:-
+![aks](./doc/aks.png)
 ### 31) CD - Deploy to Google GKE using Harness. ###
 
-The [Harness](https://harness.io) Software Delivery Platform includes Continuous Integration, Continuous Delivery, Continuous Efficiency, Continuous Verification, and Continuous Features. The platform is designed to help companies accelerate their cloud initiatives as well as their adoption of containers and orchestration tools like Kubernetes and Amazon ECS.
+The [Harness](https://harness.io) Software Delivery Platform includes Continuous Integration, Continuous Delivery, Continuous Efficiency, Continuous Verification, and Continuous Features. The platform is designed to help companies accelerate their cloud initiatives as well as their adoption of containers and orchestration tools like [Kubernetes](https://kubernetes.io) and [Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html).
 
 Deploy the Container image to [Google GKE](https://cloud.google.com/kubernetes-engine/?utm_source=google&utm_medium=cpc&utm_campaign=japac-IN-all-en-dr-bkws-all-all-trial-e-dr-1009882&utm_content=text-ad-none-none-DEV_c-CRE_468709677813-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt%20~%20Containers%20~%20Kubernetes%20Engine_Kubernetes-gke-KWID_43700033867246010-aud-970366092687%3Akwd-372556496315&userloc_9299054-network_g&utm_term=KW_google%20gke&ds_rl=1264446&gclid=CjwKCAiAhreNBhAYEiwAFGGKPBhVfsfPwkEB1Yzehiow3pcsq-P9Pv78G4P28anuVF9HtSPtoNZCFxoCqr0QAvD_BwE&gclsrc=aw.ds) using [Harness](https://harness.io).
 
@@ -1401,15 +1402,16 @@ Deploy the Container image to [Google GKE](https://cloud.google.com/kubernetes-e
         run: |
           curl -X POST -H 'content-type: application/json' --url https://app.harness.io/gateway/api/webhooks/Tlugr1ZdISx44rvm4flAiXHMb3uKG3ikyiHSbOks?accountId=aGS5Pi_WSPa9IsdlTlJc7g -d '{"application":"1FYrnQdZROqjpAQdCBIMbw"}'
 ```
+GKE console:-
 ![gke](./doc/gke.png)
 
-Harness
+Harness console:-
 ![harness](./doc/harness.png) 
 
 ### 32) Load/Performance Testing - K6. ###
 [K6](https://k6.io) is an open-source load testing tool and cloud service providing the best developer experience for API performance testing.
 
-Performance Test using [K6](https://k6.io). Load Test file is present here [here](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
+Use [K6](https://k6.io) to do the Performance Test. Load Test file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
 
 ```yaml 
 
@@ -1430,12 +1432,13 @@ Performance Test using [K6](https://k6.io). Load Test file is present here [here
           token: ${{ secrets.K6_CLOUD_API_TOKEN }}
 
 ```
+K6 dashboard:-
 ![k6](./doc/k6.png)
 
 ### 33) Functional Test using Xray and Jira. ###
-[XRay](https://www.getxray.app) is a Test Management tool. Built for every member of your team to plan, test, track and release great software · Manage all your Tests as Jira issues.
+[XRay](https://www.getxray.app) is a Test Management tool integrated with Jira. Built for every member of your team to plan, test, track and release great software · Manage all your tests as Jira issues.
 
-Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) and [Cucumber](https://cucumber.io) in Jira for each story and execute as part of CI/CD. Upload the result back to Jira. XRay Test Execution config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/testexec_cloud_template.json).
+Xray Jira plugin is used to create the test case in [Gherkin](https://cucumber.io/docs/gherkin/) and [Cucumber](https://cucumber.io) for each Jira story and executed as part of CI/CD pipleline(GitHub Action). The result is uploaded back to Jira. XRay Test Execution config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/testexec_cloud_template.json).
 
 ```yaml 
 
@@ -1488,6 +1491,7 @@ Create the test case using [Gherkin](https://cucumber.io/docs/gherkin/) and [Cuc
            curl  -X POST -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" -F info=@testexec_cloud_template.json -F results=@"target/cucumber-reports/cucumber.json" "https://xray.cloud.xpand-it.com/api/v1/import/execution/cucumber/multipart"          
 
 ```
+Jira Xray test execution dashboard:-
 ![xray](./doc/xray.png)
 
 ### 34) Release Tag Creation. ###
@@ -1518,13 +1522,13 @@ Create a release tag for the branch.
             body: ${{ steps.tag_version.outputs.changelog }}  
 
 ```
-
+Release Tag:-
 ![releasetag](./doc/releasetag.png)
 
 ### 35) IaC - using Terraform - Create AWS EC2. ###
 [Terraform](https://www.terraform.io) is an open-source infrastructure as code software tool created by HashiCorp. Users define and provide data center infrastructure using a declarative configuration language known as HashiCorp Configuration Language, or optionally JSON.
 
-Set up the AWS EC2 instances using [Terraform](https://www.terraform.io) , terraform manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
+Set up the [AWS EC2](https://aws.amazon.com/ec2/?ec2-whats-new.sort-by=item.additionalFields.postDateTime&ec2-whats-new.sort-order=desc) instances using [Terraform](https://www.terraform.io) , terraform manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
 
 ```yaml 
 
@@ -1602,7 +1606,7 @@ Set up the AWS EC2 instances using [Terraform](https://www.terraform.io) , terra
             terraform apply -auto-approve  
 
 ```
-
+Terraform dashbord:-
 ![teraform](./doc/teraform.png)
 
 ## Author
