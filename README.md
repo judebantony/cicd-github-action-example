@@ -16,6 +16,8 @@
 
 DevSecOps automatically bakes in security at every phase of the software development lifecycle, enabling development of secure software at the speed of Agile and DevOps. It integrates application and infrastructure security seamlessly into Agile and DevOps processes and tools. It addresses security issues as they emerge, when they're easier, faster, and less expensive to fix and also makes application and infrastructure security a shared responsibility of development, security, and IT operations teams.
 
+Implementing “[shift left](https://www.devsecops.org/blog/2016/5/20/-security)” to a DevOps team guarantees application security at the earliest stages in the development lifecycle, as part of DevSecOps (collaboration between development, security, and operations). To shift left means to move a process to the left on the traditional linear depiction of the software development lifecycle (SDLC). There are two common subjects of shift left initiatives in DevOps: security and testing. 
+
 ![secdevops](./doc/secdevops.png)
 
 This is a sample project to demonstrate the E2E Github Action release workflow with all Security Controls gates integrated with different Cloud SaaS CI/CD tools offering.
@@ -104,7 +106,7 @@ Sample release workflow implementation using [Github Action](https://github.com/
 	
 Sample release workflow execution is present [here](https://github.com/judebantony/cicd-github-action-example/actions/runs/1500211427)	
 
-## Jira and Github Integration - (Planning/Requirement/Test Execution) ##
+## Jira and Github Integration - (Planning,Requirement & Test Execution) ##
 Jira and Github Integration will provide better traceability between Planning, Requirement, Code, Build and Test Execution.  [Linking your GitHub to Jira](https://support.atlassian.com/jira-cloud-administration/docs/integrate-with-github/) gives team the ability to see their branches, commit messages, build, test cases & results, pull requests and release information in the context of Jira tickets. More information can find [here.](https://github.blog/2018-10-04-announcing-the-new-github-and-jira-software-cloud-integration/)
 
 ![jira](./doc/jira.png)
