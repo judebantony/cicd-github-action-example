@@ -451,6 +451,7 @@ updates:
 ```
 
 Dependabot dashboard:-
+
 ![dependabot](./doc/dependabot.png)
 
 ### 9) BlackDuck CoPilot - SCA  ###
