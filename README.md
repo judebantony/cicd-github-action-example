@@ -434,7 +434,8 @@ Snyk dashboard:-
 ### 8) Dependabot - SCA  ###
 Use the github native [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/configuring-dependabot-security-updates) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab. Enabling the dependabot in GitHub can find [here](https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/enabling-and-disabling-dependabot-version-updates).
 
-```yaml dependabot.yml
+
+```yaml
 
 version: 2
 updates:

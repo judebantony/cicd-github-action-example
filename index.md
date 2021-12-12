@@ -425,7 +425,8 @@ Snyk dashboard:-
 ### 8) Dependabot - SCA  ###
 Use the github native [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/configuring-dependabot-security-updates) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab. Enabling the Dependabot in GitHub can find [here](https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/enabling-and-disabling-dependabot-version-updates).
 
-```yaml dependabot.yml
+
+```yaml
 
 version: 2
 updates:
@@ -446,6 +447,7 @@ Dependabot dashboard:-
 [Black Duck](https://www.blackducksoftware.com) is a complete open source management solution, which fully discovers all open source in your code. It can map components to known vulnerabilities, and identify license and component quality risks.
 
 Use the [Black Duck](https://www.blackducksoftware.com) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format.
+
 
 ```yaml 
 
@@ -482,6 +484,7 @@ BlackDuck CoPilot dashboard-
 
 Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format. GitHub integration with FOSSA can find [here](https://docs.fossa.com/docs/github).
 
+
 ```yaml 
 
   fossaScan:
@@ -508,6 +511,7 @@ FOSSA dashboard:-
 [ShiftLeft](https://www.shiftleft.io) provides an early, accurate picture of risk so devs can quickly secure code and stay focused on the transformation. 
 
 Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format. GitHub integration with ShiftLeft can find [here](https://docs.shiftleft.io/ngsast/integrations/github-marketplace).
+
 
 ```yaml 
 
@@ -539,6 +543,7 @@ ShiftLeft dashboard:-
 [Snyk](https://snyk.io) (pronounced sneak) is a developer security platform for securing code, dependencies, containers, and infrastructure as code.
 
 Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code Files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests). GitHub integration with Snyk can find [here](https://docs.snyk.io/features/integrations/git-repository-scm-integrations/github-integration).
+
 
 ```yaml 
 
@@ -577,6 +582,7 @@ The [Open Policy Agent](https://www.openpolicyagent.org/docs/latest/)  (OPA, pro
 
 Use [OPA](https://www.openpolicyagent.org/docs/latest/) to scan the [Infrastructure as Code Files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests) using [OPA Policies](https://github.com/judebantony/cicd-github-action-example/tree/main/opa-policies).
 
+
 ```yaml 
 
  opa-test:
@@ -606,6 +612,7 @@ OPA result:-
 [Trufflehog](https://trufflesecurity.com/trufflehog) runs behind the scenes to scan your environment for secrets like private keys and credentials, so you can protect your data before a breach occurs.
 
 Use [Trufflehog](https://trufflesecurity.com/trufflehog) to find any secrets present in the source code. 
+
  
 ```yaml 
 
