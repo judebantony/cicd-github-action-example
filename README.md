@@ -449,6 +449,7 @@ updates:
       interval: "weekly"
 
 ```
+
 Dependabot dashboard:-
 ![dependabot](./doc/dependabot.png)
 
