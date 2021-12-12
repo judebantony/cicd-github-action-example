@@ -1,3 +1,6 @@
+# DevSecOps with GitHub Action and SaaS Tools 
+
+
 ## CICD - DevSecOps using GitHub Action ##
 
 DevSecOps automatically bakes in security at every phase of the software development lifecycle, enabling development of secure software at the speed of Agile and DevOps. It integrates application and infrastructure security seamlessly into Agile and DevOps processes and tools. It addresses security issues as they emerge, when they're easier, faster, and less expensive to fix and also makes application and infrastructure security a shared responsibility of development, security, and IT operations teams.
@@ -193,7 +196,8 @@ Sample test result:-
 [SonarQube](https://www.sonarqube.org) is an open-source platform developed by SonarSource for continuous inspection of code quality to perform automatic reviews with static analysis of code to detect bugs, code smells, and security vulnerabilities on 20+ programming languages.
 
 Inspect the code using [SonarQube](https://www.sonarqube.org) and enable the Quality Gate Check in CI/CD workflow. 
-Results are uploaded to [SonarQube](https://www.sonarqube.org) Cloud SaaS offering. 
+Results are uploaded to [SonarQube](https://www.sonarqube.org) Cloud SaaS offering. GitHub integration with SonarQube can find [here](https://docs.sonarqube.org/latest/analysis/github-integration/).
+
 
 ```yaml
   sonar:
@@ -245,7 +249,8 @@ Quality Gate Check:-
 ### 3) Codecov - Code Coverage ###
 [Codecov](https://about.codecov.io) improve code quality and workflow with highly integrated tools to group, merge, archive, and compare coverage reports.
 
-Uploaded the code coverage result to [Codecov](https://about.codecov.io) Cloud SaaS offering.
+Uploaded the code coverage result to [Codecov](https://about.codecov.io) Cloud SaaS offering. GitHub integration with Codecov can find [here](https://codecov.freshdesk.com/support/solutions/articles/43000593941-set-up-github-app-integration).
+
 
 ```yaml
   codecov:
@@ -290,7 +295,7 @@ CodeCov dashboard:-
 ### 4) CodeQL - SAST ###
 [CodeQL](https://codeql.github.com) is the code analysis engine developed by GitHub to automate security checks. You can analyze your code using CodeQL and display the results as code scanning alerts.
 
-Use the native Github Action [CodeQL](https://codeql.github.com) for SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab.
+Use the native Github Action [CodeQL](https://codeql.github.com) for SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab. Configuring CodeQL code scanning can find [here](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning).
 
 ```yaml
   codeqlScan:
@@ -387,7 +392,7 @@ Codacy dashboard.
 ### 7) Snyk - SCA  ###
 [Snyk](https://snyk.io) (pronounced sneak) is a developer security platform for securing code, dependencies, containers, and infrastructure as code.
 
-Use the [Snyk](https://snyk.io) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format.
+Use the [Snyk](https://snyk.io) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format. GitHub integration with Snyk can find [here](https://docs.snyk.io/features/integrations/git-repository-scm-integrations/github-integration).
 
 ```yaml
   snykScan:
@@ -418,7 +423,7 @@ Snyk dashboard:-
 ![snky](./doc/snyk.png)
 
 ### 8) Dependabot - SCA  ###
-Use the github native [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/configuring-dependabot-security-updates) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab.
+Use the github native [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/configuring-dependabot-security-updates) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab. Enabling the Dependabot in GitHub can find [here](https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/enabling-and-disabling-dependabot-version-updates).
 
 ```yaml dependabot.yml
 
@@ -475,7 +480,7 @@ BlackDuck CoPilot dashboard-
 ### 10) FOSSA - SCA  ###
 [FOSSA](https://fossa.com/variant/homepage) accelerate open source adoption with scalable, end-to-end management for third-party code, license compliance and vulnerabilities.
 
-Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format.
+Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format. GitHub integration with FOSSA can find [here](https://docs.fossa.com/docs/github).
 
 ```yaml 
 
@@ -502,7 +507,7 @@ FOSSA dashboard:-
 ### 11) ShiftLeft - SCA & SAST ###
 [ShiftLeft](https://www.shiftleft.io) provides an early, accurate picture of risk so devs can quickly secure code and stay focused on the transformation. 
 
-Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format.
+Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format. GitHub integration with ShiftLeft can find [here](https://docs.shiftleft.io/ngsast/integrations/github-marketplace).
 
 ```yaml 
 
@@ -533,7 +538,7 @@ ShiftLeft dashboard:-
 ### 12) Snyk - Infrastructure as Code Scan ###
 [Snyk](https://snyk.io) (pronounced sneak) is a developer security platform for securing code, dependencies, containers, and infrastructure as code.
 
-Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code Files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
+Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code Files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests). GitHub integration with Snyk can find [here](https://docs.snyk.io/features/integrations/git-repository-scm-integrations/github-integration).
 
 ```yaml 
 
@@ -656,7 +661,7 @@ GitGuardian dashboard:-
 ### 16) Snyk - Container Image Scan ###
 [Snyk](https://snyk.io) (pronounced sneak) is a developer security platform for securing code, dependencies, containers, and infrastructure as code.
 
-Use [Snyk](https://snyk.io) to perform container image scan. 
+Use [Snyk](https://snyk.io) to perform container image scan. GitHub integration with Snyk can find [here](https://docs.snyk.io/features/integrations/git-repository-scm-integrations/github-integration).
 
 ```yaml 
 
