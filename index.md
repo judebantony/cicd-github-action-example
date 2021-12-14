@@ -1613,7 +1613,10 @@ Terraform dashbord:-
 
 ## Author
 
-* **Jude Antony** ([LinkedIn](https://www.linkedin.com/in/jude-antony-2b208219/)) - ([GitHub](https://github.com/judebantony))
+* **Jude Antony**
+[![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/jude-antony-2b208219/)
+&nbsp;
+[![GitHub](https://i.stack.imgur.com/tskMh.png) GitHub](https://github.com/judebantony)
 
 ## License
 
