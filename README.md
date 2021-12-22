@@ -200,6 +200,32 @@ The test coverage result, which is aggregated by [Jacoco](https://www.baeldung.c
            files: target/surefire-reports/*.xml
 
 ```
+
+In [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml), we need to add the jacoco plugin.
+
+```xml
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.7</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>generate-code-coverage-report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+```
+
 Sample test result:- 
 ![unittest](./doc/unittest.png)
 
@@ -251,6 +277,16 @@ Results are uploaded to [SonarQube](https://www.sonarqube.org) Cloud SaaS offeri
           scanMetadataReportFile: target/sonar/report-task.txt     
 
 ```
+
+In [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml), we need to add the below configuration.
+
+```xml
+		<sonar.organization>judebantony</sonar.organization>
+		<sonar.projectKey>cicd-github-action-example</sonar.projectKey>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+```
+
 SonarQube dashbord:-
 ![sonar](./doc/sonar.png)
 Quality Gate Check:-
@@ -297,6 +333,25 @@ Uploaded the code coverage result to [Codecov](https://about.codecov.io) Cloud S
           verbose: true     
 
 ```
+
+In [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml), we need to add the below plugin.
+
+```xml
+			<plugin>
+			    <groupId>org.codehaus.mojo</groupId>
+			    <artifactId>cobertura-maven-plugin</artifactId>
+			    <version>2.7</version>
+			    <configuration>
+			        <formats>
+			            <format>html</format>
+			            <format>xml</format>
+			        </formats>
+			        <check />
+			    </configuration>
+			</plugin>			
+
+```
+
 CodeCov dashboard:-
 ![codecov](./doc/codecov.png)
 
@@ -801,6 +856,20 @@ Publish the Jar to [Github Packages](https://docs.github.com/en/packages/learn-g
 
 
 ```
+
+In [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml), we need to add the below configuration.
+
+```xml
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub Packages</name>
+			<url>https://maven.pkg.github.com/judebantony/cicd-github-action-example</url>
+		</repository>
+	</distributionManagement>
+
+```
+
 GitHub Package UI:-
 ![githubpackage](./doc/githubpackage.png)
 
@@ -809,6 +878,7 @@ GitHub Package UI:-
 [Jfrog Artifactory](https://jfrog.com/) is the only Universal Repository Manager supporting all major packaging formats, build tools and CI servers.
 
 Publish the Container Image to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog+artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=CjwKCAiAhreNBhAYEiwAFGGKPHkjlShpTBfbPyMgP1l5hGLeiezWo9xCn-3ncNVZCudxMzCdNUhMDhoCIDIQAvD_BwE).
+Dockerfile is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/Dockerfile).
 
 ```yaml 
 
@@ -862,6 +932,7 @@ Jfrog Artifactory Image Registry UI:-
 [Github Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages) is a software package hosting service that allows you to host your software packages privately or publicly and use packages as dependencies in your projects.
 
 Publish the Container Image to [Github Package](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
+Dockerfile is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/Dockerfile).
 
 ```yaml 
 
@@ -917,6 +988,20 @@ gitHubPakageImageBuild:
 
 
 ```
+
+In [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml), we need to add the below configuration.
+
+```xml
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub Packages</name>
+			<url>https://maven.pkg.github.com/judebantony/cicd-github-action-example</url>
+		</repository>
+	</distributionManagement>
+
+```
+
 GitHub Package Image Registry UI:-
 ![githubimage](./doc/githubimage.png)
 
@@ -925,6 +1010,7 @@ GitHub Package Image Registry UI:-
 [Docker hub](https://hub.docker.com) is the world's easiest way to create, manage, and deliver your teams' container applications.
 
 Publish the Container Image to [Docker hub](https://hub.docker.com).
+Dockerfile is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/Dockerfile).
 
 ```yaml 
 
