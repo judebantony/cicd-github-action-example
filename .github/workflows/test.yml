@@ -8,23 +8,31 @@ jobs:
 
  
   release-notes:
+      name: Release Tag & Note Creation 
       runs-on: ubuntu-latest
       steps:
-        - name: Check out the repo
+        - name: Checkout
           uses: actions/checkout@v2
           with:
             fetch-depth: 0
-        - name: Generate and email notes
-          uses: patrixr/jira-release-notes@v1.0.1
-          id: pdf_generator
+        - name: Bump version and push tag
+          id: tag_version
+          uses: anothrNick/github-tag-action@1.26.0
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            WITH_V: true
+      
+        - name: Build Changelog
+          id: github_release
+          uses: mikepenz/release-changelog-builder-action@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+        - name: Create Release
+          uses: actions/create-release@v1
           with:
-            head: ${{github.event.push.head.sha}}
-            base: ${{github.event.push.base.sha}}
-            jira-code: 'JUDE'
-            jira-host: judebantony.atlassian.net
-            jira-username: 'judebantony'
-            jira-password: ${{secrets.JIRA_GITHUB_ACTION_TOKEN}}
-            app-name: 'My GitHub Action Service'
-            unshallow: true
-        - name: Process the pdf
-          run: echo "The generated pdf was ${{ steps.pdf_generator.outputs.pdf }}"
+            tag_name: ${{ steps.tag_version.outputs.new_tag }}
+            release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+            body: ${{steps.github_release.outputs.changelog}}
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
