@@ -15,7 +15,7 @@ jobs:
           with:
             fetch-depth: 0
         - name: Generate and email notes
-          uses: actions/jira-release-notes@v1.0.1
+          uses: patrixr/jira-release-notes@v1.0.1
           id: pdf_generator
           with:
             head: ${{github.event.push.head.sha}}
