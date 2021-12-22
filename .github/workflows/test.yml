@@ -7,18 +7,16 @@ on:
 jobs:
 
  
- test_swagger_editor_validator_remote:
+  create-release-notes:
     runs-on: ubuntu-latest
-    name: Swagger Editor Validator Remote
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Download OpenAPI Spec
-        run: |
-          curl http://35.194.14.180/api-docs > openapi.json
-      - name: Validate OpenAPI definition
-        uses: char0n/swagger-editor-validate@v1.2.1
-        with:
-          definition-file: openapi.json  
+        - name: Check out the repo
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+        - name: Create Release Notes
+          uses: docker://decathlon/release-notes-generator-action:2.0.1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            OUTPUT_FOLDER: temp_release_notes
+            USE_MILESTONE_TITLE: "true"
