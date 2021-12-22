@@ -7,16 +7,24 @@ on:
 jobs:
 
  
-  create-release-notes:
-    runs-on: ubuntu-latest
-    steps:
+  release-notes:
+      runs-on: ubuntu-latest
+      steps:
         - name: Check out the repo
           uses: actions/checkout@v2
           with:
             fetch-depth: 0
-        - name: Create Release Notes
-          uses: docker://decathlon/release-notes-generator-action:2.0.1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            OUTPUT_FOLDER: temp_release_notes
-            USE_MILESTONE_TITLE: "true"
+        - name: Generate and email notes
+          uses: actions/jira-release-notes@v1.0.1
+          id: pdf_generator
+          with:
+            head: ${{github.event.push.head.sha}}
+            base: ${{github.event.push.base.sha}}
+            jira-code: 'JUDE'
+            jira-host: judebantony.atlassian.net
+            jira-username: 'judebantony'
+            jira-password: ${{secrets.JIRA_GITHUB_ACTION_TOKEN}}
+            app-name: 'My GitHub Action Service'
+            unshallow: true
+        - name: Process the pdf
+          run: echo "The generated pdf was ${{ steps.pdf_generator.outputs.pdf }}"
