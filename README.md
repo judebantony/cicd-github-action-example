@@ -93,7 +93,7 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
     * [LamdaTest](https://www.lambdatest.com)
 * Performance Testing
     * [K6](https://k6.io)
-* Create Release Tag
+* Create Release Note & Tag
 
 ## CI/CD E2E Release Workflow ##
 This Project implements the below CI/CD E2E release workflow integrated with CI, CD, Security Scans, IaC and Test automation using Cloud SaaS tool sets.
@@ -1591,7 +1591,7 @@ Create a release tag for the branch.
 ```yaml 
 
   releaseTag:
-      name: Release Tag Creation 
+      name: Release Tag & Note Creation 
       runs-on: ubuntu-latest
       needs: [k6_cloud_test]
       steps:
@@ -1605,14 +1605,24 @@ Create a release tag for the branch.
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             WITH_V: true
-        - name: Create a GitHub release
-          uses: ncipollo/release-action@v1
+      
+        - name: Build Changelog
+          id: github_release
+          uses: mikepenz/release-changelog-builder-action@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+        - name: Create Release
+          uses: actions/create-release@v1
           with:
-            tag: ${{ steps.tag_version.outputs.new_tag }}
-            name: Release ${{ steps.tag_version.outputs.new_tag }}
-            body: ${{ steps.tag_version.outputs.changelog }}  
+            tag_name: ${{ steps.tag_version.outputs.new_tag }}
+            release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+            body: ${{steps.github_release.outputs.changelog}}
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
 
 ```
+
 Release Tag:-
 ![releasetag](./doc/releasetag.png)
 
