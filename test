@@ -1,0 +1,6 @@
+curl --location --request GET 'https://api.gretel.cloud/projects/safecast/models/6078c674a67d32e4bb881bb4/artifact?type=model' \
+--header 'Content-Type: application/json'
+
+https://www.kaggle.com/sakshigoyal7/credit-card-customers
+
+https://console.gretel.cloud/judebantony-868a3/models/_new
