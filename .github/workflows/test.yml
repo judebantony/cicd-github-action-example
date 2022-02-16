@@ -54,7 +54,7 @@ jobs:
       - name: Katalon Report Uploader
         uses: katalon-studio/report-uploader@v0.0.7.11
         env:
-          PASSWORD: $
-          PROJECT_ID: 50236
+          PASSWORD: ${{ secrets.GITHUB_TOKEN }} 
+          PROJECT_ID: 494065
           TYPE: junit
           REPORT_PATH: target/site/jacoco/
