@@ -1585,7 +1585,27 @@ Xray Jira plugin is used to create the test case in [Gherkin](https://cucumber.i
 Jira Xray test execution dashboard:-
 ![xray](./doc/xray.png)
 
-### 34) Release Tag & Note Creation. ###
+### 34) Test Management using Katalon. ###
+[Katalon](https://testops.katalon.io/)  is a Test Management tool integrated with Jira. 
+
+
+```yaml 
+
+      - name: Katalon Report Uploader
+        uses: katalon-studio/report-uploader@v0.0.7.11
+        env:
+          EMAIL: ${{ secrets.KATALON_EMAIL }}
+          PASSWORD: ${{ secrets.KATALON_PWD }}
+          PROJECT_ID: 494065
+          TYPE: junit
+          REPORT_PATH: target/surefire-reports/*.xml        
+
+```
+
+Katalon test execution dashboard:-
+![katalon](./doc/katalon.png)
+
+### 35) Release Tag & Note Creation. ###
 Create a release tag for the branch. 
 
 ```yaml 
@@ -1626,7 +1646,7 @@ Create a release tag for the branch.
 Release Tag:-
 ![releasetag](./doc/releasetag.png)
 
-### 35) IaC - using Terraform - Create AWS EC2. ###
+### 36) IaC - using Terraform - Create AWS EC2. ###
 [Terraform](https://www.terraform.io) is an open-source infrastructure as code software tool created by HashiCorp. Users define and provide data center infrastructure using a declarative configuration language known as HashiCorp Configuration Language, or optionally JSON.
 
 Set up the [AWS EC2](https://aws.amazon.com/ec2/?ec2-whats-new.sort-by=item.additionalFields.postDateTime&ec2-whats-new.sort-order=desc) instances using [Terraform](https://www.terraform.io) , terraform manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
