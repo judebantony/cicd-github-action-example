@@ -1600,7 +1600,7 @@ Jira Xray test execution dashboard:-
           PASSWORD: ${{ secrets.KATALON_PWD }}
           PROJECT_ID: 494065
           TYPE: junit
-          REPORT_PATH: target/surefire-reports/*.xml       
+          REPORT_PATH: target/surefire-reports/     
 
 ```
 
