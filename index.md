@@ -76,10 +76,12 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
     * [Jacoco](https://www.baeldung.com/sonarqube-jacoco-code-coverage)
 * Functional Testing
     * [Cucumber](https://cucumber.io)
-    * [Xray & Jira for Test Execution](https://docs.getxray.app/display/XRAY/About+Xray)
     * [Selenium](https://www.selenium.dev)
     * [BrowserStack](https://www.browserstack.com)
     * [LamdaTest](https://www.lambdatest.com)
+* Test Management
+    * [Xray & Jira for Test Execution](https://docs.getxray.app/display/XRAY/About+Xray)
+    * [Katalon](https://testops.katalon.io/)        
 * Performance Testing
     * [K6](https://k6.io)
 * Create Release Note & ag
