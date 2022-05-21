@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        
+
+
+        {
+            "type": "java",
+            "name": "Spring Boot-CIGitHubActionApplication<cigithubaction>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.jba.ci.CIGitHubActionApplication",
+            "projectName": "cigithubaction",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
