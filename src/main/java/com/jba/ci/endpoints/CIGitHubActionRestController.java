@@ -1,8 +1,10 @@
 package com.jba.ci.endpoints;
 
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 /**
  * @author judebarnabasantony
@@ -19,4 +21,6 @@ public class CIGitHubActionRestController {
     public String health() {
         return JUDE_S_GIT_HUB_ACTION_CI_EXAMPLE;
     }
+
+    
 }
