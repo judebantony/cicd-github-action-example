@@ -1,0 +1,42 @@
+{
+  "_type": "https://in-toto.io/Statement/v0.1",
+  "subject": [
+    {
+      "name": "cigithubaction.jar",
+      "digest": {
+        "sha256": "2c973ff218a3911bcfc58111dbbed30b6fee31a1ff7c1863b8d6eb189861a848"
+      }
+    }
+  ],
+  "predicateType": "https://in-toto.io/Provenance/v0.1",
+  "predicate": {
+    "builder": {
+      "id": "https://github.com/judebantony/cicd-github-action-example/Attestations/GitHubHostedActions@v1"
+    },
+    "metadata": {
+      "buildInvocationId": "https://github.com/judebantony/cicd-github-action-example/actions/runs/2644961098",
+      "completeness": {
+        "arguments": true,
+        "environment": false,
+        "materials": false
+      },
+      "reproducible": false,
+      "buildFinishedOn": "2022-07-10T14:34:25Z"
+    },
+    "recipe": {
+      "type": "https://github.com/Attestations/GitHubActionsWorkflow@v1",
+      "definedInMaterial": 0,
+      "entryPoint": "Main Branch",
+      "arguments": null,
+      "environment": null
+    },
+    "materials": [
+      {
+        "uri": "git+https://github.com/judebantony/cicd-github-action-example",
+        "digest": {
+          "sha1": "23e3563f36f555cf45988e95a8e6b943a68bbbc5"
+        }
+      }
+    ]
+  }
+}

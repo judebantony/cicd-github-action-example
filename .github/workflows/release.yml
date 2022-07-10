@@ -66,5 +66,15 @@ jobs:
       - name: Upload provenance
         uses: actions/upload-artifact@v2
         with:
-          name: my-artifact
+          name: slsa-provenance
           path: build.provenance
+      - uses: anchore/sbom-action@v0
+        with:
+          artifact-name: sbom.spdx.json
+          format: spdx-json
+          path: target
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v2
+        with:
+          name: spdx-provenance
+          path: sbom.spdx.json
