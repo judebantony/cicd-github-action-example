@@ -1,0 +1,66 @@
+name: Main Branch
+
+on:
+  push:
+     branches: [ main ]
+
+jobs:
+
+ 
+  test:
+    name: Build and Unit Test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2     
+      - name: Build
+        run: mvn -B clean package -DskipTests
+      - name: Run UnitTest and Verify 
+        run: mvn -B verify -DexcludedGroups="Smoke | Staging | BrowserStack | LamdaTest"
+      - name: Generate JaCoCo Badge
+        id: jacoco
+        uses: cicirello/jacoco-badge-generator@v2
+      - name: Log code coverage percentage
+        run: |
+          echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
+          echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
+      - name: Upload code coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/
+      - name: Adding Junit Report
+        uses: ashley-taylor/junit-report-annotations-action@master
+        if: always()
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}          
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        with:
+           files: target/surefire-reports/*.xml
+      - name: Katalon Report Uploader
+        uses: katalon-studio/report-uploader@v0.0.7.11
+        env:
+          EMAIL: ${{ secrets.KATALON_EMAIL }}
+          PASSWORD: ${{ secrets.KATALON_PWD }}
+          PROJECT_ID: 494065
+          TYPE: junit
+          REPORT_PATH: target/surefire-reports/
+      - name: Generate provenance
+        uses: slsa-framework/github-actions-demo@v0.1
+        with:
+          artifact_path: target/cigithubaction.jar
+
