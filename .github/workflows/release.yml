@@ -1,7 +1,7 @@
 name: Main Branch
 
 on:
-  pull_request:
+  push:
      branches: [ main ]
 
 jobs:
@@ -59,3 +59,8 @@ jobs:
           PROJECT_ID: 494065
           TYPE: junit
           REPORT_PATH: target/surefire-reports/
+      - name: Generate provenance
+        uses: slsa-framework/github-actions-demo@v0.1
+        with:
+          artifact_path: target/cigithubaction.jar
+

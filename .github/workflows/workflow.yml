@@ -2,7 +2,10 @@ name: Main Branch
 
 on:
   pull_request:
-    branches: [ main ]
+    types:
+      - opened
+    branches: 
+      - 'releases/**'
 
 jobs:
 
