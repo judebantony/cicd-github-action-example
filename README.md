@@ -1,4 +1,5 @@
 # CICD GitHub Action Example #
+
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/judebantony/cicd-github-action-example)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/quality_gate?project=judebantony_cicd-github-action-example&branch=main)](https://sonarcloud.io/project/overview?id=judebantony_cicd-github-action-example)
 [![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=judebantony_cicd-github-action-example&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=judebantony_cicd-github-action-example)
@@ -12,12 +13,11 @@
 
 [![codecov](https://codecov.io/gh/judebantony/cicd-github-action-example/branch/main/graph/badge.svg?token=E3O3NABP1H)](https://codecov.io/gh/judebantony/cicd-github-action-example)
 
-
 ## CICD - DevSecOps using GitHub Action ##
 
 DevSecOps automatically bakes in security at every phase of the software development lifecycle, enabling development of secure software at the speed of Agile and DevOps. It integrates application and infrastructure security seamlessly into Agile and DevOps processes and tools. It addresses security issues as they emerge, when they're easier, faster, and less expensive to fix and also makes application and infrastructure security a shared responsibility of development, security, and IT operations teams.
 
-Implementing “[shift left](https://www.devsecops.org/blog/2016/5/20/-security)” to a DevOps team guarantees application security at the earliest stages in the development lifecycle, as part of DevSecOps (collaboration between development, security, and operations). To shift left means to move a process to the left on the traditional linear depiction of the software development lifecycle (SDLC). There are two common subjects of shift left initiatives in DevOps: security and testing. 
+Implementing “[shift left](https://www.devsecops.org/blog/2016/5/20/-security)” to a DevOps team guarantees application security at the earliest stages in the development lifecycle, as part of DevSecOps (collaboration between development, security, and operations). To shift left means to move a process to the left on the traditional linear depiction of the software development lifecycle (SDLC). There are two common subjects of shift left initiatives in DevOps: security and testing.
 
 ![secdevops](./doc/secdevops.png)
 
@@ -26,90 +26,92 @@ This is a sample project to demonstrate the E2E Github Action release workflow w
 #### Tools used are listed below ####
 
 * Requirements & Planning
-    * [JIRA](https://judebantony.atlassian.net)
+  * [JIRA](https://judebantony.atlassian.net)
 * Language used
-    * [Spring Boot](https://spring.io/projects/spring-boot)
-    * [Java](https://www.java.com/en/)
+  * [Spring Boot](https://spring.io/projects/spring-boot)
+  * [Java](https://www.java.com/en/)
 * SCM
-    * [GitHub](https://github.com)	
+  * [GitHub](https://github.com)
 * Build
-    * [Mavan](https://maven.apache.org)
-* Continuous Integration 
-    * [Github Action](https://github.com/features/actions)
+  * [Mavan](https://maven.apache.org)
+* Continuous Integration
+  * [Github Action](https://github.com/features/actions)
 * Code Quality
-    * [SonarQube](https://sonarcloud.io/organizations/judebantony/projects)
-    * [Codecov](https://codecov.io/gh/judebantony/cicd-github-action-example/commit/4b9f0f601ab2feee0e409ede57283d5b99b9182d/build)  	
+  * [SonarQube](https://sonarcloud.io/organizations/judebantony/projects)
+  * [Codecov](https://codecov.io/gh/judebantony/cicd-github-action-example/commit/4b9f0f601ab2feee0e409ede57283d5b99b9182d/build)
 * SAST (Static Analysis Security Testing)
-    * [CodeQL](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-with-codeql)
-    * [HCL AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep)	
-    * [Codacy](https://www.codacy.com/products/sonarqube-alternatives?utm_term=sonarqube&utm_campaign=SEA+-+Competitors&utm_source=adwords&utm_medium=ppc&hsa_acc=9882323101&hsa_cam=11598890837&hsa_grp=112569261106&hsa_ad=493336668133&hsa_src=g&hsa_tgt=kwd-57815990976&hsa_kw=sonarqube&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAiA4veMBhAMEiwAU4XRr_qVWrji3IRgivxyqqPc3QrEMVwBQmQoACBfPuCL5H0gE0nmn3n2LhoCcgkQAvD_BwE)
-    * [42crunch](https://platform.42crunch.com)
-    * [Fortify](https://www.microfocus.com/en-us/cyberres/application-security/static-code-analyzer?utm_campaign=7018e000000PgpeAAC&utm_content=Search-NB-SEC-Fortify-APJ&gclid=Cj0KCQiAzMGNBhCyARIsANpUkzNu_PaYL3ERhZ-KktUnSxHBTZbFkEOqZYAHFDfE-7m4jviXVhtoUKAaAsSFEALw_wcB)
-    * [Coverity](https://www.synopsys.com/software-integrity/security-testing/static-analysis-sast.html?utm_source=google&utm_medium=cpc&utm_term=&utm_campaign=G_S_Coverity_BMM_India&cmp=ps-SIG-G_S_Coverity_BMM_India&gclid=Cj0KCQiAzMGNBhCyARIsANpUkzNY7xgotkaFx4ZukqPDQdZjn6tKU_xYAdWO_Y2t5kD_YpiP5m7DYdAaAlYREALw_wcB)
-    * [Checkmarx](https://checkmarx.com)
+  * [CodeQL](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-with-codeql)
+  * [HCL AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep)
+  * [Codacy](https://www.codacy.com/products/sonarqube-alternatives?utm_term=sonarqube&utm_campaign=SEA+-+Competitors&utm_source=adwords&utm_medium=ppc&hsa_acc=9882323101&hsa_cam=11598890837&hsa_grp=112569261106&hsa_ad=493336668133&hsa_src=g&hsa_tgt=kwd-57815990976&hsa_kw=sonarqube&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAiA4veMBhAMEiwAU4XRr_qVWrji3IRgivxyqqPc3QrEMVwBQmQoACBfPuCL5H0gE0nmn3n2LhoCcgkQAvD_BwE)
+  * [42crunch](https://platform.42crunch.com)
+  * [Fortify](https://www.microfocus.com/en-us/cyberres/application-security/static-code-analyzer?utm_campaign=7018e000000PgpeAAC&utm_content=Search-NB-SEC-Fortify-APJ&gclid=Cj0KCQiAzMGNBhCyARIsANpUkzNu_PaYL3ERhZ-KktUnSxHBTZbFkEOqZYAHFDfE-7m4jviXVhtoUKAaAsSFEALw_wcB)
+  * [Coverity](https://www.synopsys.com/software-integrity/security-testing/static-analysis-sast.html?utm_source=google&utm_medium=cpc&utm_term=&utm_campaign=G_S_Coverity_BMM_India&cmp=ps-SIG-G_S_Coverity_BMM_India&gclid=Cj0KCQiAzMGNBhCyARIsANpUkzNY7xgotkaFx4ZukqPDQdZjn6tKU_xYAdWO_Y2t5kD_YpiP5m7DYdAaAlYREALw_wcB)
+  * [Checkmarx](https://checkmarx.com)
 * SCA (Software Composition Analysis)
-    * [Snyk](https://app.snyk.io/org/judebantony)
-    * [Dependabot](https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/)
-    * [BlackDuck CoPilot](https://copilot.blackducksoftware.com/github/repos/judebantony/cicd-github-action-example/results) 
-    * [FOSSA](https://app.fossa.com/projects/git%2Bgithub.com%2Fjudebantony%2Fcicd-github-action-example/refs/branch/main/0116ae3eef023ccfb56995ab2c4b10aaf5ffe1e1)
-    * [Shift Left](https://www.shiftleft.io/apps/shiftleft-java-demo/vulnerabilities?scan=1&branch=demo-branch-1638196402&severity=critical)		
+  * [Snyk](https://app.snyk.io/org/judebantony)
+  * [Dependabot](https://github.blog/2020-06-01-keep-all-your-packages-up-to-date-with-dependabot/)
+  * [BlackDuck CoPilot](https://copilot.blackducksoftware.com/github/repos/judebantony/cicd-github-action-example/results)
+  * [FOSSA](https://app.fossa.com/projects/git%2Bgithub.com%2Fjudebantony%2Fcicd-github-action-example/refs/branch/main/0116ae3eef023ccfb56995ab2c4b10aaf5ffe1e1)
+  * [Shift Left](https://www.shiftleft.io/apps/shiftleft-java-demo/vulnerabilities?scan=1&branch=demo-branch-1638196402&severity=critical)  
 * DAST (Dynamic Application Security Testing)
-    * [StackHawk](https://app.stackhawk.com/applications)
-    * [OWASP ZAP](https://www.zaproxy.org)
+  * [StackHawk](https://app.stackhawk.com/applications)
+  * [OWASP ZAP](https://www.zaproxy.org)
 * OpenAPI Spec Validator
-    * [Swagger Editor Validator](https://swagger.io/blog/api-design/validate-openapi-definitions-swagger-editor/)  
+  * [Swagger Editor Validator](https://swagger.io/blog/api-design/validate-openapi-definitions-swagger-editor/)  
 * Infra as Code Scan
-    * [Snyk](https://snyk.io)
-    * [OPA](https://www.openpolicyagent.org)
+  * [Snyk](https://snyk.io)
+  * [OPA](https://www.openpolicyagent.org)
 * Secret Scan
-    * [Trufflehog](https://github.com/trufflesecurity/truffleHog)
-    * [GitGuardian](https://dashboard.gitguardian.com/workspace/190186/analytics)
+  * [Trufflehog](https://github.com/trufflesecurity/truffleHog)
+  * [GitGuardian](https://dashboard.gitguardian.com/workspace/190186/analytics)
 * Maven Repository
-    * [Jfrog Artifactory](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
-     * [Github Package](https://github.com/trufflesecurity/truffleHog)
+  * [Jfrog Artifactory](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
+  * [Github Package](https://github.com/trufflesecurity/truffleHog)
 * Helm Repository
-    * [Jfrog Artifactiory](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
+  * [Jfrog Artifactiory](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
 * Container Scan - Docker Image
-    * [Snyk](https://snyk.io)
-    * [JFrog Xray](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
+  * [Snyk](https://snyk.io)
+  * [JFrog Xray](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
 * Container Repository
-    * [JFrog Artifactory](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
-    * [Github Package](https://github.com/features/packages)
-    * [DockerHub](https://hub.docker.com/r/judebantony/cigithubaction)
+  * [JFrog Artifactory](https://jfrog.com/artifactory/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog%20artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=Cj0KCQiAhf2MBhDNARIsAKXU5GTNwwGiZx5Msn96nvS7v3kLKexhg50OTeKFkyYJSfFDkmnKLb0OH38aAiOTEALw_wcB)
+  * [Github Package](https://github.com/features/packages)
+  * [DockerHub](https://hub.docker.com/r/judebantony/cigithubaction)
 * Deploying to Azure - AKS
-    * [GitHub Action & K8S native](https://kubernetes.io)
-    * [GitHub Action & Helm Chart](https://helm.sh/docs/topics/charts/)
-* Deploying to GCP - GKE 
-    * [GitHub Action & Harness](https://harness.io)
+  * [GitHub Action & K8S native](https://kubernetes.io)
+  * [GitHub Action & Helm Chart](https://helm.sh/docs/topics/charts/)
+* Deploying to GCP - GKE
+  * [GitHub Action & Harness](https://harness.io)
 * Provisioning(IaC) AWS - EC2
-    * [Terraform](https://www.terraform.io)
+  * [Terraform](https://www.terraform.io)
 * Unit Testing
-    * [Junit](https://junit.org/junit5/)
-    * [Jacoco](https://www.baeldung.com/sonarqube-jacoco-code-coverage)
+  * [Junit](https://junit.org/junit5/)
+  * [Jacoco](https://www.baeldung.com/sonarqube-jacoco-code-coverage)
 * Functional Testing
-    * [Cucumber](https://cucumber.io)   
-    * [Selenium](https://www.selenium.dev)
-    * [BrowserStack](https://www.browserstack.com)
-    * [LamdaTest](https://www.lambdatest.com)
+  * [Cucumber](https://cucumber.io)
+  * [Selenium](https://www.selenium.dev)
+  * [BrowserStack](https://www.browserstack.com)
+  * [LamdaTest](https://www.lambdatest.com)
 * Test Management
-    * [Xray & Jira for Test Execution](https://docs.getxray.app/display/XRAY/About+Xray)
-    * [Katalon](https://testops.katalon.io/)     
+  * [Xray & Jira for Test Execution](https://docs.getxray.app/display/XRAY/About+Xray)
+  * [Katalon](https://testops.katalon.io/)
 * Performance Testing
-    * [K6](https://k6.io)
+  * [K6](https://k6.io)
 * Create Release Note & Tag
 
 ## CI/CD E2E Release Workflow ##
+
 This Project implements the below CI/CD E2E release workflow integrated with CI, CD, Security Scans, IaC and Test automation using Cloud SaaS tool sets.
 
-![releaseworkflow](./doc/releaseworkflow.png)	
+![releaseworkflow](./doc/releaseworkflow.png)
 
 Sample release workflow implementation using [Github Action](https://github.com/features/actions) is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/.github/workflows/workflow.yml)
 
 ![workflow](./doc/workflow.png)
-	
-Sample release workflow execution is present [here](https://github.com/judebantony/cicd-github-action-example/actions/runs/1500211427)	
+
+Sample release workflow execution is present [here](https://github.com/judebantony/cicd-github-action-example/actions/runs/1500211427)
 
 ## Jira and Github Integration - (Planning,Requirement & Test Execution) ##
+
 Jira and Github Integration will provide better traceability between Planning, Requirement, Code, Build and Test Execution.  [Linking your GitHub to Jira](https://support.atlassian.com/jira-cloud-administration/docs/integrate-with-github/) gives team the ability to see their branches, commit messages, build, test cases & results, pull requests and release information in the context of Jira tickets. More information can find [here.](https://github.blog/2018-10-04-announcing-the-new-github-and-jira-software-cloud-integration/)
 
 ![jira](./doc/jira.png)
@@ -147,13 +149,15 @@ Test results will be uploaded back to Jira to provide [Requirement Traceability 
 ![githubresult](./doc/githubresult.png)
 
 ## Integrating Cloud SaaS DevSecOps tools using GitHub Action ##
+
 Integration & Implementation of E2E CI/CD release workflow using [Github Action](https://github.com/features/actions), this has been achieved using different Cloud SaaS tools listed below.
 
 ### 1) Maven - Build and Unit Test ###
+
 [Apache Maven](https://maven.apache.org) is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information.
 
 Code is build using [Maven](https://maven.apache.org) and unit test cases are executed using [JUnit](https://junit.org/junit5/)
-The test coverage result, which is aggregated by [Jacoco](https://www.baeldung.com/sonarqube-jacoco-code-coverage) would be uploaded to [Github Action](https://github.com/features/actions) as artifacts. Please check [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml) as well. 
+The test coverage result, which is aggregated by [Jacoco](https://www.baeldung.com/sonarqube-jacoco-code-coverage) would be uploaded to [Github Action](https://github.com/features/actions) as artifacts. Please check [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml) as well.
 
 ```yaml
 
@@ -207,35 +211,36 @@ The test coverage result, which is aggregated by [Jacoco](https://www.baeldung.c
 In [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml), we need to add the jacoco plugin.
 
 ```xml
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.7</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>generate-code-coverage-report</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+   <plugin>
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+    <version>0.8.7</version>
+    <executions>
+     <execution>
+      <goals>
+       <goal>prepare-agent</goal>
+      </goals>
+     </execution>
+     <execution>
+      <id>generate-code-coverage-report</id>
+      <phase>test</phase>
+      <goals>
+       <goal>report</goal>
+      </goals>
+     </execution>
+    </executions>
+   </plugin>
 
 ```
 
-Sample test result:- 
+Sample test result:-
 ![unittest](./doc/unittest.png)
 
 ### 2) SonarQube Cloud - Code Quality ###
+
 [SonarQube](https://www.sonarqube.org) is an open-source platform developed by SonarSource for continuous inspection of code quality to perform automatic reviews with static analysis of code to detect bugs, code smells, and security vulnerabilities on 20+ programming languages.
 
-Inspect the code using [SonarQube](https://www.sonarqube.org) and enable the Quality Gate Check in CI/CD workflow. 
+Inspect the code using [SonarQube](https://www.sonarqube.org) and enable the Quality Gate Check in CI/CD workflow.
 Results are uploaded to [SonarQube](https://www.sonarqube.org) Cloud SaaS offering. GitHub integration with SonarQube can find [here](https://docs.sonarqube.org/latest/analysis/github-integration/).
 
 ```yaml
@@ -284,9 +289,9 @@ Results are uploaded to [SonarQube](https://www.sonarqube.org) Cloud SaaS offeri
 In [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml), we need to add the below configuration.
 
 ```xml
-		<sonar.organization>judebantony</sonar.organization>
-		<sonar.projectKey>cicd-github-action-example</sonar.projectKey>
-		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+  <sonar.organization>judebantony</sonar.organization>
+  <sonar.projectKey>cicd-github-action-example</sonar.projectKey>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
 ```
 
@@ -296,6 +301,7 @@ Quality Gate Check:-
 ![qualitygate](./doc/qulitygate.png)
 
 ### 3) Codecov - Code Coverage ###
+
 [Codecov](https://about.codecov.io) improve code quality and workflow with highly integrated tools to group, merge, archive, and compare coverage reports.
 
 Uploaded the code coverage result to [Codecov](https://about.codecov.io) Cloud SaaS offering. GitHub integration with Codecov can find [here](https://codecov.freshdesk.com/support/solutions/articles/43000593941-set-up-github-app-integration).
@@ -340,26 +346,26 @@ Uploaded the code coverage result to [Codecov](https://about.codecov.io) Cloud S
 In [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml), we need to add the below plugin.
 
 ```xml
-			<plugin>
-			    <groupId>org.codehaus.mojo</groupId>
-			    <artifactId>cobertura-maven-plugin</artifactId>
-			    <version>2.7</version>
-			    <configuration>
-			        <formats>
-			            <format>html</format>
-			            <format>xml</format>
-			        </formats>
-			        <check />
-			    </configuration>
-			</plugin>			
+   <plugin>
+       <groupId>org.codehaus.mojo</groupId>
+       <artifactId>cobertura-maven-plugin</artifactId>
+       <version>2.7</version>
+       <configuration>
+           <formats>
+               <format>html</format>
+               <format>xml</format>
+           </formats>
+           <check />
+       </configuration>
+   </plugin>   
 
 ```
 
 CodeCov dashboard:-
 ![codecov](./doc/codecov.png)
 
-
 ### 4) CodeQL - SAST ###
+
 [CodeQL](https://codeql.github.com) is the code analysis engine developed by GitHub to automate security checks. You can analyze your code using CodeQL and display the results as code scanning alerts.
 
 Use the native Github Action [CodeQL](https://codeql.github.com) for SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab. Configuring CodeQL code scanning can find [here](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning).
@@ -394,14 +400,15 @@ Use the native Github Action [CodeQL](https://codeql.github.com) for SAST scan a
         uses: github/codeql-action/analyze@v1
 
 ```
+
 GitHub Advanced Security Tab:-
 ![codeql](./doc/codeql.png)
 
 ### 5) AppScan CodeSweep - SAST ###
+
 [HCL AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) is a free to use security tool, designed for beginners and professionals alike, who need a quick, simple, and platform friendly program.
 
 Use the [AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) for SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format.
-
 
 ```yaml
   appScan:
@@ -422,10 +429,12 @@ Use the [AppScan CodeSweep](https://www.hcltechsw.com/appscan/codesweep) for SAS
         env: 
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 ```
+
 HCL AppScan CodeSweep dashboard:-
 ![appscan](./doc/appScan.png)
 
-### 6) Codacy - SAST  ###
+### 6) Codacy - SAST ###
+
 [Codacy](https://www.codacy.com) automatically analyzes your source code and identifies issues as you go, helping you develop software more efficiently with fewer issues down the line. Through static code review analysis, Codacy notifies you of security issues, code coverage, code duplication, and code complexity in every commit and pull request.
 
 Use the [Codacy](https://www.codacy.com) for SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format.
@@ -453,10 +462,12 @@ Use the [Codacy](https://www.codacy.com) for SAST scan and upload the result to 
           with:
             sarif_file: codacy.sarif          
 ```
+
 Codacy dashboard.
 ![codacy](./doc/codacy.png)
 
-### 7) Snyk - SCA  ###
+### 7) Snyk - SCA ###
+
 [Snyk](https://snyk.io) (pronounced sneak) is a developer security platform for securing code, dependencies, containers, and infrastructure as code.
 
 Use the [Snyk](https://snyk.io) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format. GitHub integration with Snyk can find [here](https://docs.snyk.io/features/integrations/git-repository-scm-integrations/github-integration).
@@ -486,12 +497,13 @@ Use the [Snyk](https://snyk.io) for SCA scan and upload the result to [GitHub Ad
           sarif_file: snyk.sarif
 
 ```
+
 Snyk dashboard:-
 ![snky](./doc/snyk.png)
 
-### 8) Dependabot - SCA  ###
-Use the github native [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/configuring-dependabot-security-updates) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab. Enabling the dependabot in GitHub can find [here](https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/enabling-and-disabling-dependabot-version-updates).
+### 8) Dependabot - SCA ###
 
+Use the github native [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/managing-vulnerabilities-in-your-projects-dependencies/configuring-dependabot-security-updates) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab. Enabling the dependabot in GitHub can find [here](https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/enabling-and-disabling-dependabot-version-updates).
 
 ```yaml
 
@@ -512,12 +524,13 @@ Dependabot dashboard:-
 
 ![dependabot](./doc/dependabot.png)
 
-### 9) BlackDuck CoPilot - SCA  ###
+### 9) BlackDuck CoPilot - SCA ###
+
 [Black Duck](https://www.blackducksoftware.com) is a complete open source management solution, which fully discovers all open source in your code. It can map components to known vulnerabilities, and identify license and component quality risks.
 
 Use the [Black Duck](https://www.blackducksoftware.com) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format.
 
-```yaml 
+```yaml
 
   blackduck:
       name: SCA Scan using BlackDuck
@@ -544,15 +557,17 @@ Use the [Black Duck](https://www.blackducksoftware.com) for SCA scan and upload 
 
 
 ```
+
 BlackDuck CoPilot dashboard-
 ![blackduck](./doc/blackduck.png)
 
-### 10) FOSSA - SCA  ###
+### 10) FOSSA - SCA ###
+
 [FOSSA](https://fossa.com/variant/homepage) accelerate open source adoption with scalable, end-to-end management for third-party code, license compliance and vulnerabilities.
 
 Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format. GitHub integration with FOSSA can find [here](https://docs.fossa.com/docs/github).
 
-```yaml 
+```yaml
 
   fossaScan:
       name: SCA Scan using FOSSA
@@ -571,15 +586,17 @@ Use the [FOSSA](https://fossa.com/variant/homepage) for SCA scan and upload the 
 
 
 ```
+
 FOSSA dashboard:-
 ![fossa](./doc/fossa.png)
 
 ### 11) ShiftLeft - SCA & SAST ###
-[ShiftLeft](https://www.shiftleft.io) provides an early, accurate picture of risk so devs can quickly secure code and stay focused on the transformation. 
+
+[ShiftLeft](https://www.shiftleft.io) provides an early, accurate picture of risk so devs can quickly secure code and stay focused on the transformation.
 
 Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the result to [GitHub Advanced Security](https://github.com/security) tab using sairf [OWASP](https://owasp.org/www-community/Source_Code_Analysis_Tools) format. GitHub integration with ShiftLeft can find [here](https://docs.shiftleft.io/ngsast/integrations/github-marketplace).
 
-```yaml 
+```yaml
 
    shitLeftScan:
       name: SAST and SCA Scan using ShiftLeft
@@ -602,15 +619,17 @@ Use the [ShiftLeft](https://www.shiftleft.io) for SCA & SAST scan and upload the
 
 
 ```
+
 ShiftLeft dashboard:-
 ![shiftleft](./doc/shiftleft.png)
 
 ### 12) Snyk - Infrastructure as Code Scan ###
+
 [Snyk](https://snyk.io) (pronounced sneak) is a developer security platform for securing code, dependencies, containers, and infrastructure as code.
 
 Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code Files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
 
-```yaml 
+```yaml
 
   snykIaSScan:
       name: SAST - Scan IaC Configs using Snyk
@@ -638,6 +657,7 @@ Use [Snyk](https://snyk.io) to secure the [Infrastructure as Code Files](https:/
 
 
 ```
+
 Snyk dashboard:-
 ![snky](./doc/snyk.png)
 
@@ -647,7 +667,7 @@ The [Open Policy Agent](https://www.openpolicyagent.org/docs/latest/)  (OPA, pro
 
 Use [OPA](https://www.openpolicyagent.org/docs/latest/) to scan the [Infrastructure as Code Files](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests) using [OPA Policies](https://github.com/judebantony/cicd-github-action-example/tree/main/opa-policies).
 
-```yaml 
+```yaml
 
  opa-test:
     name: SAST - Scan IaC Configs Using OPA
@@ -667,17 +687,17 @@ Use [OPA](https://www.openpolicyagent.org/docs/latest/) to scan the [Infrastruct
             DATA: data.kubernetes.admission.deny  
 
 ```
+
 OPA result:-
 ![opa](./doc/opa.png)
-
 
 ### 14) Trufflehog - Secret Scan ###
 
 [Trufflehog](https://trufflesecurity.com/trufflehog) runs behind the scenes to scan your environment for secrets like private keys and credentials, so you can protect your data before a breach occurs.
 
-Use [Trufflehog](https://trufflesecurity.com/trufflehog) to find any secrets present in the source code. 
- 
-```yaml 
+Use [Trufflehog](https://trufflesecurity.com/trufflehog) to find any secrets present in the source code.
+
+```yaml
 
   trufflehogScan:
       name: Secret Scan Using Trufflehog
@@ -696,12 +716,14 @@ Use [Trufflehog](https://trufflesecurity.com/trufflehog) to find any secrets pre
 
 
 ```
+
 ### 15) GitGuardian - Secret Scan ###
+
 [GitGuardian](https://www.gitguardian.com) is a developers-first solution scanning GitHub activity in real-time for API secret tokens, database credentials, certificates.
 
 Use [GitGuardian](https://www.gitguardian.com) to find any secrets present in the source code. Github integration with GitGuardian is present [here](https://docs.gitguardian.com/internal-repositories-monitoring/integrations/ci_cd_integrations/github_actions).
- 
-```yaml 
+
+```yaml
 
  gitguardian:
       name: Secret Scan Using GitGuardian
@@ -725,15 +747,17 @@ Use [GitGuardian](https://www.gitguardian.com) to find any secrets present in th
 
 
 ```
+
 GitGuardian dashboard:-
 ![gitguardian](./doc/gitguardian.png)
 
 ### 16) Snyk - Container Image Scan ###
+
 [Snyk](https://snyk.io) (pronounced sneak) is a developer security platform for securing code, dependencies, containers, and infrastructure as code.
 
-Use [Snyk](https://snyk.io) to perform container image scan. 
+Use [Snyk](https://snyk.io) to perform container image scan.
 
-```yaml 
+```yaml
 
 snykImageScan:
       name: Image Scan using Snyk
@@ -774,6 +798,7 @@ snykImageScan:
 
 
 ```
+
 Snyk dashboard:-
 ![snyk](./doc/snyk.png)
 
@@ -783,7 +808,7 @@ Snyk dashboard:-
 
 Publish the Jar to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog+artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=CjwKCAiAhreNBhAYEiwAFGGKPHkjlShpTBfbPyMgP1l5hGLeiezWo9xCn-3ncNVZCudxMzCdNUhMDhoCIDIQAvD_BwE).
 
-```yaml 
+```yaml
 
  jfrogArtifactPush:
     name: Publish Artifact to Jfrog Artifactory
@@ -818,6 +843,7 @@ Publish the Jar to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=
 
 
 ```
+
 Jfrog Artifactory UI:-
 ![jfrogjar](./doc/jfrogjar.png)
 
@@ -827,7 +853,7 @@ Jfrog Artifactory UI:-
 
 Publish the Jar to [Github Packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
 
-```yaml 
+```yaml
 
  gitHubPakageArtifactPush:
     name: Publish Artifact to GitHub Package
@@ -863,13 +889,13 @@ Publish the Jar to [Github Packages](https://docs.github.com/en/packages/learn-g
 In [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml), we need to add the below configuration.
 
 ```xml
-	<distributionManagement>
-		<repository>
-			<id>github</id>
-			<name>GitHub Packages</name>
-			<url>https://maven.pkg.github.com/judebantony/cicd-github-action-example</url>
-		</repository>
-	</distributionManagement>
+ <distributionManagement>
+  <repository>
+   <id>github</id>
+   <name>GitHub Packages</name>
+   <url>https://maven.pkg.github.com/judebantony/cicd-github-action-example</url>
+  </repository>
+ </distributionManagement>
 
 ```
 
@@ -883,7 +909,7 @@ GitHub Package UI:-
 Publish the Container Image to [Jfrog Artifactory](https://jfrog.com/start-free/?utm_source=google&utm_medium=cpc&utm_campaign=14808689020&utm_term=jfrog+artifactory&utm_network=g&cq_plac=&cq_plt=gp&gclid=CjwKCAiAhreNBhAYEiwAFGGKPHkjlShpTBfbPyMgP1l5hGLeiezWo9xCn-3ncNVZCudxMzCdNUhMDhoCIDIQAvD_BwE).
 Dockerfile is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/Dockerfile).
 
-```yaml 
+```yaml
 
 jfrogImageBuild:
     name: Build Docker Image and Publish to JFrog Artifactory
@@ -927,6 +953,7 @@ jfrogImageBuild:
 
 
 ```
+
 Jfrog Artifactory Image Registry UI:-
 ![jfrogimage](./doc/jfrogimage.png)
 
@@ -937,7 +964,7 @@ Jfrog Artifactory Image Registry UI:-
 Publish the Container Image to [Github Package](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
 Dockerfile is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/Dockerfile).
 
-```yaml 
+```yaml
 
 gitHubPakageImageBuild:
     name: Push Docker image to GitHub Package
@@ -995,13 +1022,13 @@ gitHubPakageImageBuild:
 In [pom.xml](https://github.com/judebantony/cicd-github-action-example/tree/main/pom.xml), we need to add the below configuration.
 
 ```xml
-	<distributionManagement>
-		<repository>
-			<id>github</id>
-			<name>GitHub Packages</name>
-			<url>https://maven.pkg.github.com/judebantony/cicd-github-action-example</url>
-		</repository>
-	</distributionManagement>
+ <distributionManagement>
+  <repository>
+   <id>github</id>
+   <name>GitHub Packages</name>
+   <url>https://maven.pkg.github.com/judebantony/cicd-github-action-example</url>
+  </repository>
+ </distributionManagement>
 
 ```
 
@@ -1015,7 +1042,7 @@ GitHub Package Image Registry UI:-
 Publish the Container Image to [Docker hub](https://hub.docker.com).
 Dockerfile is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/Dockerfile).
 
-```yaml 
+```yaml
 
  dockerHubImageBuild:
       name: Push Docker image to Docker Hub
@@ -1061,6 +1088,7 @@ Dockerfile is present [here](https://github.com/judebantony/cicd-github-action-e
 
 
 ```
+
 Docker Hub Image Registry UI:-
 ![dockerhub](./doc/dockerhub.png)
 
@@ -1070,7 +1098,7 @@ Docker Hub Image Registry UI:-
 
 Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/services/kubernetes-service/) using [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) and GitHub Action, [kubeconfig](https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/) manifest files are available  [here](https://github.com/judebantony/cicd-github-action-example/tree/main/manifests).
 
-```yaml 
+```yaml
 
   qadeploy:
     name: QA Deployment to AKS 
@@ -1119,16 +1147,17 @@ Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/serv
 
 
 ```
+
 AKS Console:-
 ![aks](./doc/aks.png)
 
-### 23) Functional Test - Using Cucumber. ###
+### 23) Functional Test - Using Cucumber ###
 
 [Cucumber](https://cucumber.io) is the world's leading tool for BDD.
 
 Run the [Cucumber](https://cucumber.io) Test Cases and upload the result to cucumber.io and GitHub Action. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
- 
-```yaml 
+
+```yaml
 
   qatest:
     name: QA Validation and Report
@@ -1168,20 +1197,22 @@ Run the [Cucumber](https://cucumber.io) Test Cases and upload the result to cucu
           path: target/cucumber-reports/cucumber.html
 
 ```
+
 Cucumber Report:-
 ![cucumber](./doc/cucumber.png)
 
 Cucumber.io Report:-
 ![cucumberreport](./doc/cucumberreport.png)
 
-### 24) Functional UI Test - Using BrowserStack. ###
+### 24) Functional UI Test - Using BrowserStack ###
+
 [BrowserStack](https://www.browserstack.com) is an Indian cloud web and mobile testing platform that provides developers with the ability to test their websites and mobile applications across on-demand browsers, operating systems and real mobile devices.
 
 [Selenium](https://www.selenium.dev) is an open-source umbrella project for a range of tools and libraries aimed at supporting web browser automation. Selenium provides a playback tool for authoring functional tests without the need to learn a test scripting language.
 
 Run the [Selenium](https://www.selenium.dev) [Cucumber](https://cucumber.io) based UI Test Cases using [BrowserStack](https://www.browserstack.com) [Selenium Grid](https://www.selenium.dev/documentation/grid/) and capture the result in their Cloud SaaS offering. The test case feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
 
-```yaml 
+```yaml
 
   browserStackTest:
     name: 'BrowserStack QA Test Validation'
@@ -1227,16 +1258,17 @@ Run the [Selenium](https://www.selenium.dev) [Cucumber](https://cucumber.io) bas
           local-testing: stop
 
 ```
+
 BrowserStack dashboard:-
 ![browserstack](./doc/browserstack.png)
 
-### 25) Functional UI Test - Using LamdaTest. ###
+### 25) Functional UI Test - Using LamdaTest ###
 
 Run your [Selenium](https://www.selenium.dev) test automation scripts across online selenium grid of desktop, Android and iOS mobile browsers. Develop, test, and deliver faster every time with automated cross browser testing using LambdaTest online Automation Browser Testing Grid.
 
 Execute the [Selenium](https://www.selenium.dev) [Cucumber](https://cucumber.io) based UI Test Cases using [LamdaTest](https://www.lambdatest.com/?fp_ref=aliakbar42) and capture the result. The feature files are present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/src/test/resources/com/jba/ci/bdd/).
 
-```yaml 
+```yaml
 
   lamdaTest:
     name: 'LamdaTest QA Test Validation'
@@ -1278,15 +1310,17 @@ Execute the [Selenium](https://www.selenium.dev) [Cucumber](https://cucumber.io)
            path: ${{ steps.tunnel.outputs.logFileName }}          
 
 ```
+
 LambdaTest dashboard:-
 ![lambdatest](./doc/lambdatest.png)
 
-### 26) DAST Scan - Using StackHawk. ###
+### 26) DAST Scan - Using StackHawk ###
+
 [StackHawk](https://www.stackhawk.com) makes it simple for developers to find, triage, and fix application security bugs. Scan your application for AppSec bugs in the code your team wrote, triage and fix with provided documentation, and automate in your pipeline to prevent future bugs from hitting prod.
 
 Use [StackHawk](https://www.stackhawk.com) for DAST scan for all the [OpenAPI](https://swagger.io/specification/) (REST APIs). StackHawk config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/stackhawl.yml).
 
-```yaml 
+```yaml
 
   stackhawkScan:
     name: DAST Scan using StackHawk
@@ -1319,16 +1353,17 @@ Use [StackHawk](https://www.stackhawk.com) for DAST scan for all the [OpenAPI](h
           APP_ID: ea0079f1-648e-4bdb-aa2d-233696082b4e
 
 ```
+
 StackHawk dashboard:-
 ![stackhawk](./doc/stackhawk.png)
 
-### 27) DAST Scan - Using OWASP ZAP. ###
+### 27) DAST Scan - Using OWASP ZAP ###
 
 [OWASP ZAP](https://github.com/marketplace/actions/owasp-zap-api-scan) is an open-source web application security scanner. It is intended to be used by both those new to application security as well as professional penetration testers. It is one of the most active Open Web Application Security Project projects and has been given Flagship status.
 
 Use [OWASP ZAP](https://github.com/marketplace/actions/owasp-zap-api-scan) for DAST scan for all the [OpenAPI](https://swagger.io/specification/) (REST APIs). OWASP ZAP rule file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/zap/).
 
-```yaml 
+```yaml
 
   zap_scan:
       runs-on: ubuntu-latest
@@ -1351,20 +1386,21 @@ Use [OWASP ZAP](https://github.com/marketplace/actions/owasp-zap-api-scan) for D
             cmd_options: '-a'
 
 ```
-ZAP Scan Report:- 
+
+ZAP Scan Report:-
 ![zapresult](./doc/zapresult.png)
 Result is uploaded in Github Action.
 ![zapbuild](./doc/zapbuild.png)
 Issue created on GitHub
 ![zapissue](./doc/zapissue.png)
 
-### 28) API Validator - Using Swagger Editor Validator. ###
-[Swagger Editor](https://swagger.io/blog/api-design/validate-openapi-definitions-swagger-editor/) lets you edit Swagger API specifications in YAML inside your browser and to preview documentations in real time. Valid Swagger JSON descriptions can then be generated and used with the full Swagger tooling (code generation, documentation, etc).
+### 28) API Validator - Using Swagger Editor Validator ###
 
+[Swagger Editor](https://swagger.io/blog/api-design/validate-openapi-definitions-swagger-editor/) lets you edit Swagger API specifications in YAML inside your browser and to preview documentations in real time. Valid Swagger JSON descriptions can then be generated and used with the full Swagger tooling (code generation, documentation, etc).
 
 Use [Swagger Editor Validator](https://swagger.io/blog/api-design/validate-openapi-definitions-swagger-editor/) for validating the [OpenAPI Specification](https://swagger.io/specification/) of REST APIs .
 
-```yaml 
+```yaml
 
  test_swagger_editor_validator:
     runs-on: ubuntu-latest
@@ -1384,15 +1420,15 @@ Use [Swagger Editor Validator](https://swagger.io/blog/api-design/validate-opena
           definition-file: openapi.json   
 
 ```
+
 Build output:-
 ![swaggereditor](./doc/swaggereditor.png)
 
-
-### 29) Setting up Approval Gates and Email. ###
+### 29) Setting up Approval Gates and Email ###
 
 Approval gates for deployment using [Github Environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment) feature.
 
-```yaml 
+```yaml
 
  stagingdeployapproval:
     name: Waiting for Staging Deployment Approval
@@ -1420,12 +1456,13 @@ Approval gates for deployment using [Github Environment](https://docs.github.com
 
 ```
 
-### 30) CD - Deploy to Azure AKS using Helm. ###
+### 30) CD - Deploy to Azure AKS using Helm ###
+
 [Helm](https://helm.sh) helps you manage [Kubernetes](https://kubernetes.io) applications — Helm Charts help you define, install, and upgrade even the most complex [Kubernetes](https://kubernetes.io) application.
 
 Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/services/kubernetes-service/) using [Helm](https://helm.sh), manifest files are available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/helm).
 
-```yaml 
+```yaml
 
  stagingdeploy:         
     name: Staging Deployment Using Helm To AKS
@@ -1476,15 +1513,17 @@ Deploy the Container image to [Azure AKS](https://azure.microsoft.com/en-in/serv
               ./helm/aks \
 
 ```
+
 AKS Console:-
 ![aks](./doc/aks.png)
-### 31) CD - Deploy to Google GKE using Harness. ###
+
+### 31) CD - Deploy to Google GKE using Harness ###
 
 The [Harness](https://harness.io) Software Delivery Platform includes Continuous Integration, Continuous Delivery, Continuous Efficiency, Continuous Verification, and Continuous Features. The platform is designed to help companies accelerate their cloud initiatives as well as their adoption of containers and orchestration tools like [Kubernetes](https://kubernetes.io) and [Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html).
 
 Deploy the Container image to [Google GKE](https://cloud.google.com/kubernetes-engine/?utm_source=google&utm_medium=cpc&utm_campaign=japac-IN-all-en-dr-bkws-all-all-trial-e-dr-1009882&utm_content=text-ad-none-none-DEV_c-CRE_468709677813-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt%20~%20Containers%20~%20Kubernetes%20Engine_Kubernetes-gke-KWID_43700033867246010-aud-970366092687%3Akwd-372556496315&userloc_9299054-network_g&utm_term=KW_google%20gke&ds_rl=1264446&gclid=CjwKCAiAhreNBhAYEiwAFGGKPBhVfsfPwkEB1Yzehiow3pcsq-P9Pv78G4P28anuVF9HtSPtoNZCFxoCqr0QAvD_BwE&gclsrc=aw.ds) using [Harness](https://harness.io).
 
-```yaml 
+```yaml
 
   uatdeploy:
     name: UAT Deployment using Harness
@@ -1496,18 +1535,20 @@ Deploy the Container image to [Google GKE](https://cloud.google.com/kubernetes-e
         run: |
           curl -X POST -H 'content-type: application/json' --url https://app.harness.io/gateway/api/webhooks/Tlugr1ZdISx44rvm4flAiXHMb3uKG3ikyiHSbOks?accountId=aGS5Pi_WSPa9IsdlTlJc7g -d '{"application":"1FYrnQdZROqjpAQdCBIMbw"}'
 ```
+
 GKE console:-
 ![gke](./doc/gke.png)
 
 Harness console:-
-![harness](./doc/harness.png) 
+![harness](./doc/harness.png)
 
-### 32) Load/Performance Testing - K6. ###
+### 32) Load/Performance Testing - K6 ###
+
 [K6](https://k6.io) is an open-source load testing tool and cloud service providing the best developer experience for API performance testing.
 
 Use [K6](https://k6.io) to do the Performance Test. Load Test file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/k6-test.js).
 
-```yaml 
+```yaml
 
   k6_cloud_test:
     name: Perf Testing - k6 cloud test run
@@ -1526,15 +1567,17 @@ Use [K6](https://k6.io) to do the Performance Test. Load Test file is present [h
           token: ${{ secrets.K6_CLOUD_API_TOKEN }}
 
 ```
+
 K6 dashboard:-
 ![k6](./doc/k6.png)
 
-### 33) Functional Test using Xray and Jira. ###
+### 33) Functional Test using Xray and Jira ###
+
 [XRay](https://www.getxray.app) is a Test Management tool integrated with Jira. Built for every member of your team to plan, test, track and release great software · Manage all your tests as Jira issues.
 
 Xray Jira plugin is used to create the test case in [Gherkin](https://cucumber.io/docs/gherkin/) and [Cucumber](https://cucumber.io) for each Jira story and executed as part of CI/CD pipleline(GitHub Action). The result is uploaded back to Jira. XRay Test Execution config file is present [here](https://github.com/judebantony/cicd-github-action-example/tree/main/testexec_cloud_template.json).
 
-```yaml 
+```yaml
 
   jiraXrayTest:
     name: Functional Test using Xray and Jira 
@@ -1585,14 +1628,15 @@ Xray Jira plugin is used to create the test case in [Gherkin](https://cucumber.i
            curl  -X POST -H "Authorization: Bearer ${{ steps.xray-token.outputs.XRAY_TOKEN }}" -F info=@testexec_cloud_template.json -F results=@"target/cucumber-reports/cucumber.json" "https://xray.cloud.xpand-it.com/api/v1/import/execution/cucumber/multipart"          
 
 ```
+
 Jira Xray test execution dashboard:-
 ![xray](./doc/xray.png)
 
-### 34) Test Management using Katalon. ###
-[Katalon](https://testops.katalon.io/)  is a Test Management tool integrated with Jira. 
+### 34) Test Management using Katalon ###
 
+[Katalon](https://testops.katalon.io/)  is a Test Management tool integrated with Jira.
 
-```yaml 
+```yaml
 
       - name: Katalon Report Uploader
         uses: katalon-studio/report-uploader@v0.0.7.11
@@ -1608,11 +1652,11 @@ Jira Xray test execution dashboard:-
 Katalon test execution dashboard:-
 ![katalon](./doc/katalon.png)
 
+### 35) Release Tag Creation ###
 
-### 35) Release Tag Creation. ###
-Create a release tag for the branch. 
+Create a release tag for the branch.
 
-```yaml 
+```yaml
 
   releaseTag:
       name: Release Tag & Note Creation 
@@ -1650,12 +1694,13 @@ Create a release tag for the branch.
 Release Tag:-
 ![releasetag](./doc/releasetag.png)
 
-### 36) IaC - using Terraform - Create AWS EC2. ###
+### 36) IaC - using Terraform - Create AWS EC2 ###
+
 [Terraform](https://www.terraform.io) is an open-source infrastructure as code software tool created by HashiCorp. Users define and provide data center infrastructure using a declarative configuration language known as HashiCorp Configuration Language, or optionally JSON.
 
 Set up the [AWS EC2](https://aws.amazon.com/ec2/?ec2-whats-new.sort-by=item.additionalFields.postDateTime&ec2-whats-new.sort-order=desc) instances using [Terraform](https://www.terraform.io) , terraform manifest file is available [here](https://github.com/judebantony/cicd-github-action-example/tree/main/terraform).
 
-```yaml 
+```yaml
 
   terraform:
     name: "Terraform - Create AWS EC2"
@@ -1731,6 +1776,7 @@ Set up the [AWS EC2](https://aws.amazon.com/ec2/?ec2-whats-new.sort-by=item.addi
             terraform apply -auto-approve  
 
 ```
+
 Terraform dashbord:-
 ![teraform](./doc/teraform.png)
 

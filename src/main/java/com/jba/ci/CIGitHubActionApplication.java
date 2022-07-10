@@ -2,6 +2,7 @@ package com.jba.ci;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * @author judebarnabasantony
@@ -40,4 +41,21 @@ public class CIGitHubActionApplication {
 			System.out.println("a is equal to b");
 		}
 	}
+
+	// restart the application
+	void restartApplication() {
+		SpringApplication.exit(SpringApplication.run(CIGitHubActionApplication.class));
+	}  
+
+	@PostMapping("/")
+	public String hello() {
+		return "Hello World!";
+	}
+
+	@PostMapping("/hello")
+	public String hello2() {
+		return "Hello World!";
+	}
+
+	// spring boot application exception advice
 }
