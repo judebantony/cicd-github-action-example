@@ -16,7 +16,7 @@
 	<description>CI Github Action </description>
 	<properties>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>2021.0.0</spring-cloud.version>
+		<spring-cloud.version>2021.0.4</spring-cloud.version>
 		<testcontainers.version>1.16.3</testcontainers.version>
 		<cucumber.version>7.2.3</cucumber.version>
 		<sonar.organization>judebantony</sonar.organization>
